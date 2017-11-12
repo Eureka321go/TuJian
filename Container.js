@@ -18,7 +18,7 @@ import {allActionsFun} from "./redux/action"; //导入函数生成action
 
 
 
-class App extends Component<{}> {
+class Container extends Component<{}> {
   render() {
     return (
       <View style={styles.container}>
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
 
 
 
-export default connect()(App);
+export default connect()(Container);
