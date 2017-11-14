@@ -16,8 +16,9 @@ import {connect} from "react-redux";
 import {allActionsFun} from "./redux/action"; //导入函数生成action
 
 import TabNavigator from 'react-native-tab-navigator';
-
-
+import My from "./components/My"
+import Home from "./components/Home"
+import Message from "./components/Message"
 
 class Container extends Component<{}> {
   constructor(props){
@@ -37,7 +38,7 @@ class Container extends Component<{}> {
              renderIcon={()=> <Image style={styles.tabIcon} source={require("./assets/images/index/home.png")}/>}
              renderSelectedIcon={()=> <Image  style={styles.tabIcon} source={require("./assets/images/index/home_ok.png")}/>}
             >
-            <View style={styles.container}><Text>dwadaw</Text></View>
+                <Home/>
             </TabNavigator.Item>
 
             <TabNavigator.Item
@@ -48,7 +49,7 @@ class Container extends Component<{}> {
                 renderIcon={()=> <Image   style={styles.tabIcon} source={require("./assets/images/index/message.png")}/>}
                 renderSelectedIcon={()=> <Image style={styles.tabIcon} source={require("./assets/images/index/message_ok.png")}/>}
             >
-              <View style={styles.container}><Text>1132d</Text></View>
+                <Message/>
             </TabNavigator.Item>
 
           <TabNavigator.Item
@@ -71,7 +72,7 @@ class Container extends Component<{}> {
               renderIcon={()=> <Image   style={styles.tabIcon} source={require("./assets/images/index/my.png")}/>}
               renderSelectedIcon={()=> <Image style={styles.tabIcon} source={require("./assets/images/index/my_ok.png")}/>}
           >
-            <View style={styles.container}><Text>1132d</Text></View>
+              <My/>
           </TabNavigator.Item>
         </TabNavigator>
     );
