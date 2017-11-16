@@ -10,71 +10,63 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+    ScrollView
 } from 'react-native';
 import {connect} from "react-redux";
+import {StackNavigator}from 'react-navigation';
 import {allActionsFun} from "./redux/action"; //导入函数生成action
 
-import TabNavigator from 'react-native-tab-navigator';
 import My from "./components/My"
 import Home from "./components/Home"
 import Message from "./components/Message"
 
+import {TabNavigator} from 'react-navigation';
+
+const SimpleApp = TabNavigator({
+    Home: {
+        screen: Home,
+        navigationOptions:{
+            tabBarLabel: '识兔',
+            tabBarIcon:({tintColor},focused)=>(
+                focused?
+                 <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/home.png")}/>
+                 :
+                 <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/home_ok.png")}/>
+            )
+        },
+
+    },
+    My:{
+        screen:My,
+        navigationOptions:{
+            tabBarLabel: '识兔22',
+            tabBarIcon:({tintColor},focused)=>(
+                focused?
+                 <Image style={[styles.tabIcon,{tintColor:tintColor}]}   source={require("./assets/images/index/home.png")}/>
+                :
+                <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/home_ok.png")}/>
+            )}
+        }
+},{
+    tabBarPosition:"bottom",
+    swipeEnabled:true,
+    tabBarOptions: {
+        activeBackgroundColor: 'white',
+        activeTintColor: '#4ECBFC',
+        inactiveBackgroundColor: 'white',
+        inactiveTintColor: '#aaa',
+    }
+});
+
+
 class Container extends Component<{}> {
   constructor(props){
     super(props)
-    this.state={
-      selected:"home"
-    }
   }
   render() {
     return (
-        <TabNavigator>
-            <TabNavigator.Item
-             selected={this.state.selected=="home"}
-             title={"首页"}
-             titleStyle={styles.titleStyle}
-             onPress={()=>{this.setState({selected:"home"})}}
-             renderIcon={()=> <Image style={styles.tabIcon} source={require("./assets/images/index/home.png")}/>}
-             renderSelectedIcon={()=> <Image  style={styles.tabIcon} source={require("./assets/images/index/home_ok.png")}/>}
-            >
-                <Home/>
-            </TabNavigator.Item>
-
-            <TabNavigator.Item
-                selected={this.state.selected=="message"}
-                title={"消息"}
-                titleStyle={styles.titleStyle}
-                onPress={()=>{this.setState({selected:"message"})}}
-                renderIcon={()=> <Image   style={styles.tabIcon} source={require("./assets/images/index/message.png")}/>}
-                renderSelectedIcon={()=> <Image style={styles.tabIcon} source={require("./assets/images/index/message_ok.png")}/>}
-            >
-                <Message/>
-            </TabNavigator.Item>
-
-          <TabNavigator.Item
-              selected={this.state.selected=="order"}
-              title={"订单"}
-              titleStyle={styles.titleStyle}
-              onPress={()=>{this.setState({selected:"order"})}}
-              renderIcon={()=> <Image   style={styles.tabIcon} source={require("./assets/images/index/order.png")}/>}
-              renderSelectedIcon={()=> <Image style={styles.tabIcon} source={require("./assets/images/index/order_ok.png")}/>}
-          >
-            <View style={styles.container}><Text>1132d</Text></View>
-          </TabNavigator.Item>
-
-
-          <TabNavigator.Item
-              selected={this.state.selected=="my"}
-              title={"我的"}
-              titleStyle={styles.titleStyle}
-              onPress={()=>{this.setState({selected:"my"})}}
-              renderIcon={()=> <Image   style={styles.tabIcon} source={require("./assets/images/index/my.png")}/>}
-              renderSelectedIcon={()=> <Image style={styles.tabIcon} source={require("./assets/images/index/my_ok.png")}/>}
-          >
-              <My/>
-          </TabNavigator.Item>
-        </TabNavigator>
+        <SimpleApp/>
     );
   }
 }

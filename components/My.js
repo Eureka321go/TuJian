@@ -21,6 +21,7 @@ class My extends Component<{}> {
     }
 
     render() {
+        //const { params } = this.props.navigation.state;
         return (
             <View style={styles.container}>
                 <Text>444</Text>

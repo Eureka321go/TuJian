@@ -21,9 +21,14 @@ class Home extends Component<{}> {
     }
 
     render() {
+        //const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
-                <Text>111</Text>
+                <Text
+                 onPress={()=>{
+                     //navigate('My',{user:"纯纯"})
+                 }}
+                >111</Text>
             </View>
         );
     }
