@@ -20,6 +20,7 @@ import {allActionsFun} from "./redux/action"; //导入函数生成action
 import My from "./components/My"
 import Home from "./components/Home"
 import Message from "./components/Message"
+import Order from "./components/Order"
 
 import {TabNavigator} from 'react-navigation';
 
@@ -27,7 +28,7 @@ const SimpleApp = TabNavigator({
     Home: {
         screen: Home,
         navigationOptions:{
-            tabBarLabel: '识兔',
+            tabBarLabel: '首页',
             tabBarIcon:({tintColor},focused)=>(
                 focused?
                  <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/home.png")}/>
@@ -37,25 +38,46 @@ const SimpleApp = TabNavigator({
         },
 
     },
+    Message:{
+        screen:Message,
+        navigationOptions:{
+            tabBarLabel: '消息',
+            tabBarIcon:({tintColor},focused)=>(
+                focused?
+                 <Image style={[styles.tabIcon,{tintColor:tintColor}]}   source={require("./assets/images/index/message.png")}/>
+                :
+                <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/message_ok.png")}/>
+            )}
+        },
+    Order:{
+        screen:Order,
+        navigationOptions:{
+            tabBarLabel: '订单',
+            tabBarIcon:({tintColor},focused)=>(
+                focused?
+                    <Image style={[styles.tabIcon,{tintColor:tintColor}]}   source={require("./assets/images/index/order.png")}/>
+                    :
+                    <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/order_ok.png")}/>
+            )}
+    },
     My:{
         screen:My,
         navigationOptions:{
-            tabBarLabel: '识兔22',
+            tabBarLabel: '我的',
             tabBarIcon:({tintColor},focused)=>(
                 focused?
-                 <Image style={[styles.tabIcon,{tintColor:tintColor}]}   source={require("./assets/images/index/home.png")}/>
-                :
-                <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/home_ok.png")}/>
+                    <Image style={[styles.tabIcon,{tintColor:tintColor}]}   source={require("./assets/images/index/my.png")}/>
+                    :
+                    <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/my_ok.png")}/>
             )}
-        }
+    }
 },{
     tabBarPosition:"bottom",
     swipeEnabled:true,
     tabBarOptions: {
         activeBackgroundColor: 'white',
-        activeTintColor: '#4ECBFC',
+        activeTintColor: '#51cdf1',
         inactiveBackgroundColor: 'white',
-        inactiveTintColor: '#aaa',
     }
 });
 
@@ -79,11 +101,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   tabIcon:{
-      width:25,
-      height:25
-  },
-  titleStyle:{
-    fontSize:12
+      width:21,
+      height:21
   }
 
 });

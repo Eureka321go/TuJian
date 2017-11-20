@@ -10,25 +10,32 @@ import {
     StyleSheet,
     Text,
     View,
-    Image
+    Image,
+    ScrollView
 } from 'react-native';
 import {connect} from "react-redux";
 
 class Home extends Component<{}> {
     constructor(props) {
         super(props)
-
+        this.state={
+            isRefreshing:false
+        }
     }
 
     render() {
         //const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
-                <Text
-                 onPress={()=>{
-                     //navigate('My',{user:"纯纯"})
-                 }}
-                >111</Text>
+                <ScrollView>
+                   <View style={{height:1000,backgroundColor:"red"}}>
+                       <Text
+                           onPress={()=>{
+                               // navigate('My',{user:"纯纯"})
+                           }}
+                       >111</Text>
+                   </View>
+                </ScrollView>
             </View>
         );
     }
@@ -36,10 +43,7 @@ class Home extends Component<{}> {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        flex: 1
     }
 
 });
