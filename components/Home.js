@@ -15,8 +15,8 @@ import {
 } from 'react-native';
 
 import {connect} from "react-redux";
-import RefreshScrollView from "./common/RefreshScrollView"
 import  {Calc} from "./common/Calc"
+var ParallaxView = require('react-native-parallax-view');
 class Home extends Component<{}> {
     constructor(props) {
         super(props)
@@ -29,9 +29,16 @@ class Home extends Component<{}> {
         //const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
-                <RefreshScrollView>
-                    <Image style={styles.indexBg} source={require("../assets/images/index/indexBg.jpg")}/>
-                </RefreshScrollView>
+                <ParallaxView
+                    backgroundSource={require("../assets/images/index/indexBg.jpg")}
+                    windowHeight={Calc.getHeight(547)}
+                >
+                  <View>
+                      <Text >awdw</Text>
+                      <Text >awdw</Text>
+                      <Text >awdw</Text>
+                  </View>
+                </ParallaxView>
             </View>
         );
     }
