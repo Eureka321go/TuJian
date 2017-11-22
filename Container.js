@@ -31,9 +31,9 @@ const SimpleApp = TabNavigator({
             tabBarLabel: '首页',
             tabBarIcon:({tintColor},focused)=>(
                 focused?
-                 <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/home.png")}/>
-                 :
                  <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/home_ok.png")}/>
+                 :
+                 <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/home.png")}/>
             )
         },
 
@@ -44,9 +44,9 @@ const SimpleApp = TabNavigator({
             tabBarLabel: '消息',
             tabBarIcon:({tintColor},focused)=>(
                 focused?
-                 <Image style={[styles.tabIcon,{tintColor:tintColor}]}   source={require("./assets/images/index/message.png")}/>
+                 <Image style={[styles.tabIcon,{tintColor:tintColor}]}   source={require("./assets/images/index/message_ok.png")}/>
                 :
-                <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/message_ok.png")}/>
+                <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/message.png")}/>
             )}
         },
     Order:{
@@ -55,9 +55,9 @@ const SimpleApp = TabNavigator({
             tabBarLabel: '订单',
             tabBarIcon:({tintColor},focused)=>(
                 focused?
-                    <Image style={[styles.tabIcon,{tintColor:tintColor}]}   source={require("./assets/images/index/order.png")}/>
+                    <Image style={[styles.tabIcon,{tintColor:tintColor}]}   source={require("./assets/images/index/order_ok.png")}/>
                     :
-                    <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/order_ok.png")}/>
+                    <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/order.png")}/>
             )}
     },
     My:{
@@ -66,18 +66,16 @@ const SimpleApp = TabNavigator({
             tabBarLabel: '我的',
             tabBarIcon:({tintColor},focused)=>(
                 focused?
-                    <Image style={[styles.tabIcon,{tintColor:tintColor}]}   source={require("./assets/images/index/my.png")}/>
+                    <Image style={[styles.tabIcon,{tintColor:tintColor}]}   source={require("./assets/images/index/my_ok.png")}/>
                     :
-                    <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/my_ok.png")}/>
+                    <Image style={[styles.tabIcon,{tintColor:tintColor}]}  source={require("./assets/images/index/my.png")}/>
             )}
     }
 },{
     tabBarPosition:"bottom",
     swipeEnabled:true,
     tabBarOptions: {
-        activeBackgroundColor: 'white',
         activeTintColor: '#51cdf1',
-        inactiveBackgroundColor: 'white',
     }
 });
 

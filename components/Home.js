@@ -11,15 +11,17 @@ import {
     Text,
     View,
     Image,
-    ScrollView
+    ScrollView,
 } from 'react-native';
-import {connect} from "react-redux";
 
+import {connect} from "react-redux";
+import RefreshScrollView from "./common/RefreshScrollView"
+import  {Calc} from "./common/Calc"
 class Home extends Component<{}> {
     constructor(props) {
         super(props)
         this.state={
-            isRefreshing:false
+
         }
     }
 
@@ -27,15 +29,9 @@ class Home extends Component<{}> {
         //const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
-                <ScrollView>
-                   <View style={{height:1000,backgroundColor:"red"}}>
-                       <Text
-                           onPress={()=>{
-                               // navigate('My',{user:"纯纯"})
-                           }}
-                       >111</Text>
-                   </View>
-                </ScrollView>
+                <RefreshScrollView>
+                    <Image style={styles.indexBg} source={require("../assets/images/index/indexBg.jpg")}/>
+                </RefreshScrollView>
             </View>
         );
     }
@@ -44,7 +40,15 @@ class Home extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+    indexBg:{
+        width:Calc.getWidth(750),
+        height:Calc.getHeight(547),
+        position:"absolute",
+        top:0,
+        left:0,
     }
+
 
 });
 
