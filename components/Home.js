@@ -24,29 +24,52 @@ class Home extends Component<{}> {
             addressText:"目的地/客栈名称",
             addressName:"厦门",
             liveDate:"10月21日-10月22日",
-            peopleNum:"2人"
+            peopleNum:"2人",
+            tabActive:"jingCai"
         }
     }
 
     render() {
         //const { navigate } = this.props.navigation;
+        const ActiveClass={color:"#51cdf1"}
+        const noActive={color:"#3a3c3c"}
         return (
             <View style={styles.container}>
                 <ParallaxView
                     backgroundSource={require("../assets/images/index/indexBg.jpg")}
                     windowHeight={Calc.getHeight(547)}
+                    stickyHeaderIndices={[2]}
+                    header={(
+                        <View style={styles.searchInfo}>
+                            {this.renderAddress()}
+                            {this.renderLiveDate()}
+                            {this.renderPeopleNum()}
+                            <View style={{flex:1,height:Calc.getHeight(88),backgroundColor:"#51cdf1",alignItems:"center",justifyContent:"center",borderRadius:6}}>
+                                <Text style={{fontSize:18,color:"#fff"}}>开始</Text>
+                            </View>
+                        </View>
+                    )}
                 >
+                  {/*占位*/}
+                  <View style={{height:Calc.getHeight(444)/2+Calc.getHeight(80)}}></View>
+                  {/*tab*/}
                   <View>
-                      {/*搜索info*/}
-                      <View style={styles.searchInfo}>
-                          {this.renderAddress()}
-                          {this.renderLiveDate()}
-                          {this.renderPeopleNum()}
-                          <View style={{flex:1,height:Calc.getHeight(88),backgroundColor:"#51cdf1",alignItems:"center",justifyContent:"center",borderRadius:6}}>
-                              <Text style={{fontSize:18,color:"#fff"}}>开始</Text>
+                      <View style={styles.tab}>
+                          <View style={styles.tabItem}>
+                              <Text style={[styles.tabText,this.state.tabActive=='jingCai'?ActiveClass:noActive]}>精彩</Text>
+                          </View>
+                          <View style={styles.tabItem}>
+                              <Text style={[styles.tabText,this.state.tabActive=='bieShu'?ActiveClass:noActive]}>别墅</Text>
+                          </View>
+                          <View style={styles.tabItem}>
+                              <Text style={[styles.tabText,this.state.tabActive=='fangDong'?ActiveClass:noActive]}>房东故事</Text>
+                          </View>
+                          <View style={styles.tabItem}>
+                              <Text style={styles.tabText}>购房</Text>
                           </View>
                       </View>
                   </View>
+                  <View style={{height:1000,backgroundColor:"red"}}></View>
                 </ParallaxView>
             </View>
         );
@@ -104,7 +127,7 @@ const styles = StyleSheet.create({
         width:Calc.getWidth(702),
         height:Calc.getHeight(444),
         backgroundColor:"#fff",
-        marginTop:-(Calc.getHeight(444)/2),
+        marginTop:Calc.getHeight(103)+Calc.getHeight(444)/2,
         marginLeft:"auto",
         marginRight:"auto",
         borderRadius:6,
@@ -115,7 +138,7 @@ const styles = StyleSheet.create({
         shadowOpacity:0.5,
         paddingLeft:Calc.getWidth(20),
         paddingRight:Calc.getWidth(20),
-        paddingBottom:Calc.getWidth(20)
+        paddingBottom:Calc.getWidth(20),
     },
     //View
     List:{
@@ -143,7 +166,23 @@ const styles = StyleSheet.create({
     enterIcon:{
         width:Calc.getWidth(10),
         height:Calc.getWidth(18),
-    }
+    },
+//    tabItem
+    tab:{
+        flexDirection:"row",
+        height:Calc.getHeight(100),
+        alignItems:"center",
+        backgroundColor:"#fff",
+    },
+    tabItem:{
+        flex:1,
+        backgroundColor:"#fff",
+        height:Calc.getHeight(29),
+    },
+    tabText:{
+        fontSize:16,
+        textAlign:"center",
+    },
 });
 
 

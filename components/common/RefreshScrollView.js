@@ -22,7 +22,9 @@ class RefreshScrollView extends Component<{}> {
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView
+
+            >
                 {this.props.children}
             </ScrollView>
         );

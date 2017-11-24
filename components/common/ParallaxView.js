@@ -122,14 +122,14 @@ var ParallaxView = createReactClass({
                     ref={component => { this._scrollView = component; }}
                     {...props}
                     style={styles.scrollView}
-                    onScroll={Animated.event(
-                        [{ nativeEvent: { contentOffset: { y: this.state.scrollY }}}]
-                    )}
+                    onScroll={
+                        Animated.event([{ nativeEvent: { contentOffset: { y: this.state.scrollY }}}])
+                    }
                     scrollEventThrottle={16}>
                     {this.renderHeader()}
-                    <View style={[styles.content, props.scrollableViewStyle]}>
+                    {/*<View style={[styles.content, props.scrollableViewStyle]}>*/}
                         {this.props.children}
-                    </View>
+                    {/*</View>*/}
                 </ScrollView>
             </View>
         );
