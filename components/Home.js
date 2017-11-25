@@ -17,6 +17,8 @@ import {
 import {connect} from "react-redux";
 import  {Calc} from "./common/Calc"
 import ParallaxView from "./common/ParallaxView"
+import Tabs from "./Index/Tabs"
+
 class Home extends Component<{}> {
     constructor(props) {
         super(props)
@@ -24,15 +26,11 @@ class Home extends Component<{}> {
             addressText:"目的地/客栈名称",
             addressName:"厦门",
             liveDate:"10月21日-10月22日",
-            peopleNum:"2人",
-            tabActive:"jingCai"
+            peopleNum:"2人"
         }
     }
-
     render() {
         //const { navigate } = this.props.navigation;
-        const ActiveClass={color:"#51cdf1"}
-        const noActive={color:"#3a3c3c"}
         return (
             <View style={styles.container}>
                 <ParallaxView
@@ -54,22 +52,9 @@ class Home extends Component<{}> {
                   <View style={{height:Calc.getHeight(444)/2+Calc.getHeight(80)}}></View>
                   {/*tab*/}
                   <View>
-                      <View style={styles.tab}>
-                          <View style={styles.tabItem}>
-                              <Text style={[styles.tabText,this.state.tabActive=='jingCai'?ActiveClass:noActive]}>精彩</Text>
-                          </View>
-                          <View style={styles.tabItem}>
-                              <Text style={[styles.tabText,this.state.tabActive=='bieShu'?ActiveClass:noActive]}>别墅</Text>
-                          </View>
-                          <View style={styles.tabItem}>
-                              <Text style={[styles.tabText,this.state.tabActive=='fangDong'?ActiveClass:noActive]}>房东故事</Text>
-                          </View>
-                          <View style={styles.tabItem}>
-                              <Text style={styles.tabText}>购房</Text>
-                          </View>
-                      </View>
+                      <Tabs/>
                   </View>
-                  <View style={{height:1000,backgroundColor:"red"}}></View>
+
                 </ParallaxView>
             </View>
         );
@@ -166,22 +151,6 @@ const styles = StyleSheet.create({
     enterIcon:{
         width:Calc.getWidth(10),
         height:Calc.getWidth(18),
-    },
-//    tabItem
-    tab:{
-        flexDirection:"row",
-        height:Calc.getHeight(100),
-        alignItems:"center",
-        backgroundColor:"#fff",
-    },
-    tabItem:{
-        flex:1,
-        backgroundColor:"#fff",
-        height:Calc.getHeight(29),
-    },
-    tabText:{
-        fontSize:16,
-        textAlign:"center",
     },
 });
 
