@@ -75,7 +75,8 @@ var ParallaxView = createReactClass({
                     transform: [{
                         translateY: scrollY.interpolate({
                             inputRange: [ -windowHeight, 0, windowHeight],
-                            outputRange: [windowHeight/2, 0, -windowHeight/3]
+                                                              //原本是-windowHeight/3
+                            outputRange: [windowHeight/2, 0, -windowHeight]
                         })
                     },{
                         scale: scrollY.interpolate({
@@ -103,10 +104,10 @@ var ParallaxView = createReactClass({
             <Animated.View style={{
                 position: 'relative',
                 height: windowHeight,
-                opacity: scrollY.interpolate({
-                    inputRange: [-windowHeight, 0, windowHeight / 1.2],
-                    outputRange: [1, 1, 0]
-                }),
+                // opacity: scrollY.interpolate({
+                //     inputRange: [-windowHeight, 0, windowHeight / 1.2],
+                //     outputRange: [1, 1, 0]
+                // }),
             }}>
                 {this.props.header}
             </Animated.View>
