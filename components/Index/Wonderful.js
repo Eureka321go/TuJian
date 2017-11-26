@@ -10,11 +10,13 @@ import {
     StyleSheet,
     Text,
     View,
-    Image
+    Image,
+    FlatList
 } from 'react-native';
 import {connect} from "react-redux";
 import  {Calc} from "../common/Calc"
 import Carousel from 'react-native-snap-carousel';
+import Star from "../common/Star"
 
 class Wonderful extends Component<{}> {
     constructor(props) {
@@ -22,6 +24,7 @@ class Wonderful extends Component<{}> {
         this.state={
             entries:["item1","item2","item3"],  //顶部轮播数组
             teSeSwiper:["item","item","item"],  //特色风格轮播
+            youXuanList:[{key:"item"}],//优选列表
         }
     }
     //顶部轮播
@@ -62,6 +65,18 @@ class Wonderful extends Component<{}> {
            </View>
         )
     }
+    //优选列表
+    renderYouXuanItem(item){
+        return(
+            <View style={styles.allPadding}>
+                <View style={styles.yXImgWrap}>
+                    <Image style={styles.youXuanListImg} source={require("../../assets/images/index/youXuanList.png")}/>
+                </View>
+                <Text style={{fontSize:18,color:"#262626",marginTop:Calc.getHeight(20),marginBottom:Calc.getHeight(16)}}>三亚名宿清晰名宿含早1室0厅1卫</Text>
+                <Star score={3.8}/>
+            </View>
+        )
+    }
     render() {
         return (
            <View style={{backgroundColor:"#fff"}}>
@@ -81,6 +96,16 @@ class Wonderful extends Component<{}> {
                {this.renderTeSeSwiper()}
                {/*分割线*/}
                <Text style={styles.line}></Text>
+               {/*优选推荐*/}
+               <View style={[styles.allPadding,{flexDirection:"row",justifyContent:"space-between",marginTop:Calc.getHeight(50),marginBottom:Calc.getHeight(40)}]}>
+                   <Text style={{fontSize:18,color:"#262626"}}>优选推荐</Text>
+                   <Text style={{fontSize:15,color:"#3a3c3c"}}>更多</Text>
+               </View>
+               {/*优选推荐列表*/}
+               <FlatList
+                 data={this.state.youXuanList}
+                 renderItem={this.renderYouXuanItem}
+               />
            </View>
         );
     }
@@ -92,6 +117,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
+    },
+    allPadding:{
+        paddingLeft:Calc.getWidth(24),
+        paddingRight:Calc.getWidth(24)
     },
     //特色每个slider
     smallSlider:{
@@ -115,8 +144,19 @@ const styles = StyleSheet.create({
         marginLeft:"auto",
         marginRight:"auto",
         backgroundColor:"#d9e1e9"
-    }
+    },
+    //优选列表
+    //列表大图容器
+    yXImgWrap:{
+        width:Calc.getWidth(702),
+        height:Calc.getHeight(351),
 
+    },
+    //列表大图
+    youXuanListImg:{
+        width:Calc.getWidth(702),
+        height:Calc.getHeight(351),
+    }
 });
 
 

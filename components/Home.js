@@ -18,6 +18,7 @@ import {connect} from "react-redux";
 import  {Calc} from "./common/Calc"
 import ParallaxView from "./common/ParallaxView"
 import Tabs from "./Index/Tabs"
+import Wonderful from "./Index/Wonderful"
 
 class Home extends Component<{}> {
     constructor(props) {
@@ -54,7 +55,10 @@ class Home extends Component<{}> {
                   <View>
                       <Tabs/>
                   </View>
-
+                  {/*tabContainer精彩等列表容器*/}
+                  <View>
+                      <Wonderful/>
+                  </View>
                 </ParallaxView>
             </View>
         );

@@ -5,7 +5,6 @@
  */
 
 import React, {Component} from 'react';
-import Wonderful from "./Wonderful"
 import {
     Platform,
     StyleSheet,
@@ -34,7 +33,6 @@ class Tabs extends Component<{}> {
                         {this.renderTabItem({name:"房东故事"})}
                         {this.renderTabItem({name:"购房"})}
                     </View>
-                    <Wonderful/>
                 </View>
             </View>
         );
