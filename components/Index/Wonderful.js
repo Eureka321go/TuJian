@@ -11,7 +11,8 @@ import {
     Text,
     View,
     Image,
-    FlatList
+    FlatList,
+    TouchableOpacity
 } from 'react-native';
 import {connect} from "react-redux";
 import  {Calc} from "../common/Calc"
@@ -24,7 +25,7 @@ class Wonderful extends Component<{}> {
         this.state={
             entries:["item1","item2","item3"],  //顶部轮播数组
             teSeSwiper:["item","item","item"],  //特色风格轮播
-            youXuanList:[{key:"item"}],//优选列表
+            youXuanList:[{key:"item1",collection:false},{key:"item2",collection:true}],//优选列表,数组中的数据注意要key
         }
     }
     //顶部轮播
@@ -65,15 +66,58 @@ class Wonderful extends Component<{}> {
            </View>
         )
     }
+    //收藏图标点击
+    CollectionPress(){
+        alert(11)
+    }
+    //渲染收藏图标
+    renderCollection(self,item){
+        function clickIcon() {
+            let arr=self.state.youXuanList;
+            if(arr[item.index].collection){
+                arr[item.index].collection=false
+            }else{
+                arr[item.index].collection=true
+            }
+            self.setState({
+                youXuanList:arr
+            })
+
+        }
+        if(item.item.collection){
+            return (
+                <TouchableOpacity activeOpacity={1} style={styles.collectionIcon} onPress={()=>{clickIcon()}}>
+                    <Image  style={styles.collectionIcon} source={require("../../assets/images/common/collection.png")}/>
+                </TouchableOpacity>
+            )
+        }else{
+            return (
+                <TouchableOpacity activeOpacity={1} style={styles.collectionIcon} onPress={()=>{clickIcon()}}>
+                    <Image  style={styles.collectionIcon} source={require("../../assets/images/common/collection_no.png")}/>
+                </TouchableOpacity>
+            )
+        }
+    }
     //优选列表
     renderYouXuanItem(item){
         return(
-            <View style={styles.allPadding}>
+            <View style={[styles.allPadding,{marginBottom:Calc.getHeight(50)}]}>
                 <View style={styles.yXImgWrap}>
                     <Image style={styles.youXuanListImg} source={require("../../assets/images/index/youXuanList.png")}/>
+                    {/*收藏图标*/}
+                    {this.renderCollection(this,item)}
                 </View>
                 <Text style={{fontSize:18,color:"#262626",marginTop:Calc.getHeight(20),marginBottom:Calc.getHeight(16)}}>三亚名宿清晰名宿含早1室0厅1卫</Text>
                 <Star score={4.8}/>
+                {/*实拍，免押金*/}
+                <View style={{flexDirection:"row",marginTop:Calc.getHeight(20)}}>
+                    <View style={styles.mianYaJin}>
+                        <Text style={{ color:"#fff", fontSize:12,}}>免押金</Text>
+                    </View>
+                    <View style={styles.shiPai}>
+                        <Text style={{ color:"#97d2ec", fontSize:12,}}>实拍</Text>
+                    </View>
+                </View>
             </View>
         )
     }
@@ -104,7 +148,8 @@ class Wonderful extends Component<{}> {
                {/*优选推荐列表*/}
                <FlatList
                  data={this.state.youXuanList}
-                 renderItem={this.renderYouXuanItem}
+                 renderItem={this.renderYouXuanItem.bind(this)}
+                 extraData={this.state}
                />
            </View>
         );
@@ -150,13 +195,36 @@ const styles = StyleSheet.create({
     yXImgWrap:{
         width:Calc.getWidth(702),
         height:Calc.getHeight(351),
-
+        borderRadius:6
+    },
+    collectionIcon:{
+        position:"absolute",
+        top:Calc.getHeight(30),
+        right:Calc.getWidth(30),
+        width:Calc.getWidth(48),
+        height:Calc.getWidth(48),
     },
     //列表大图
     youXuanListImg:{
         width:Calc.getWidth(702),
         height:Calc.getHeight(351),
+    },
+    //免押金
+    mianYaJin:{
+        backgroundColor:"#97d2ec",
+        paddingLeft:Calc.getWidth(10),
+        paddingRight:Calc.getWidth(10),
+        paddingTop:Calc.getHeight(10),
+        paddingBottom:Calc.getHeight(10),
+        borderRadius:3
+    },
+    shiPai:{
+        paddingLeft:Calc.getWidth(10),
+        paddingRight:Calc.getWidth(10),
+        paddingTop:Calc.getHeight(10),
+        paddingBottom:Calc.getHeight(10),
     }
+
 });
 
 
