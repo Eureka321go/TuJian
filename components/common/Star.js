@@ -41,7 +41,7 @@ class Star extends Component<{}> {
             Arr.push(
                 <Image key={Arr.length} style={styles.star} source={require("../../assets/images/common/halfStar.png")}/>
             );
-        }else if(decimal>0.8 &&  decimal!=0){
+        }else if(decimal>=0.8 &&  decimal!=0){
             Arr.push(
                 <Image key={Arr.length} style={styles.star} source={require("../../assets/images/common/starAll.png")}/>
             );
