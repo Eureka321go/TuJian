@@ -28,7 +28,7 @@ class My extends Component<{}> {
                     header={(
                         <View style={styles.topWrap}>
                             {/*设置图标*/}
-                            <TouchableOpacity style={styles.settingIconWrap}  onPress={()=>{alert(11)}}>
+                            <TouchableOpacity style={styles.settingIconWrap}  onPress={()=>{alert(11)}} activeOpacity={0.9}>
                                 <Image style={styles.settingIcon} source={require("../assets/images/my/settingIcon.png")}/>
                             </TouchableOpacity>
                             {/*用户信息*/}
@@ -42,10 +42,14 @@ class My extends Component<{}> {
                                 </View>
                             </View>
                             {/*我的银行卡*/}
-
+                            <TouchableOpacity style={styles.cardWrap} onPress={()=>{alert(1)}} activeOpacity={0.9}>
+                                <View style={styles.MyCard}>
+                                    <Image style={{width:Calc.getWidth(31),height:Calc.getHeight(24),marginRight:Calc.getWidth(10)}} source={require("../assets/images/my/card.png")}/>
+                                    <Text style={{fontSize:12,color:"#fff",flex:1}}>我的银行卡</Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     )}
-
                 >
 
                 </ParallaxView>
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         alignItems:"center",
         justifyContent:"flex-start",
-        width:Calc.getWidth(750)
+        width:Calc.getWidth(750),
     },
     userImgWrap:{
         width:Calc.getWidth(140),
@@ -88,12 +92,34 @@ const styles = StyleSheet.create({
         borderRadius:Calc.getWidth(80),
         overflow:"hidden",
         marginLeft:Calc.getWidth(80),
-        marginRight:Calc.getWidth(40)
+        marginRight:Calc.getWidth(40),
+        borderWidth:1,
+        borderColor:"#fff"
     },
     userImg:{
         width:Calc.getWidth(140),
         height:Calc.getWidth(140),
     },
+    cardWrap:{
+        position:"absolute",
+        bottom:Calc.getHeight(60),
+        right:-Calc.getWidth(30),
+        zIndex:10,
+        flex:1,
+        borderRadius:Calc.getWidth(30),
+        backgroundColor:"#51cdf1",
+        height:Calc.getHeight(60),
+        width:Calc.getWidth(215),
+        paddingLeft:Calc.getWidth(20),
+        paddingRight:Calc.getWidth(20),
+    },
+    MyCard:{
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"center",
+        flex:1,
+    },
+
 
 });
 

@@ -62,8 +62,10 @@ class Star extends Component<{}> {
     render() {
         return (
             <View style={styles.container}>
-                {this.state.starArr}
-                <Text style={{fontSize:12,color:"#f2cb2f"}}>({this.props.score})</Text>
+              <View style={styles.starWrap}>
+                  {this.state.starArr}
+                  <Text style={{fontSize:12,color:"#f2cb2f"}}>({this.props.score})</Text>
+              </View>
             </View>
         );
     }
@@ -75,6 +77,14 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         justifyContent: 'flex-start',
         alignItems: 'center',
+
+    },
+    starWrap:{
+        flex: 1,
+        flexDirection:"row",
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        height:Calc.getHeight(30),
     },
     star:{
         width:Calc.getWidth(32),

@@ -44,7 +44,7 @@ class Home extends Component<{}> {
                     stickyHeaderIndices={[2]}
                     header={(
                         <View style={styles.searchInfo}>
-                            {this.renderAddress()}
+                            {this.renderAddress()}z
                             {this.renderLiveDate()}
                             {this.renderPeopleNum()}
                             <View style={{flex:1,height:Calc.getHeight(88),backgroundColor:"#51cdf1",alignItems:"center",justifyContent:"center",borderRadius:6}}>
