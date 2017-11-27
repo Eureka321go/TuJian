@@ -73,7 +73,7 @@ class Wonderful extends Component<{}> {
                     <Image style={styles.youXuanListImg} source={require("../../assets/images/index/youXuanList.png")}/>
                 </View>
                 <Text style={{fontSize:18,color:"#262626",marginTop:Calc.getHeight(20),marginBottom:Calc.getHeight(16)}}>三亚名宿清晰名宿含早1室0厅1卫</Text>
-                <Star score={3.8}/>
+                <Star score={4.8}/>
             </View>
         )
     }

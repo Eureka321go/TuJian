@@ -28,7 +28,7 @@ class Star extends Component<{}> {
     componentWillMount(){
         let {score} = this.props;
         let intNum=Math.floor(score);
-        let decimal=score-intNum;
+        let decimal=Math.round((score-intNum)*100)/100
         let Arr=new Array();
         let Arrkey=0;
         for(let i=0;i<intNum;i++){
@@ -37,19 +37,18 @@ class Star extends Component<{}> {
                 <Image key={i} style={styles.star} source={require("../../assets/images/common/starAll.png")}/>
             );
         }
-        if(decimal<0.8){
+        if(decimal<0.8 && decimal!=0){
             Arr.push(
                 <Image key={Arr.length} style={styles.star} source={require("../../assets/images/common/halfStar.png")}/>
             );
-        }else{
+        }else if(decimal>0.8 &&  decimal!=0){
             Arr.push(
                 <Image key={Arr.length} style={styles.star} source={require("../../assets/images/common/starAll.png")}/>
             );
         }
         let s=5-Arr.length;
         if(s>0){
-            let n=5-s;
-            for(let a=0;a<n;a++){
+            for(let a=0;a<s;a++){
                 Arr.push(
                     <Image key={Arr.length} style={styles.star} source={require("../../assets/images/common/startNo.png")}/>
                 );
@@ -64,6 +63,7 @@ class Star extends Component<{}> {
         return (
             <View style={styles.container}>
                 {this.state.starArr}
+                <Text style={{fontSize:12,color:"#f2cb2f"}}>({this.props.score})</Text>
             </View>
         );
     }
