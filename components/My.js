@@ -17,7 +17,47 @@ class My extends Component<{}> {
         super(props)
 
     }
-
+    //渲染积分收益余额
+    renderMoney(){
+        return(
+            <View style={styles.tabWrap}>
+                <TouchableOpacity style={styles.tabOpWrap} activeOpacity={1} onPress={()=>{this.jumpScore()}}>
+                    <View style={styles.tab}>
+                        <View style={styles.scoreWrap}>
+                            <Text style={styles.score}>200</Text>
+                            <Text style={styles.scoreName}>分</Text>
+                        </View>
+                        <Text style={styles.describe}>积分</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.tabOpWrap} activeOpacity={1} onPress={()=>{this.jumpScore()}}>
+                    <View style={styles.tab}>
+                        <View style={styles.scoreWrap}>
+                            <Text style={styles.score}>620</Text>
+                            <Text style={styles.scoreName}>元</Text>
+                        </View>
+                        <Text style={styles.describe}>收益</Text>
+                        {/*线条*/}
+                        <Text style={styles.lfLine}></Text>
+                        <Text style={styles.RfLine}></Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.tabOpWrap} activeOpacity={1} onPress={()=>{this.jumpScore()}}>
+                    <View style={styles.tab}>
+                        <View style={styles.scoreWrap}>
+                            <Text style={styles.score}>100</Text>
+                            <Text style={styles.scoreName}>元</Text>
+                        </View>
+                        <Text style={styles.describe}>余额</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+    //积分收益余额的跳转
+    jumpScore(){
+        alert("跳转到积分or收益or余额")
+    }
     render() {
         //const { params } = this.props.navigation.state;
         return (
@@ -51,7 +91,10 @@ class My extends Component<{}> {
                         </View>
                     )}
                 >
-
+                <View>
+                    {/*3个tab*/}
+                    {this.renderMoney()}
+                </View>
                 </ParallaxView>
             </View>
         );
@@ -119,7 +162,59 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         flex:1,
     },
-
+    //三个Tab
+    tabWrap:{
+        flex:1,
+        height:Calc.getHeight(200),
+        borderBottomWidth:Calc.getHeight(20),
+        borderColor:"#f5f5f5",
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"center"
+    },
+    tab:{
+        flex:1,
+        justifyContent:"center",
+        position:"relative"
+    },
+    tabOpWrap:{
+        flex:1,
+    },
+    scoreWrap:{
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"center"
+    },
+    score:{
+        fontSize:21,
+        color:"#3a3a3a"
+    },
+    scoreName:{
+        fontSize:12,
+        color:"#3a3a3a"
+    },
+    describe:{
+        textAlign:"center",
+        fontSize:12,
+        color:"#b8bdc2",
+        marginTop:Calc.getHeight(10)
+    },
+    lfLine:{
+        position:"absolute",
+        top:Calc.getHeight(62),
+        left:0,
+        width:1,
+        height:Calc.getHeight(76),
+        backgroundColor:"#d9e1e9"
+    },
+    RfLine:{
+        position:"absolute",
+        top:Calc.getHeight(62),
+        right:0,
+        width:1,
+        height:Calc.getHeight(76),
+        backgroundColor:"#d9e1e9"
+    }
 
 });
 
