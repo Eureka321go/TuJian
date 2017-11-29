@@ -133,7 +133,7 @@ class My extends Component<{}> {
                             {/*我的银行卡*/}
                             <TouchableOpacity style={styles.cardWrap} onPress={()=>{alert(1)}} activeOpacity={0.9}>
                                 <View style={styles.MyCard}>
-                                    <Image style={{width:Calc.getWidth(31),height:Calc.getHeight(24),marginRight:Calc.getWidth(10)}} source={require("../assets/images/my/card.png")}/>
+                                    <Image style={{width:Calc.getWidth(31),height:Calc.getHeight(26),marginRight:Calc.getWidth(10)}} source={require("../assets/images/my/card.png")}/>
                                     <Text style={{fontSize:12,color:"#fff",flex:1}}>我的银行卡</Text>
                                 </View>
                             </TouchableOpacity>

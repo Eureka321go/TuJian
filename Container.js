@@ -32,16 +32,15 @@ const TabObj=function () {
                 inactiveTintColor:"#000",
                 style:{
                     height:Calc.getHeight(110),
-                    backgroundColor:"#fff"
+                    backgroundColor:"#fff",
+                    borderTopWidth:0.5,
+                    borderColor:"#d9e1e9"
                 },
                 tabStyle:{
                     flex:1,
+                    flexDirection:"column",
                     alignItems:"center",
                     justifyContent:"center"
-                },
-                iconStyle:{
-                    width:Calc.getWidth(44),
-                    height:Calc.getWidth(42),
                 },
                 labelStyle:{
                     position:"relative",
@@ -107,7 +106,7 @@ const SimpleApp = TabNavigator({
     }
 },{
     tabBarPosition:"bottom",
-    swipeEnabled:true,
+    swipeEnabled:false,
     tabBarOptions:TabObj()
 });
 
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#fff',
   },
   tabIcon:{
       width:21,
