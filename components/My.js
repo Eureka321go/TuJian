@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
         overflow:"hidden",
         marginLeft:Calc.getWidth(80),
         marginRight:Calc.getWidth(40),
-        borderWidth:1,
+        borderWidth:0.5,
         borderColor:"#fff"
     },
     userImg:{
@@ -278,8 +278,8 @@ const styles = StyleSheet.create({
         flexDirection:"column",
         alignItems:"center",
         justifyContent:"center",
-        borderRightWidth:1,
-        borderBottomWidth:1,
+        borderRightWidth:0.5,
+        borderBottomWidth:0.5,
         borderColor:"#f5f5f5"
     },
     teQuan:{

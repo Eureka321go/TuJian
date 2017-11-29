@@ -11,7 +11,7 @@ import {
   Text,
   View,
   Image,
-    ScrollView
+  ScrollView,
 } from 'react-native';
 import {connect} from "react-redux";
 import {StackNavigator}from 'react-navigation';
@@ -23,6 +23,40 @@ import Message from "./components/Message"
 import Order from "./components/Order"
 
 import {TabNavigator} from 'react-navigation';
+import {Calc} from "./components/common/Calc"
+
+const TabObj=function () {
+    if(Platform.OS=='android'){
+        return {
+                activeTintColor: '#51cdf1',
+                inactiveTintColor:"#000",
+                style:{
+                    height:Calc.getHeight(110),
+                    backgroundColor:"#fff"
+                },
+                tabStyle:{
+                    flex:1,
+                    alignItems:"center",
+                    justifyContent:"center"
+                },
+                iconStyle:{
+                    width:Calc.getWidth(44),
+                    height:Calc.getWidth(42),
+                },
+                labelStyle:{
+                    position:"relative",
+                    top:-5
+                },
+                indicatorStyle:{
+                    height:0
+                },
+                showIcon:true
+            }
+    }
+    return {
+        activeTintColor: '#51cdf1',
+    }
+}
 
 const SimpleApp = TabNavigator({
     Home: {
@@ -73,11 +107,8 @@ const SimpleApp = TabNavigator({
     }
 },{
     tabBarPosition:"bottom",
-    //swipeEnabled:true,
-    lazy:true,
-    tabBarOptions: {
-        activeTintColor: '#51cdf1',
-    }
+    swipeEnabled:true,
+    tabBarOptions:TabObj()
 });
 
 

@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         shadowColor:'#000',
         shadowOffset:{h:10,w:10},
         shadowRadius:3,
-        shadowOpacity:0.5,
+        shadowOpacity:1,
         paddingLeft:Calc.getWidth(20),
         paddingRight:Calc.getWidth(20),
         paddingBottom:Calc.getWidth(20),

@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     },
     line:{
         width:Calc.getWidth(702),
-        height:1,
+        height:0.5,
         marginLeft:"auto",
         marginRight:"auto",
         backgroundColor:"#d9e1e9"

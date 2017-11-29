@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         alignItems:"center",
         justifyContent:"center",
-        borderBottomWidth:1,
+        borderBottomWidth:0.5,
         borderColor:"#d8e3e8"
     },
     list2:{
