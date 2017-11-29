@@ -49,8 +49,8 @@ class Home extends Component<{}> {
                             {this.renderLiveDate()}
                             {this.renderPeopleNum()}
                            <TouchableOpacity style={{flex:1,height:Calc.getHeight(88),backgroundColor:"#51cdf1",alignItems:"center",justifyContent:"center",borderRadius:6}} activeOpacity={1}>
-                               <View style={{flex:1,}}>
-                                   <Text style={{fontSize:18,color:"#fff",flex:1}}>开始</Text>
+                               <View>
+                                   <Text style={{fontSize:18,color:"#fff"}}>开始</Text>
                                </View>
                            </TouchableOpacity>
                         </View>
