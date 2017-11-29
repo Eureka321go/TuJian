@@ -58,6 +58,55 @@ class My extends Component<{}> {
     jumpScore(){
         alert("跳转到积分or收益or余额")
     }
+    //渲染我的页面的列表
+    renderList(){
+        return(
+            <View style={styles.listWrap}>
+                <TouchableOpacity activeOpacity={0.9}>
+                    <View style={styles.list}>
+                        <Image style={styles.teQuan} source={require("../assets/images/my/p_privilege.png")}/>
+                        <Text style={styles.listText}>特权</Text>
+                        <Text style={styles.listDescribe}>积分</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.9}>
+                    <View style={styles.list}>
+                        <Image style={styles.shouCang} source={require("../assets/images/my/p_collection.png")}/>
+                        <Text style={styles.listText}>收藏</Text>
+                        <Text style={styles.listDescribe}>我的收藏</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.9}>
+                    <View style={styles.list}>
+                        <Image style={styles.diZhi} source={require("../assets/images/my/p_location.png")}/>
+                        <Text style={styles.listText}>地址</Text>
+                        <Text style={styles.listDescribe}>收货地址</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.9}>
+                    <View style={styles.list}>
+                        <Image style={styles.fuWu} source={require("../assets/images/my/p_service.png")}/>
+                        <Text style={styles.listText}>客服</Text>
+                        <Text style={styles.listDescribe}>24小时客服</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.9}>
+                    <View style={styles.list}>
+                        <Image style={styles.youHui} source={require("../assets/images/my/p_discount.png")}/>
+                        <Text style={styles.listText}>优惠券</Text>
+                        <Text style={styles.listDescribe}>优惠享不停</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.9}>
+                    <View style={styles.list}>
+                        <Image style={styles.youHui} source={require("../assets/images/my/p_mall.png")}/>
+                        <Text style={styles.listText}>商城</Text>
+                        <Text style={styles.listDescribe}>积分换礼</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        )
+    }
     render() {
         //const { params } = this.props.navigation.state;
         return (
@@ -94,6 +143,8 @@ class My extends Component<{}> {
                 <View>
                     {/*3个tab*/}
                     {this.renderMoney()}
+                    {/*渲染列表*/}
+                    {this.renderList()}
                 </View>
                 </ParallaxView>
             </View>
@@ -214,8 +265,53 @@ const styles = StyleSheet.create({
         width:1,
         height:Calc.getHeight(76),
         backgroundColor:"#d9e1e9"
+    },
+    //列表
+    listWrap:{
+        flexDirection:"row",
+        flexWrap:"wrap"
+    },
+    list:{
+        width:Calc.getWidth(250),
+        height:Calc.getWidth(250),
+        flexDirection:"column",
+        alignItems:"center",
+        justifyContent:"center",
+        borderRightWidth:1,
+        borderBottomWidth:1,
+        borderColor:"#f5f5f5"
+    },
+    teQuan:{
+        width:Calc.getWidth(62),
+        height:Calc.getWidth(44),
+    },
+    listText:{
+        textAlign:"center",
+        fontSize:15,
+        color:"#3a3c3c",
+        marginTop:Calc.getHeight(10)
+    },
+    listDescribe:{
+        fontSize:12,
+        color:"#b8bdc2",
+        marginTop:Calc.getHeight(10),
+    },
+    shouCang:{
+        width:Calc.getWidth(48),
+        height:Calc.getWidth(44),
+    },
+    diZhi:{
+        width:Calc.getWidth(43),
+        height:Calc.getWidth(46),
+    },
+    fuWu:{
+        width:Calc.getWidth(46),
+        height:Calc.getWidth(46),
+    },
+    youHui:{
+        width:Calc.getWidth(48),
+        height:Calc.getWidth(46),
     }
-
 });
 
 
