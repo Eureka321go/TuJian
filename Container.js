@@ -74,6 +74,7 @@ const SimpleApp = TabNavigator({
 },{
     tabBarPosition:"bottom",
     //swipeEnabled:true,
+    lazy:true,
     tabBarOptions: {
         activeTintColor: '#51cdf1',
     }
