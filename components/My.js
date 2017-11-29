@@ -227,6 +227,7 @@ const styles = StyleSheet.create({
     tab:{
         flex:1,
         justifyContent:"center",
+        alignItems:"center",
         position:"relative"
     },
     tabOpWrap:{
