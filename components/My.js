@@ -162,6 +162,7 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center",
         position:"relative",
+        height:Calc.getHeight(332)
     },
     settingIconWrap:{
         position:"absolute",

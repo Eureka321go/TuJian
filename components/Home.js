@@ -12,7 +12,8 @@ import {
     View,
     Image,
     ScrollView,
-    StatusBar
+    StatusBar,
+    TouchableOpacity
 } from 'react-native';
 
 import {connect} from "react-redux";
@@ -47,14 +48,16 @@ class Home extends Component<{}> {
                             {this.renderAddress()}
                             {this.renderLiveDate()}
                             {this.renderPeopleNum()}
-                            <View style={{flex:1,height:Calc.getHeight(88),backgroundColor:"#51cdf1",alignItems:"center",justifyContent:"center",borderRadius:6}}>
-                                <Text style={{fontSize:18,color:"#fff"}}>开始</Text>
-                            </View>
+                           <TouchableOpacity style={{flex:1,height:Calc.getHeight(88),backgroundColor:"#51cdf1",alignItems:"center",justifyContent:"center",borderRadius:6}}>
+                               <View>
+                                   <Text style={{fontSize:18,color:"#fff"}}>开始</Text>
+                               </View>
+                           </TouchableOpacity>
                         </View>
                     )}
                 >
                   {/*占位*/}
-                  <View style={{height:Calc.getHeight(444)/2+Calc.getHeight(80)}}></View>
+                  <View style={{height:Calc.getHeight(849)}}></View>
                   {/*tab*/}
                   <View>
                       <Tabs/>
@@ -120,7 +123,9 @@ const styles = StyleSheet.create({
         width:Calc.getWidth(702),
         height:Calc.getHeight(444),
         backgroundColor:"#fff",
-        marginTop:Calc.getHeight(103)+Calc.getHeight(444)/2,
+        position:"absolute",
+        top:Calc.getHeight(103)+Calc.getHeight(444)/2,
+        left:Calc.getWidth(24),
         marginLeft:"auto",
         marginRight:"auto",
         borderRadius:6,
@@ -132,6 +137,7 @@ const styles = StyleSheet.create({
         paddingLeft:Calc.getWidth(20),
         paddingRight:Calc.getWidth(20),
         paddingBottom:Calc.getWidth(20),
+        zIndex:100,
     },
     //View
     List:{

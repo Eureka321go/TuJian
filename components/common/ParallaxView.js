@@ -127,7 +127,7 @@ var ParallaxView = createReactClass({
                         Animated.event([{ nativeEvent: { contentOffset: { y: this.state.scrollY }}}])
                     }
                     scrollEventThrottle={16}>
-                    {this.renderHeader()}
+                    {this.props.header}
                     {/*<View style={[styles.content, props.scrollableViewStyle]}>*/}
                         {this.props.children}
                     {/*</View>*/}
@@ -149,7 +149,7 @@ var styles = StyleSheet.create({
         position: 'absolute',
         backgroundColor: '#2e2f31',
         width: screen.width,
-        resizeMode: 'cover'
+        resizeMode: 'cover',
     },
     blur: {
         position: 'absolute',
