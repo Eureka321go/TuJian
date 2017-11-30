@@ -112,6 +112,10 @@ class Home extends Component<{}> {
             </View>
         )
     }
+    componentWillMount(){
+        //没有登录就跳转到登录
+        //this.props.navigation.navigate('Login')
+    }
 }
 
 const styles = StyleSheet.create({

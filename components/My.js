@@ -154,7 +154,8 @@ class My extends Component<{}> {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor:"#fff"
     },
     topWrap:{
         flex:1,
