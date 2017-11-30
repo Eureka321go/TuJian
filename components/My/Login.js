@@ -30,12 +30,7 @@ class Login extends Component<{}> {
             </View>
         );
     }
-    videoStart(){
-        //alert("ok")
-    }
-    videoError(){
-        alert("err")
-    }
+
 }
 
 const styles = StyleSheet.create({
@@ -43,16 +38,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-
+        position:"relative",
     },
-    video:{
-        position:"absolute",
-        top:0,
-        left:0,
-        zIndex:10,
-        width:Calc.getWidth(750),
-        height:Calc.getHeight(1334)
-    }
 
 });
 
