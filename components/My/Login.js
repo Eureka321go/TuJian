@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import {connect} from "react-redux";
 import {Calc} from "../common/Calc"
-import Video from "react-native-video"
+
 
 class Login extends Component<{}> {
     constructor(props) {
@@ -26,16 +26,7 @@ class Login extends Component<{}> {
         return (
             <View style={styles.container}>
                 <Text>我是登录页</Text>
-                <Video
-                 ref={(ref)=>{this.player=ref}}
-                 source={require("../../assets/12.mp4")}
-                 rate={1}
-                 resizeMode={"cover"}
-                 style={styles.video}
-                 onLoadStart={this.videoStart}
-                 onError={this.videoError}
-                 repeat={true}
-                />
+
             </View>
         );
     }
