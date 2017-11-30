@@ -106,7 +106,7 @@ const SimpleApp = TabNavigator({
     }
 },{
     tabBarPosition:"bottom",
-    swipeEnabled:false,
+    swipeEnabled:true,
     tabBarOptions:TabObj()
 });
 

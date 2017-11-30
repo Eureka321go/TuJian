@@ -87,13 +87,13 @@ class Wonderful extends Component<{}> {
         if(item.item.collection){
             return (
                 <TouchableOpacity activeOpacity={1} style={styles.collectionIcon} onPress={()=>{clickIcon()}}>
-                    <Image  style={styles.collectionIcon} source={require("../../assets/images/common/collection.png")}/>
+                    <Image  style={styles.Icon} source={require("../../assets/images/common/collection.png")}/>
                 </TouchableOpacity>
             )
         }else{
             return (
                 <TouchableOpacity activeOpacity={1} style={styles.collectionIcon} onPress={()=>{clickIcon()}}>
-                    <Image  style={styles.collectionIcon} source={require("../../assets/images/common/collection_no.png")}/>
+                    <Image  style={styles.Icon} source={require("../../assets/images/common/collection_no.png")}/>
                 </TouchableOpacity>
             )
         }
@@ -201,6 +201,10 @@ const styles = StyleSheet.create({
         position:"absolute",
         top:Calc.getHeight(30),
         right:Calc.getWidth(30),
+        width:Calc.getWidth(50),
+        height:Calc.getWidth(50),
+    },
+    Icon:{
         width:Calc.getWidth(48),
         height:Calc.getWidth(48),
     },
