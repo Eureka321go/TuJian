@@ -8,7 +8,7 @@
  */
 
 #import "AppDelegate.h"
-
+#import <AVFoundation/AVFoundation.h>  // import
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
@@ -20,7 +20,7 @@
   
   //设置状态栏
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-  
+  [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];  // allow。允许其他应用程序来播放音乐视频分量，
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 

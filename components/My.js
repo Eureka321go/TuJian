@@ -107,6 +107,10 @@ class My extends Component<{}> {
             </View>
         )
     }
+    //设置
+    jumpSetting(){
+        this.props.navigation.navigate("Login")
+    }
     render() {
         //const { params } = this.props.navigation.state;
         return (
@@ -117,7 +121,7 @@ class My extends Component<{}> {
                     header={(
                         <View style={styles.topWrap}>
                             {/*设置图标*/}
-                            <TouchableOpacity style={styles.settingIconWrap}  onPress={()=>{alert(11)}} activeOpacity={0.9}>
+                            <TouchableOpacity style={styles.settingIconWrap}  onPress={()=>{this.jumpSetting()}} activeOpacity={0.9}>
                                 <Image style={styles.settingIcon} source={require("../assets/images/my/settingIcon.png")}/>
                             </TouchableOpacity>
                             {/*用户信息*/}
