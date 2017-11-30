@@ -49,7 +49,8 @@ const TabObj=function () {
                 indicatorStyle:{
                     height:0
                 },
-                showIcon:true
+                showIcon:true,
+                pressOpacity:1
             }
     }
     return {
