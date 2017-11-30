@@ -109,22 +109,7 @@ class Login extends Component<{}> {
             </View>
         )
     }
-    //普通登录
-    renderGeneralLogin(){
-        return(
-            <View style={[styles.loginWrap,{ backgroundColor:"red",}]}>
-                {this.renderInput()}
-            </View>
-        )
-    }
-    //动态码登录
-    renderDynamicLogin(){
-        return(
-            <View style={[styles.loginWrap,{ backgroundColor:"yellow",}]}>
-                <Text>22</Text>
-            </View>
-        )
-    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -138,20 +123,7 @@ class Login extends Component<{}> {
                     {/*btns*/}
                     {this.renderTab()}
                     {/*form表单*/}
-                    <View style={[styles.formWrap]}>
-                        <Animated.View style={[styles.longWrap,
-                            {
-                                transform:[
-                                    {translateX:this.state.tabLeft}
-                                ]
-                            }
-                        ]}>
-                            {/*普通登录*/}
-                            {this.renderGeneralLogin()}
-                            {/*动态码登录*/}
-                            {this.renderDynamicLogin()}
-                        </Animated.View>
-                    </View>
+
                 </ImageBackground>
             </View>
         );
@@ -211,21 +183,7 @@ const styles = StyleSheet.create({
         borderRadius:99,
     },
 //    tbaItem
-    formWrap:{
-        width:Calc.getWidth(620),
-        overflow:"hidden",
-        marginLeft:"auto",
-        marginRight:"auto",
-    },
-    longWrap:{
-        width:Calc.getWidth(1240),
-        flexDirection:"row",
-        height:400
-    },
-    loginWrap:{
-        flex:1,
-        marginTop:Calc.getHeight(42)
-    },
+
 });
 
 
