@@ -13,7 +13,7 @@ import {
     Image,
     ImageBackground,
     TouchableOpacity,
-    Animated,
+    ScrollView,
     TextInput
 } from 'react-native';
 import {connect} from "react-redux";
@@ -25,7 +25,6 @@ class Login extends Component<{}> {
         super(props)
         this.state={
             active:"general",  //tab选中，general|dynamic
-            tabLeft:new Animated.Value(0),  //tab的距离
         }
     }
 
@@ -33,19 +32,11 @@ class Login extends Component<{}> {
         this.setState({
             active:name,
         });
-        let f;
         if(name=='general'){
-           left=0;
+            this.refs.scrollview.scrollTo({x:0});
         }else{
-           left=-Calc.getWidth(620);
+            this.refs.scrollview.scrollToEnd();
         }
-        Animated.timing(
-            this.state.tabLeft,
-            {
-                toValue:left,
-                duration:200
-            }
-        ).start()
     }
     //tab选中的颜色
     renderFontColor(name){
@@ -109,7 +100,25 @@ class Login extends Component<{}> {
             </View>
         )
     }
+    renderTabContainer(){
+        return(
+            <View style={styles.tabContainer}>
+                <ScrollView
+                    ref={"scrollview"}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    pagingEnabled={true}
+                >
+                    {/*普通登录*/}
+                    <View style={styles.generalLogin}>
 
+                    </View>
+                    {/*动态登录*/}
+                    <View style={styles.dynamic}></View>
+                </ScrollView>
+            </View>
+        )
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -123,7 +132,7 @@ class Login extends Component<{}> {
                     {/*btns*/}
                     {this.renderTab()}
                     {/*form表单*/}
-
+                    {this.renderTabContainer()}
                 </ImageBackground>
             </View>
         );
@@ -183,6 +192,22 @@ const styles = StyleSheet.create({
         borderRadius:99,
     },
 //    tbaItem
+    tabContainer:{
+        width:Calc.getWidth(620),
+        marginLeft:"auto",
+        marginRight:"auto",
+        marginTop:Calc.getHeight(42)
+    },
+    generalLogin:{
+        width:Calc.getWidth(620),
+        height:300,
+        backgroundColor:"red"
+    },
+    dynamic:{
+        width:Calc.getWidth(620),
+        height:300,
+        backgroundColor:"yellow"
+    }
 
 });
 
