@@ -29,9 +29,6 @@ class Login extends Component<{}> {
     }
 
     changeTab(name){
-        this.setState({
-            active:name,
-        });
         if(name=='general'){
             this.refs.scrollview.scrollTo({x:0});
         }else{
@@ -68,14 +65,14 @@ class Login extends Component<{}> {
         return(
             <View style={styles.btns}>
                 <View style={styles.tabWrap}>
-                    <TouchableOpacity style={styles.tabWrap} onPress={()=>{this.changeTab("general")}} activeOpacity={0.8}>
+                    <TouchableOpacity style={styles.tabWrap} onPress={()=>{this.changeTab("general")}} activeOpacity={1}>
                         <Text style={[styles.tab,this.renderFontColor('general')]}>普通登录</Text>
                         {/*圆*/}
                         {this.renderYuan('general')}
                     </TouchableOpacity>
                 </View>
                 <View style={styles.tabWrap}>
-                    <TouchableOpacity style={styles.tabWrap} onPress={()=>{this.changeTab("dynamic")}} activeOpacity={0.8}>
+                    <TouchableOpacity style={styles.tabWrap} onPress={()=>{this.changeTab("dynamic")}} activeOpacity={1}>
                         <Text style={[styles.tab,this.renderFontColor('dynamic')]}>动态码登录</Text>
                         {/*圆*/}
                         {this.renderYuan('dynamic')}
@@ -108,6 +105,18 @@ class Login extends Component<{}> {
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled={true}
+                    scrollEventThrottle={10}
+                    onScroll={(e)=>{
+                        if(e.nativeEvent.contentOffset.x>Calc.getWidth(310)){
+                            this.setState({
+                                active:"dynamic"
+                            })
+                        }else{
+                            this.setState({
+                                active:"general"
+                            })
+                        }
+                    }}
                 >
                     {/*普通登录*/}
                     <View style={styles.generalLogin}>
