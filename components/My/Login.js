@@ -216,7 +216,7 @@ class Login extends Component<{}> {
             <View style={styles.container}>
                 <ImageBackground style={styles.bg} source={require("../../assets/images/login/login_bg.jpg")}>
                     {/*注册按钮*/}
-                    <TouchableOpacity activeOpacity={0.9} onPress={()=>{alert(1)}}>
+                    <TouchableOpacity style={styles.zuceWrap} activeOpacity={0.9} onPress={()=>{alert(1)}}>
                         <Text allowFontScaling={false} style={styles.registerBtn}>注册</Text>
                     </TouchableOpacity>
                     {/*logo图标*/}
@@ -261,9 +261,12 @@ const styles = StyleSheet.create({
     registerBtn:{
         fontSize:Calc.getFont(18),
         color:"#fff",
+    },
+    zuceWrap:{
         position:"absolute",
         top:Calc.getHeight(60),
         right:Calc.getWidth(25),
+        zIndex:10
     },
 //    logot图标
     logoIcon:{
@@ -302,14 +305,11 @@ const styles = StyleSheet.create({
     },
     generalLogin:{
         width:Calc.getWidth(620),
-        height:Calc.getHeight(300),
         paddingLeft:Calc.getWidth(20),
         paddingRight:Calc.getWidth(20),
     },
     dynamic:{
         width:Calc.getWidth(620),
-        height:Calc.getHeight(300),
-        //backgroundColor:"yellow",
         paddingLeft:Calc.getWidth(20),
         paddingRight:Calc.getWidth(20),
     },
@@ -356,6 +356,7 @@ const styles = StyleSheet.create({
         borderRadius:6,
         marginLeft:"auto",
         marginRight:"auto",
+        marginTop:Calc.getHeight(20)
     },
     loginText:{
         fontSize:Calc.getFont(18),
