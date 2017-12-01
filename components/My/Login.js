@@ -19,15 +19,18 @@ import {
 import {connect} from "react-redux";
 import {Calc} from "../common/Calc"
 
-
 class Login extends Component<{}> {
     constructor(props) {
         super(props)
+
         this.state={
             active:"general",  //tab选中，general|dynamic
             userName:"", //用户名
             password:"",
-            phone:""
+            phone:"",
+            getCode:true,   //是否点击
+            codeText:"获取验证码", //倒计时内容
+            codeTime:10,  //总的倒计时时间
         }
     }
 
@@ -114,15 +117,57 @@ class Login extends Component<{}> {
     }
     //手机验证码
     renderCode(){
+        let codeBg;
+        let fontColor;
+        if(this.state.getCode){
+            codeBg={
+                backgroundColor:"#f2cb2f"
+            }
+            fontColor={
+                color:"#fff",
+            }
+        }else{
+            codeBg={
+                backgroundColor:"#f5f5f5"
+            }
+            fontColor={
+                color:"#000",
+            }
+        }
         return(
             <View style={styles.inputWrap}>
                 <Image source={require("../../assets/images/login/QrCode.png")} style={styles.inputIcon}/>
-                <TextInput keyboardType={"numeric"} maxLength={6}  underlineColorAndroid={"transparent"}  placeholder={"手机号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({phone:text})}}/>
-                <TouchableOpacity style={styles.getCode}>
-                    <Text allowFontScaling={false} style={styles.getcodeText}>获取二维码</Text>
+                <TextInput keyboardType={"numeric"} maxLength={6}  underlineColorAndroid={"transparent"}  placeholder={"验证码"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({phone:text})}}/>
+                <TouchableOpacity style={[styles.getCode,codeBg]} activeOpacity={1} onPress={()=>{this.getCode()}}>
+                    <Text allowFontScaling={false} style={[styles.getcodeText,fontColor]}>{this.state.codeText}</Text>
                 </TouchableOpacity>
             </View>
         )
+    }
+    //获取手机验证码
+    getCode(){
+        if(this.state.getCode){
+            this.setState({
+                getCode:false,
+                codeText:this.state.codeTime
+            });
+            let allTime=this.state.codeTime;
+            let timer=setInterval(()=>{
+                let time=this.state.codeTime-1;
+                this.setState({
+                    codeText:time,
+                    codeTime:time
+                });
+                if(time-1<-1){
+                    clearInterval(timer);
+                    this.setState({
+                        codeText:"获取验证码",
+                        codeTime:allTime,
+                        getCode:true
+                    });
+                }
+            },1000)
+        }
     }
     //tab内容
     renderTabContainer(){
@@ -180,6 +225,16 @@ class Login extends Component<{}> {
                     {this.renderTab()}
                     {/*form表单*/}
                     {this.renderTabContainer()}
+                    {/*登录按钮*/}
+                    <TouchableOpacity style={styles.loginBtn} activeOpacity={0.8} onPress={()=>{alert("登录")}}>
+                        <Text style={styles.loginText} allowFontScaling={false}>登录</Text>
+                    </TouchableOpacity>
+                    {/*微信登录*/}
+                    <View style={styles.wxWrap}>
+                        <TouchableOpacity  activeOpacity={0.8} onPress={()=>{alert("登录")}}>
+                            <Text style={styles.wxloginText} allowFontScaling={false}>微信登录</Text>
+                        </TouchableOpacity>
+                    </View>
                 </ImageBackground>
             </View>
         );
@@ -213,7 +268,7 @@ const styles = StyleSheet.create({
 //    logot图标
     logoIcon:{
         width:Platform.OS=='android'?Calc.getWidth(300):Calc.getWidth(280),
-        height:Platform.OS=='android'?Calc.getHeight(205):Calc.getHeight(140),
+        height:Platform.OS=='android'?Calc.getHeight(205):Calc.getHeight(174),
         marginLeft:Calc.getWidth(235),
         marginTop:Calc.getHeight(128)
     },
@@ -253,7 +308,7 @@ const styles = StyleSheet.create({
     },
     dynamic:{
         width:Calc.getWidth(620),
-        height:300,
+        height:Calc.getHeight(300),
         //backgroundColor:"yellow",
         paddingLeft:Calc.getWidth(20),
         paddingRight:Calc.getWidth(20),
@@ -283,14 +338,43 @@ const styles = StyleSheet.create({
         paddingLeft:Calc.getWidth(20),
         paddingRight:Calc.getWidth(20),
         height:Calc.getHeight(68),
-        backgroundColor:"#f2cb2f",
+        minWidth:Calc.getWidth(200),
         borderRadius:6,
         justifyContent:"center",
         alignItems:"center"
     },
     getcodeText:{
-        color:"#fff",
         fontSize:Calc.getFont(15),
+    },
+//    登录
+    loginBtn:{
+        width:Calc.getWidth(620),
+        height:Calc.getHeight(98),
+        backgroundColor:"#51cdf1",
+        alignItems:"center",
+        justifyContent:"center",
+        borderRadius:6,
+        marginLeft:"auto",
+        marginRight:"auto",
+    },
+    loginText:{
+        fontSize:Calc.getFont(18),
+        color:"#fff"
+    },
+    wxWrap:{
+        width:Calc.getWidth(620),
+        height:Calc.getHeight(98),
+        alignItems:"center",
+        justifyContent:"center",
+        borderRadius:6,
+        marginLeft:"auto",
+        marginRight:"auto",
+        marginTop:Calc.getHeight(20)
+    },
+    wxloginText:{
+        fontSize:Calc.getFont(18),
+        color:"#51cdf1",
+        fontWeight:"bold"
     }
 
 });
