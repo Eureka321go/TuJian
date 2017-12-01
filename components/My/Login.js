@@ -25,6 +25,8 @@ class Login extends Component<{}> {
         super(props)
         this.state={
             active:"general",  //tab选中，general|dynamic
+            userName:"", //用户名
+            password:"",
         }
     }
 
@@ -82,18 +84,21 @@ class Login extends Component<{}> {
         )
     }
 
-    //输入框
-    renderInput(){
+    //账号输入
+    renderUserName(){
         return(
-            <View style={{
-                flex:1,
-                flexDirection:"row",
-                height:Calc.getHeight(112),
-            }}>
-                <Image source={require("../../assets/images/login/userIn.png")} style={{
-                    width:Calc.getWidth(42),
-                    height:Calc.getWidth(42)
-                }}/>
+            <View style={styles.inputWrap}>
+                <Image source={require("../../assets/images/login/userIn.png")} style={styles.inputIcon}/>
+                <TextInput clearButtonMode={"while-editing"} placeholder={"请输入账号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({userName:text})}}/>
+            </View>
+        )
+    }
+    //密码输入
+    renderPassword(){
+        return(
+            <View style={styles.inputWrap}>
+                <Image source={require("../../assets/images/login/userPassword.png")} style={styles.inputIcon}/>
+                <TextInput clearButtonMode={"while-editing"} placeholder={"请输入密码"} placeholderTextColor={"#fff"} secureTextEntry={true} style={styles.inputInput} onChangeText={(text)=>{this.setState({password:text})}}/>
             </View>
         )
     }
@@ -120,7 +125,11 @@ class Login extends Component<{}> {
                 >
                     {/*普通登录*/}
                     <View style={styles.generalLogin}>
-
+                        {this.renderUserName()}
+                        {this.renderPassword()}
+                        <TouchableOpacity activeOpacity={1} style={{flexDirection:"row",justifyContent:"flex-end"}}>
+                            <Text onPress={()=>{alert(11)}} style={{width:"auto",color:"#fff",fontSize:15,textAlign:"right",marginTop:Calc.getHeight(20),fontWeight:"bold"}}>忘记密码？</Text>
+                        </TouchableOpacity>
                     </View>
                     {/*动态登录*/}
                     <View style={styles.dynamic}></View>
@@ -211,12 +220,35 @@ const styles = StyleSheet.create({
     generalLogin:{
         width:Calc.getWidth(620),
         height:300,
-        backgroundColor:"red"
+        backgroundColor:"red",
+        paddingLeft:Calc.getWidth(20),
+        paddingRight:Calc.getWidth(20),
     },
     dynamic:{
         width:Calc.getWidth(620),
         height:300,
-        backgroundColor:"yellow"
+        backgroundColor:"yellow",
+        paddingLeft:Calc.getWidth(20),
+        paddingRight:Calc.getWidth(20),
+    },
+    //输入框
+    inputWrap:{
+        flexDirection:"row",
+        height:Calc.getHeight(112),
+        paddingBottom:Calc.getHeight(20),
+        alignItems:"flex-end",
+        borderBottomWidth:0.5,
+        borderColor:"rgba(255,255,255,1)"
+    },
+    inputIcon:{
+        width:Calc.getWidth(42),
+        height:Calc.getWidth(42),
+        marginRight:Calc.getWidth(30)
+    },
+    inputInput:{
+        flex:1,
+        fontSize:16,
+        color:"#fff"
     }
 
 });
