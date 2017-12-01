@@ -1,14 +1,13 @@
-
-import {PixelRatio} from "react-native";
-const pt2px = pt=>PixelRatio.getPixelSizeForLayoutSize(pt);
-const px2pt = px=>PixelRatio.roundToNearestPixel(px)
+var Dimensions = require('Dimensions');
+const maxW=Dimensions.get("window").width;
+const maxH=Dimensions.get("window").height;
 
 function getWidth(w) {
-    return px2pt(w)/2;
+    return w/750*maxW;
 }
 
 function getHeight(h) {
-    return px2pt(h)/2;
+    return h/1334*maxH;
 }
 
 export const Calc={
