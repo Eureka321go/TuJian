@@ -112,8 +112,19 @@ class Login extends Component<{}> {
             </View>
         )
     }
-
-
+    //手机验证码
+    renderCode(){
+        return(
+            <View style={styles.inputWrap}>
+                <Image source={require("../../assets/images/login/QrCode.png")} style={styles.inputIcon}/>
+                <TextInput keyboardType={"numeric"} maxLength={6}  underlineColorAndroid={"transparent"}  placeholder={"手机号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({phone:text})}}/>
+                <TouchableOpacity style={styles.getCode}>
+                    <Text style={styles.getcodeText}>获取二维码</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+    //tab内容
     renderTabContainer(){
         return(
             <View style={styles.tabContainer}>
@@ -149,6 +160,7 @@ class Login extends Component<{}> {
                     {/*动态登录*/}
                     <View style={styles.dynamic}>
                         {this.renderPhone()}
+                        {this.renderCode()}
                     </View>
                 </ScrollView>
             </View>
@@ -266,6 +278,18 @@ const styles = StyleSheet.create({
         fontSize:16,
         color:"#fff",
         height:"auto",
+    },
+    getCode:{
+        width:Calc.getWidth(200),
+        height:Calc.getHeight(68),
+        backgroundColor:"#f2cb2f",
+        borderRadius:6,
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    getcodeText:{
+        color:"#fff",
+        fontSize:15
     }
 
 });
