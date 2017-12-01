@@ -27,6 +27,7 @@ class Login extends Component<{}> {
             active:"general",  //tab选中，general|dynamic
             userName:"", //用户名
             password:"",
+            phone:""
         }
     }
 
@@ -102,6 +103,17 @@ class Login extends Component<{}> {
             </View>
         )
     }
+    //手机号输入
+    renderPhone(){
+        return(
+            <View style={styles.inputWrap}>
+                <Image source={require("../../assets/images/login/userIn.png")} style={styles.inputIcon}/>
+                <TextInput keybordType={"numeric"} maxLength={11}  underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"手机号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({phone:text})}}/>
+            </View>
+        )
+    }
+
+
     renderTabContainer(){
         return(
             <View style={styles.tabContainer}>
@@ -135,7 +147,9 @@ class Login extends Component<{}> {
                         </View>
                     </View>
                     {/*动态登录*/}
-                    <View style={styles.dynamic}></View>
+                    <View style={styles.dynamic}>
+                        {this.renderPhone()}
+                    </View>
                 </ScrollView>
             </View>
         )
@@ -228,7 +242,7 @@ const styles = StyleSheet.create({
     dynamic:{
         width:Calc.getWidth(620),
         height:300,
-        backgroundColor:"yellow",
+        //backgroundColor:"yellow",
         paddingLeft:Calc.getWidth(20),
         paddingRight:Calc.getWidth(20),
     },
