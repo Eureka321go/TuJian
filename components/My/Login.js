@@ -212,8 +212,8 @@ const styles = StyleSheet.create({
     },
 //    logot图标
     logoIcon:{
-        width:Calc.getWidth(280),
-        height:Calc.getHeight(174),
+        width:Calc.getWidth(300),
+        height:Calc.getHeight(200),
         marginLeft:Calc.getWidth(235),
         marginTop:Calc.getHeight(128)
     },
@@ -280,7 +280,8 @@ const styles = StyleSheet.create({
         height:"auto",
     },
     getCode:{
-        width:Calc.getWidth(200),
+        paddingLeft:Calc.getWidth(20),
+        paddingRight:Calc.getWidth(20),
         height:Calc.getHeight(68),
         backgroundColor:"#f2cb2f",
         borderRadius:6,
