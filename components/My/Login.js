@@ -153,7 +153,7 @@ class Login extends Component<{}> {
                         {this.renderPassword()}
                         <View style={{flexDirection:"row",justifyContent:"flex-end"}}>
                             <TouchableOpacity activeOpacity={1} onPress={()=>{alert(11)}} style={{flexDirection:"row",justifyContent:"flex-end"}}>
-                                <Text style={{width:"auto",color:"#fff",fontSize:Calc.getFont(15),textAlign:"right",marginTop:Calc.getHeight(20),fontWeight:"bold"}}>忘记密码？</Text>
+                                <Text allowFontScaling={false}  style={{width:"auto",color:"#fff",fontSize:Calc.getFont(15),textAlign:"right",marginTop:Calc.getHeight(20),fontWeight:"bold"}}>忘记密码？</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -172,7 +172,7 @@ class Login extends Component<{}> {
                 <ImageBackground style={styles.bg} source={require("../../assets/images/login/login_bg.jpg")}>
                     {/*注册按钮*/}
                     <TouchableOpacity activeOpacity={0.9} onPress={()=>{alert(1)}}>
-                        <Text style={styles.registerBtn}>注册</Text>
+                        <Text allowFontScaling={false} style={styles.registerBtn}>注册</Text>
                     </TouchableOpacity>
                     {/*logo图标*/}
                     <Image style={styles.logoIcon} source={require("../../assets/images/login/login_logo.png")}/>
