@@ -251,7 +251,8 @@ const styles = StyleSheet.create({
     inputInput:{
         flex:1,
         fontSize:16,
-        color:"#fff"
+        color:"#fff",
+        height:Calc.getHeight(42),
     }
 
 });
