@@ -109,7 +109,7 @@ class My extends Component<{}> {
     }
     //设置
     jumpSetting(){
-        this.props.navigation.navigate("Login")
+        //this.props.navigation.navigate("Login")
     }
     render() {
         //const { params } = this.props.navigation.state;

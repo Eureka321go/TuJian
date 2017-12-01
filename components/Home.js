@@ -114,7 +114,7 @@ class Home extends Component<{}> {
     }
     componentWillMount(){
         //没有登录就跳转到登录
-        //this.props.navigation.navigate('Login')
+        this.props.navigation.navigate('Login')
     }
 }
 

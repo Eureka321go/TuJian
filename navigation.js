@@ -126,7 +126,8 @@ const SimpleApp =nav.StackNavigator({
     Login:{
         screen:Login,
         navigationOptions:{
-            header:null
+            header:null,
+            gesturesEnabled:false
         }
     }
 })
