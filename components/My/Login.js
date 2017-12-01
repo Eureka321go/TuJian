@@ -212,8 +212,8 @@ const styles = StyleSheet.create({
     },
 //    logot图标
     logoIcon:{
-        width:Calc.getWidth(300),
-        height:Calc.getHeight(200),
+        width:Platform.OS=='android'?Calc.getWidth(300):Calc.getWidth(280),
+        height:Platform.OS=='android'?Calc.getHeight(205):Calc.getHeight(140),
         marginLeft:Calc.getWidth(235),
         marginTop:Calc.getHeight(128)
     },
