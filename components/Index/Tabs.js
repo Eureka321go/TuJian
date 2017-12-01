@@ -54,7 +54,7 @@ class Tabs extends Component<{}> {
         const noActive={color:"#3a3c3c"}
         return(
             <TouchableOpacity activeOpacity={0.9} style={styles.tabItem} onPress={()=>{this.setState({tabActive:obj.name})}}>
-               <Text style={[styles.tabText,this.state.tabActive==obj.name?ActiveClass:noActive]}>{obj.name}</Text>
+               <Text allowFontScaling={false}  style={[styles.tabText,this.state.tabActive==obj.name?ActiveClass:noActive]}>{obj.name}</Text>
                 {this.renderYuan(obj)}
             </TouchableOpacity>
 
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         position:"relative"
     },
     tabText:{
-        fontSize:16,
+        fontSize:Calc.getFont(16),
         textAlign:"center",
     },
     yuanBlue:{

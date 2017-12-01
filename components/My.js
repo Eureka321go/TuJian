@@ -24,31 +24,31 @@ class My extends Component<{}> {
                 <TouchableOpacity style={styles.tabOpWrap} activeOpacity={1} onPress={()=>{this.jumpScore()}}>
                     <View style={styles.tab}>
                         <View style={styles.scoreWrap}>
-                            <Text style={styles.score}>200</Text>
-                            <Text style={styles.scoreName}>分</Text>
+                            <Text allowFontScaling={false}  style={styles.score}>200</Text>
+                            <Text allowFontScaling={false}  style={styles.scoreName}>分</Text>
                         </View>
-                        <Text style={styles.describe}>积分</Text>
+                        <Text allowFontScaling={false}  style={styles.describe}>积分</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.tabOpWrap} activeOpacity={1} onPress={()=>{this.jumpScore()}}>
                     <View style={styles.tab}>
                         <View style={styles.scoreWrap}>
-                            <Text style={styles.score}>620</Text>
-                            <Text style={styles.scoreName}>元</Text>
+                            <Text allowFontScaling={false}  style={styles.score}>620</Text>
+                            <Text allowFontScaling={false}  style={styles.scoreName}>元</Text>
                         </View>
-                        <Text style={styles.describe}>收益</Text>
+                        <Text allowFontScaling={false}  style={styles.describe}>收益</Text>
                         {/*线条*/}
-                        <Text style={styles.lfLine}></Text>
-                        <Text style={styles.RfLine}></Text>
+                        <Text allowFontScaling={false}  style={styles.lfLine}></Text>
+                        <Text allowFontScaling={false} style={styles.RfLine}></Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.tabOpWrap} activeOpacity={1} onPress={()=>{this.jumpScore()}}>
                     <View style={styles.tab}>
                         <View style={styles.scoreWrap}>
-                            <Text style={styles.score}>100</Text>
-                            <Text style={styles.scoreName}>元</Text>
+                            <Text allowFontScaling={false}  style={styles.score}>100</Text>
+                            <Text allowFontScaling={false}  style={styles.scoreName}>元</Text>
                         </View>
-                        <Text style={styles.describe}>余额</Text>
+                        <Text allowFontScaling={false}  style={styles.describe}>余额</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -65,43 +65,43 @@ class My extends Component<{}> {
                 <TouchableOpacity activeOpacity={0.9}>
                     <View style={styles.list}>
                         <Image style={styles.teQuan} source={require("../assets/images/my/p_privilege.png")}/>
-                        <Text style={styles.listText}>特权</Text>
-                        <Text style={styles.listDescribe}>积分</Text>
+                        <Text allowFontScaling={false}  style={styles.listText}>特权</Text>
+                        <Text allowFontScaling={false}  style={styles.listDescribe}>积分</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.9}>
                     <View style={styles.list}>
                         <Image style={styles.shouCang} source={require("../assets/images/my/p_collection.png")}/>
-                        <Text style={styles.listText}>收藏</Text>
-                        <Text style={styles.listDescribe}>我的收藏</Text>
+                        <Text allowFontScaling={false}  style={styles.listText}>收藏</Text>
+                        <Text allowFontScaling={false}  style={styles.listDescribe}>我的收藏</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.9}>
                     <View style={styles.list}>
                         <Image style={styles.diZhi} source={require("../assets/images/my/p_location.png")}/>
-                        <Text style={styles.listText}>地址</Text>
-                        <Text style={styles.listDescribe}>收货地址</Text>
+                        <Text allowFontScaling={false}  style={styles.listText}>地址</Text>
+                        <Text allowFontScaling={false}  style={styles.listDescribe}>收货地址</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.9}>
                     <View style={styles.list}>
                         <Image style={styles.fuWu} source={require("../assets/images/my/p_service.png")}/>
-                        <Text style={styles.listText}>客服</Text>
-                        <Text style={styles.listDescribe}>24小时客服</Text>
+                        <Text allowFontScaling={false}  style={styles.listText}>客服</Text>
+                        <Text allowFontScaling={false}  style={styles.listDescribe}>24小时客服</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.9}>
                     <View style={styles.list}>
                         <Image style={styles.youHui} source={require("../assets/images/my/p_discount.png")}/>
-                        <Text style={styles.listText}>优惠券</Text>
-                        <Text style={styles.listDescribe}>优惠享不停</Text>
+                        <Text allowFontScaling={false}  style={styles.listText}>优惠券</Text>
+                        <Text allowFontScaling={false}  style={styles.listDescribe}>优惠享不停</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity activeOpacity={0.9}>
                     <View style={styles.list}>
                         <Image style={styles.youHui} source={require("../assets/images/my/p_mall.png")}/>
-                        <Text style={styles.listText}>商城</Text>
-                        <Text style={styles.listDescribe}>积分换礼</Text>
+                        <Text allowFontScaling={false}  style={styles.listText}>商城</Text>
+                        <Text allowFontScaling={false}  style={styles.listDescribe}>积分换礼</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -130,15 +130,15 @@ class My extends Component<{}> {
                                     <Image style={styles.userImg} source={require("../assets/images/my/userImg.jpg")}/>
                                 </View>
                                 <View style={{flex:1,marginRight:Calc.getWidth(50)}}>
-                                    <Text style={{fontSize:16,color:"#fff" }} numberOfLines={1}>洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫</Text>
-                                    <Text style={{fontSize:12,color:"#fff",marginTop:Calc.getHeight(12)}} numberOfLines={1}>业主</Text>
+                                    <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(16),color:"#fff" }} numberOfLines={1}>洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫</Text>
+                                    <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(12),color:"#fff",marginTop:Calc.getHeight(12)}} numberOfLines={1}>业主</Text>
                                 </View>
                             </View>
                             {/*我的银行卡*/}
                             <TouchableOpacity style={styles.cardWrap} onPress={()=>{alert(1)}} activeOpacity={0.9}>
                                 <View style={styles.MyCard}>
                                     <Image style={{width:Calc.getWidth(31),height:Calc.getHeight(26),marginRight:Calc.getWidth(10)}} source={require("../assets/images/my/card.png")}/>
-                                    <Text style={{fontSize:12,color:"#fff",flex:1}}>我的银行卡</Text>
+                                    <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(12),color:"#fff",flex:1}}>我的银行卡</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
         overflow:"hidden",
         marginLeft:Calc.getWidth(80),
         marginRight:Calc.getWidth(40),
-        borderWidth:0.5,
+        borderWidth:Calc.getBorder(1),
         borderColor:"#fff"
     },
     userImg:{
@@ -244,16 +244,16 @@ const styles = StyleSheet.create({
         justifyContent:"center"
     },
     score:{
-        fontSize:21,
+        fontSize:Calc.getFont(21),
         color:"#3a3a3a"
     },
     scoreName:{
-        fontSize:12,
+        fontSize:Calc.getFont(12),
         color:"#3a3a3a"
     },
     describe:{
         textAlign:"center",
-        fontSize:12,
+        fontSize:Calc.getFont(12),
         color:"#b8bdc2",
         marginTop:Calc.getHeight(10)
     },
@@ -284,8 +284,8 @@ const styles = StyleSheet.create({
         flexDirection:"column",
         alignItems:"center",
         justifyContent:"center",
-        borderRightWidth:0.5,
-        borderBottomWidth:0.5,
+        borderRightWidth:Calc.getBorder(1),
+        borderBottomWidth:Calc.getBorder(1),
         borderColor:"#f5f5f5"
     },
     teQuan:{
@@ -294,12 +294,12 @@ const styles = StyleSheet.create({
     },
     listText:{
         textAlign:"center",
-        fontSize:15,
+        fontSize:Calc.getFont(15),
         color:"#3a3c3c",
         marginTop:Calc.getHeight(10)
     },
     listDescribe:{
-        fontSize:12,
+        fontSize:Calc.getFont(12),
         color:"#b8bdc2",
         marginTop:Calc.getHeight(10),
     },

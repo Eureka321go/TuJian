@@ -41,7 +41,7 @@ class Wonderful extends Component<{}> {
         return(
             <View>
                 <Image style={{width:Calc.getWidth(330),height:Calc.getWidth(330)}} source={require("../../assets/images/index/teSe.png")}/>
-                <Text style={{fontSize:15,color:"#3a3c3c", marginTop:Calc.getHeight(50), marginBottom:Calc.getHeight(40)}}>海边美屋</Text>
+                <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(15),color:"#3a3c3c", marginTop:Calc.getHeight(50), marginBottom:Calc.getHeight(40)}}>海边美屋</Text>
             </View>
         )
     }
@@ -49,7 +49,7 @@ class Wonderful extends Component<{}> {
     renderTeSeSwiper(){
         return(
            <View>
-               <Text style={styles.title}>特色风格</Text>
+               <Text allowFontScaling={false}  style={styles.title}>特色风格</Text>
                {/*特色轮播*/}
                <Carousel
                    ref={(c) => { this._teSeSwiper = c; }}
@@ -107,15 +107,15 @@ class Wonderful extends Component<{}> {
                     {/*收藏图标*/}
                     {this.renderCollection(this,item)}
                 </View>
-                <Text style={{fontSize:18,color:"#262626",marginTop:Calc.getHeight(20),marginBottom:Calc.getHeight(16)}}>三亚名宿清晰名宿含早1室0厅1卫</Text>
+                <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(18),color:"#262626",marginTop:Calc.getHeight(20),marginBottom:Calc.getHeight(16)}}>三亚名宿清晰名宿含早1室0厅1卫</Text>
                 <Star score={4.8}/>
                 {/*实拍，免押金*/}
                 <View style={{flexDirection:"row",marginTop:Calc.getHeight(20)}}>
-                    <View style={styles.mianYaJin}>
-                        <Text style={{ color:"#fff", fontSize:12,}}>免押金</Text>
+                    <View allowFontScaling={false}  style={styles.mianYaJin}>
+                        <Text allowFontScaling={false}  style={{ color:"#fff", fontSize:Calc.getFont(12),}}>免押金</Text>
                     </View>
                     <View style={styles.shiPai}>
-                        <Text style={{ color:"#97d2ec", fontSize:12,}}>实拍</Text>
+                        <Text allowFontScaling={false}  style={{ color:"#97d2ec", fontSize:Calc.getFont(12),}}>实拍</Text>
                     </View>
                 </View>
             </View>
@@ -142,8 +142,8 @@ class Wonderful extends Component<{}> {
                <Text style={styles.line}></Text>
                {/*优选推荐*/}
                <View style={[styles.allPadding,{flexDirection:"row",justifyContent:"space-between",marginTop:Calc.getHeight(50),marginBottom:Calc.getHeight(40)}]}>
-                   <Text style={{fontSize:18,color:"#262626"}}>优选推荐</Text>
-                   <Text style={{fontSize:15,color:"#3a3c3c"}}>更多</Text>
+                   <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(18),color:"#262626"}}>优选推荐</Text>
+                   <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(15),color:"#3a3c3c"}}>更多</Text>
                </View>
                {/*优选推荐列表*/}
                <FlatList
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     },
     //特色轮播下面标题
     title:{
-        fontSize:18,
+        fontSize:Calc.getFont(18),
         color:"#262626",
         marginTop:Calc.getHeight(50),
         marginBottom:Calc.getHeight(40),
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     },
     line:{
         width:Calc.getWidth(702),
-        height:0.5,
+        height:Calc.getBorder(1),
         marginLeft:"auto",
         marginRight:"auto",
         backgroundColor:"#d9e1e9"

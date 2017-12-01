@@ -119,7 +119,7 @@ class Login extends Component<{}> {
                 <Image source={require("../../assets/images/login/QrCode.png")} style={styles.inputIcon}/>
                 <TextInput keyboardType={"numeric"} maxLength={6}  underlineColorAndroid={"transparent"}  placeholder={"手机号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({phone:text})}}/>
                 <TouchableOpacity style={styles.getCode}>
-                    <Text style={styles.getcodeText}>获取二维码</Text>
+                    <Text allowFontScaling={false} style={styles.getcodeText}>获取二维码</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -153,7 +153,7 @@ class Login extends Component<{}> {
                         {this.renderPassword()}
                         <View style={{flexDirection:"row",justifyContent:"flex-end"}}>
                             <TouchableOpacity activeOpacity={1} onPress={()=>{alert(11)}} style={{flexDirection:"row",justifyContent:"flex-end"}}>
-                                <Text style={{width:"auto",color:"#fff",fontSize:15,textAlign:"right",marginTop:Calc.getHeight(20),fontWeight:"bold"}}>忘记密码？</Text>
+                                <Text style={{width:"auto",color:"#fff",fontSize:Calc.getFont(15),textAlign:"right",marginTop:Calc.getHeight(20),fontWeight:"bold"}}>忘记密码？</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     },
 //    注册
     registerBtn:{
-        fontSize:18,
+        fontSize:Calc.getFont(18),
         color:"#fff",
         position:"absolute",
         top:Calc.getHeight(60),
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
       justifyContent:"center",
     },
     tab:{
-        fontSize:15,
+        fontSize:Calc.getFont(15),
         marginBottom:Calc.getHeight(10)
     },
     yuan:{
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
         marginTop:Calc.getHeight(42),
         paddingBottom:Calc.getHeight(20),
         alignItems:"center",
-        borderBottomWidth:0.5,
+        borderBottomWidth:Calc.getBorder(1),
         borderColor:"rgba(255,255,255,1)",
         padding:0,
     },
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     },
     inputInput:{
         flex:1,
-        fontSize:16,
+        fontSize:Calc.getFont(16),
         color:"#fff",
         height:"auto",
     },
@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
     },
     getcodeText:{
         color:"#fff",
-        fontSize:15
+        fontSize:Calc.getFont(15),
     }
 
 });

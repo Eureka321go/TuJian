@@ -50,7 +50,7 @@ class Home extends Component<{}> {
                             {this.renderPeopleNum()}
                            <TouchableOpacity style={{flex:1,height:Calc.getHeight(88),backgroundColor:"#51cdf1",alignItems:"center",justifyContent:"center",borderRadius:6}} activeOpacity={1}>
                                <View>
-                                   <Text style={{fontSize:18,color:"#fff"}}>开始</Text>
+                                   <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(18),color:"#fff"}}>开始</Text>
                                </View>
                            </TouchableOpacity>
                         </View>
@@ -75,8 +75,8 @@ class Home extends Component<{}> {
         return (
             <View style={styles.List}>
                 <Image style={styles.smallIcon} source={require("../assets/images/index/addressIcon.png")}/>
-                <Text numberOfLines={1} style={{flex:1,fontSize:15,color:"#b8bdc2"}}>{this.state.addressText}</Text>
-                <Text style={styles.rightText}>{this.state.addressName}</Text>
+                <Text allowFontScaling={false}  numberOfLines={1} style={{flex:1,fontSize:Calc.getFont(15),color:"#b8bdc2"}}>{this.state.addressText}</Text>
+                <Text allowFontScaling={false}  style={styles.rightText}>{this.state.addressName}</Text>
                 <Image style={styles.enterIcon} source={require("../assets/images/common/enter.png")}/>
             </View>
         )
@@ -86,18 +86,18 @@ class Home extends Component<{}> {
         return(
             <View style={styles.List}>
                 <Image style={styles.smallIcon} source={require("../assets/images/index/liveDate.png")}/>
-                <View style={{flex:1,flexDirection:"column",justifyContent:"center"}}>
+                <View allowFontScaling={false}  style={{flex:1,flexDirection:"column",justifyContent:"center"}}>
                     {/*住房入住*/}
                     <View style={{flexDirection:"row",marginBottom:Calc.getWidth(10)}}>
-                        <Text style={{fontSize:12,color:"#b8bdc2",marginRight:Calc.getWidth(102)}}>入住</Text>
-                        <Text style={{fontSize:12,color:"#b8bdc2"}}>退房</Text>
+                        <Text style={{fontSize:Calc.getFont(12),color:"#b8bdc2",marginRight:Calc.getWidth(102)}}>入住</Text>
+                        <Text style={{fontSize:Calc.getFont(12),color:"#b8bdc2"}}>退房</Text>
                     </View>
                     {/*入住日期*/}
-                    <Text numberOfLines={1} style={{fontSize:16,color:"#3a3c3c"}}>{this.state.liveDate}</Text>
+                    <Text allowFontScaling={false}  numberOfLines={1} style={{fontSize:Calc.getFont(16),color:"#3a3c3c"}}>{this.state.liveDate}</Text>
                 </View>
                 {/*入住几晚*/}
-                <Text style={styles.rightText}>共一晚</Text>
-                <Image style={styles.enterIcon} source={require("../assets/images/common/enter.png")}/>
+                <Text allowFontScaling={false}  style={styles.rightText}>共一晚</Text>
+                <Image  style={styles.enterIcon} source={require("../assets/images/common/enter.png")}/>
             </View>
         )
     }
@@ -106,8 +106,8 @@ class Home extends Component<{}> {
         return(
             <View style={[styles.List,{borderColor:"#fff"}]}>
                 <Image style={styles.smallIcon} source={require("../assets/images/index/peopleNum.png")}/>
-                <Text numberOfLines={1} style={{flex:1,fontSize:15,color:"#b8bdc2"}}>人数</Text>
-                <Text style={styles.rightText}>{this.state.peopleNum}</Text>
+                <Text allowFontScaling={false}  numberOfLines={1} style={{flex:1,fontSize:Calc.getFont(15),color:"#b8bdc2"}}>人数</Text>
+                <Text allowFontScaling={false}  style={styles.rightText}>{this.state.peopleNum}</Text>
                 <Image style={styles.enterIcon} source={require("../assets/images/common/enter.png")}/>
             </View>
         )
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         alignItems:"center",
         height:Calc.getWidth(112),
-        borderBottomWidth:0.5,
+        borderBottomWidth:Calc.getBorder(1),
         borderColor:"#d9e1e9",
         borderStyle:"solid",
         paddingLeft:Calc.getWidth(10),
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     },
     //右侧文字
     rightText:{
-        fontSize:16,
+        fontSize:Calc.getFont(16),
         color:"#3a3c3c",
         marginRight:Calc.getWidth(20),
     },

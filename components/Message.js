@@ -22,7 +22,7 @@ class Message extends Component<{}> {
         return (
             <View style={styles.container}>
                 <View style={styles.headerWrap}>
-                    <Text style={{textAlign:"center",fontSize:18,color:"#262626"}}>消息</Text>
+                    <Text allowFontScaling={false}  style={{textAlign:"center",fontSize:Calc.getFont(18),color:"#262626"}}>消息</Text>
                 </View>
                 <ScrollView style={{flex:1,marginTop:Calc.getHeight(20)}}>
                     <TouchableOpacity activeOpacity={1}>
@@ -32,8 +32,8 @@ class Message extends Component<{}> {
                                     <Image  style={styles.listIcon} source={require("../assets/images/message/msg.png")}/>
                                 </View>
                                 <View style={styles.rightWrap}>
-                                    <Text numberOfLines={1} style={styles.listTitle}>优惠折扣</Text>
-                                    <Text numberOfLines={1} style={styles.listText}>[周四特卖] 这些房子都"白菜价"</Text>
+                                    <Text allowFontScaling={false}  numberOfLines={1} style={styles.listTitle}>优惠折扣</Text>
+                                    <Text allowFontScaling={false}  numberOfLines={1} style={styles.listText}>[周四特卖] 这些房子都"白菜价"</Text>
                                 </View>
                             </View>
                         </View>
@@ -45,8 +45,8 @@ class Message extends Component<{}> {
                                     <Image  style={styles.listIcon} source={require("../assets/images/message/sysMsg.png")}/>
                                 </View>
                                 <View style={styles.rightWrap}>
-                                    <Text numberOfLines={1} style={styles.listTitle}>系统消息</Text>
-                                    <Text numberOfLines={1} style={styles.listText}>如果你无法简洁的表达你的想法，那就只能说明你还</Text>
+                                    <Text allowFontScaling={false}  numberOfLines={1} style={styles.listTitle}>系统消息</Text>
+                                    <Text allowFontScaling={false}  numberOfLines={1} style={styles.listText}>如果你无法简洁的表达你的想法，那就只能说明你还</Text>
                                 </View>
                             </View>
                         </View>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         alignItems:"center",
         justifyContent:"center",
-        borderBottomWidth:0.5,
+        borderBottomWidth:Calc.getBorder(1),
         borderColor:"#d8e3e8"
     },
     list2:{
@@ -104,11 +104,11 @@ const styles = StyleSheet.create({
         height:Calc.getWidth(100)
     },
     listTitle:{
-        fontSize:16,
+        fontSize:Calc.getFont(16),
         color:"#3a3c3c"
     },
     listText:{
-        fontSize:12,
+        fontSize:Calc.getFont(12),
         color:"#b8bdc2",
         marginTop:Calc.getHeight(20)
     }

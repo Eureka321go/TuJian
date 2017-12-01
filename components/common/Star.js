@@ -64,7 +64,7 @@ class Star extends Component<{}> {
             <View style={styles.container}>
               <View style={styles.starWrap}>
                   {this.state.starArr}
-                  <Text style={{fontSize:12,color:"#f2cb2f"}}>({this.props.score})</Text>
+                  <Text allowFontScaling={false}  style={{fontSize:12,color:"#f2cb2f"}}>({this.props.score})</Text>
               </View>
             </View>
         );
