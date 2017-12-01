@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 import {connect} from "react-redux";
 import {Calc} from "../common/Calc"
+import Toast from "react-native-root-toast"
 
 class Login extends Component<{}> {
     constructor(props) {
@@ -152,14 +153,14 @@ class Login extends Component<{}> {
                 codeText:this.state.codeTime
             });
             let allTime=this.state.codeTime;
-            let timer=setInterval(()=>{
+            this.timer=setInterval(()=>{
                 let time=this.state.codeTime-1;
                 this.setState({
                     codeText:time,
                     codeTime:time
                 });
                 if(time-1<-1){
-                    clearInterval(timer);
+                    clearInterval(this.timer);
                     this.setState({
                         codeText:"获取验证码",
                         codeTime:allTime,
@@ -211,6 +212,10 @@ class Login extends Component<{}> {
             </View>
         )
     }
+    //登录点击
+    loginPress(){
+        Toast.show("你点了我")
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -226,7 +231,7 @@ class Login extends Component<{}> {
                     {/*form表单*/}
                     {this.renderTabContainer()}
                     {/*登录按钮*/}
-                    <TouchableOpacity style={styles.loginBtn} activeOpacity={0.8} onPress={()=>{alert("登录")}}>
+                    <TouchableOpacity style={styles.loginBtn} activeOpacity={0.8} onPress={()=>{this.loginPress()}}>
                         <Text style={styles.loginText} allowFontScaling={false}>登录</Text>
                     </TouchableOpacity>
                     {/*微信登录*/}
@@ -238,6 +243,9 @@ class Login extends Component<{}> {
                 </ImageBackground>
             </View>
         );
+    }
+    componentsWillUnmount(){
+        clearInterval(this.timer);
     }
 
 }
