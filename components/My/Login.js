@@ -89,7 +89,7 @@ class Login extends Component<{}> {
         return(
             <View style={styles.inputWrap}>
                 <Image source={require("../../assets/images/login/userIn.png")} style={styles.inputIcon}/>
-                <TextInput underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"请输入账号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({userName:text})}}/>
+                <TextInput maxLength={20}  underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"请输入账号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({userName:text})}}/>
             </View>
         )
     }
@@ -98,7 +98,7 @@ class Login extends Component<{}> {
         return(
             <View style={styles.inputWrap}>
                 <Image source={require("../../assets/images/login/userPassword.png")} style={styles.inputIcon}/>
-                <TextInput underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"请输入密码"} placeholderTextColor={"#fff"} secureTextEntry={true} style={styles.inputInput} onChangeText={(text)=>{this.setState({password:text})}}/>
+                <TextInput maxLength={20} underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"请输入密码"} placeholderTextColor={"#fff"} secureTextEntry={true} style={styles.inputInput} onChangeText={(text)=>{this.setState({password:text})}}/>
             </View>
         )
     }
@@ -218,7 +218,6 @@ const styles = StyleSheet.create({
         width:Calc.getWidth(620),
         marginLeft:"auto",
         marginRight:"auto",
-        marginTop:Calc.getHeight(42)
     },
     generalLogin:{
         width:Calc.getWidth(620),
@@ -236,9 +235,9 @@ const styles = StyleSheet.create({
     //输入框
     inputWrap:{
         flexDirection:"row",
-        height:Calc.getHeight(112),
+        marginTop:Calc.getHeight(42),
         paddingBottom:Calc.getHeight(20),
-        alignItems:"flex-end",
+        alignItems:"center",
         borderBottomWidth:0.5,
         borderColor:"rgba(255,255,255,1)",
         padding:0,
@@ -252,7 +251,7 @@ const styles = StyleSheet.create({
         flex:1,
         fontSize:16,
         color:"#fff",
-        height:Calc.getHeight(42),
+        height:"auto",
     }
 
 });
