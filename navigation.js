@@ -46,6 +46,10 @@ const TabObj=function () {
                 alignItems:"center",
                 justifyContent:"center"
             },
+            iconStyle:{
+                width:Calc.getWidth(42),
+                height:Calc.getWidth(42),
+            },
             labelStyle:{
                 position:"relative",
                 top:-5

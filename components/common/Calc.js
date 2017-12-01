@@ -23,10 +23,6 @@ function getBorder(w){
     return w;
 }
 function getFont(size){
-  if(Platform.OS=='android'){
-    let newFont=pixelRation/PixelRatio.getFontScale();
-    return newFont;
-  }
   return size;
 }
 

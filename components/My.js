@@ -209,9 +209,8 @@ const styles = StyleSheet.create({
         borderRadius:Calc.getWidth(30),
         backgroundColor:"#51cdf1",
         height:Calc.getHeight(60),
-        width:Calc.getWidth(215),
         paddingLeft:Calc.getWidth(20),
-        paddingRight:Calc.getWidth(20),
+        paddingRight:Calc.getWidth(50),
     },
     MyCard:{
         flexDirection:"row",
