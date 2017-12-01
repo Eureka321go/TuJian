@@ -108,7 +108,7 @@ class Login extends Component<{}> {
         return(
             <View style={styles.inputWrap}>
                 <Image source={require("../../assets/images/login/userIn.png")} style={styles.inputIcon}/>
-                <TextInput keybordType={"numeric"} maxLength={11}  underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"手机号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({phone:text})}}/>
+                <TextInput keyboardType={"numeric"} maxLength={11}  underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"手机号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({phone:text})}}/>
             </View>
         )
     }
@@ -123,7 +123,7 @@ class Login extends Component<{}> {
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled={true}
                     scrollEventThrottle={10}
-                    keybordDismissMode={"on-drag"}
+                    keyboardDismissMode={"on-drag"}  //拖拽隐藏键盘
                     onScroll={(e)=>{
                         if(e.nativeEvent.contentOffset.x>Calc.getWidth(310)){
                             this.setState({
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     },
 //    注册
     registerBtn:{
-        fontSize:15,
+        fontSize:18,
         color:"#fff",
         position:"absolute",
         top:Calc.getHeight(60),
