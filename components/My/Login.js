@@ -181,10 +181,11 @@ const styles = StyleSheet.create({
     },
     btns:{
         width:Calc.getWidth(750),
+        height:Calc.getHeight(55),
         flexDirection:"row",
         alignItems:"center",
         justifyContent:"center",
-        marginTop:Calc.getHeight(80)
+        marginTop:Calc.getHeight(80),
     },
     tabWrap:{
       flex:1,
