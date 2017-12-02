@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 import {connect} from "react-redux";
 import {Calc} from "../common/Calc"
-import Toast from "react-native-root-toast"
+import {CommonJS} from "../common/Common";
 
 class Login extends Component<{}> {
     constructor(props) {
@@ -29,6 +29,7 @@ class Login extends Component<{}> {
             userName:"", //用户名
             password:"",
             phone:"",
+            code:"",//验证码
             getCode:true,   //是否点击
             codeText:"获取验证码", //倒计时内容
             codeTime:10,  //总的倒计时时间
@@ -138,7 +139,7 @@ class Login extends Component<{}> {
         return(
             <View style={styles.inputWrap}>
                 <Image source={require("../../assets/images/login/QrCode.png")} style={styles.inputIcon}/>
-                <TextInput keyboardType={"numeric"} maxLength={6}  underlineColorAndroid={"transparent"}  placeholder={"验证码"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({phone:text})}}/>
+                <TextInput keyboardType={"numeric"} maxLength={6}  underlineColorAndroid={"transparent"}  placeholder={"验证码"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({code:text})}}/>
                 <TouchableOpacity style={[styles.getCode,codeBg]} activeOpacity={1} onPress={()=>{this.getCode()}}>
                     <Text allowFontScaling={false} style={[styles.getcodeText,fontColor]}>{this.state.codeText}</Text>
                 </TouchableOpacity>
@@ -182,7 +183,7 @@ class Login extends Component<{}> {
                     scrollEventThrottle={10}
                     keyboardDismissMode={"on-drag"}  //拖拽隐藏键盘
                     onScroll={(e)=>{
-                        if(e.nativeEvent.contentOffset.x>Calc.getWidth(310)){
+                        if(e.nativeEvent.contentOffset.x>=Calc.getWidth(310)){
                             this.setState({
                                 active:"dynamic"
                             })
@@ -214,7 +215,19 @@ class Login extends Component<{}> {
     }
     //登录点击
     loginPress(){
-        Toast.show("你点了我")
+       //当前登录类型
+        if(this.state.active=='general'){
+            if(!this.state.userName&&!this.state.password){CommonJS.toastShow("账号和密码不能为空");return;}
+            if(!this.state.userName){CommonJS.toastShow("账号不能为空");return;}
+            if(!this.state.password){CommonJS.toastShow("密码不能为空");return;}
+        }
+        else{
+            if(!this.state.phone && !this.state.code){CommonJS.toastShow("手机号和验证码不能为空");return;}
+            if(!this.state.phone){CommonJS.toastShow("手机号不能为空");return;}
+            if(!this.state.code){CommonJS.toastShow("验证码不能为空");return;}
+        }
+
+
     }
     render() {
         return (
