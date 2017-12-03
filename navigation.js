@@ -139,12 +139,13 @@ const SimpleApp =nav.StackNavigator({
                 headerStyle:{
                     borderBottomWidth:0,
                     borderColor:"transparent",
-                    backgroundColor:"#fff"
+                    backgroundColor:"#fff",
+                    elevation:0,
                 },
                 headerTitleStyle:{
                     fontSize:Calc.getFont(18),
                     color:"#262626",
-                    fontWeight:"normal"
+                    fontWeight:"normal",
                 },
                 headerLeft:()=>{
                     return (
