@@ -11,6 +11,7 @@ import {
     View,
     Image,
     ScrollView,
+    TouchableOpacity
 } from 'react-native';
 
 
@@ -132,24 +133,28 @@ const SimpleApp =nav.StackNavigator({
     },
     Calendar:{
         screen:Calendar,
-        navigationOptions:{
-            headerTitle:"选择入住和离店时间",
-            headerStyle:{
-                borderBottomWidth:0,
-                borderColor:"transparent",
-                backgroundColor:"#fff"
-            },
-            headerTitleStyle:{
-                fontSize:Calc.getFont(18),
-                color:"#262626",
-                fontWeight:"normal"
-            },
-            headerLeft:()=>{
-                return (
-                    <View>
-                        <Image style={{width:Calc.getWidth(40),height:Calc.getWidth(40),marginLeft:Calc.getWidth(45)}} source={require("./assets/images/index/x.png")}/>
-                    </View>
-                )
+        navigationOptions:({navigation})=>{
+            return {
+                headerTitle:"选择入住和离店时间",
+                headerStyle:{
+                    borderBottomWidth:0,
+                    borderColor:"transparent",
+                    backgroundColor:"#fff"
+                },
+                headerTitleStyle:{
+                    fontSize:Calc.getFont(18),
+                    color:"#262626",
+                    fontWeight:"normal"
+                },
+                headerLeft:()=>{
+                    return (
+                        <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
+                            <View>
+                                <Image style={{width:Calc.getWidth(40),height:Calc.getWidth(40),marginLeft:Calc.getWidth(45)}} source={require("./assets/images/index/x.png")}/>
+                            </View>
+                        </TouchableOpacity>
+                    )
+                }
             }
         }
     }
