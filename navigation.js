@@ -19,7 +19,7 @@ import Home from "./components/Home"
 import Message from "./components/Message"
 import Order from "./components/Order"
 import Login from "./components/My/Login"
-
+import Calendar from "./components/Index/Calendar"
 
 
 
@@ -128,6 +128,29 @@ const SimpleApp =nav.StackNavigator({
         navigationOptions:{
             header:null,
             gesturesEnabled:false
+        }
+    },
+    Calendar:{
+        screen:Calendar,
+        navigationOptions:{
+            headerTitle:"选择入住和离店时间",
+            headerStyle:{
+                borderBottomWidth:0,
+                borderColor:"transparent",
+                backgroundColor:"#fff"
+            },
+            headerTitleStyle:{
+                fontSize:Calc.getFont(18),
+                color:"#262626",
+                fontWeight:"normal"
+            },
+            headerLeft:()=>{
+                return (
+                    <View>
+                        <Image style={{width:Calc.getWidth(40),height:Calc.getWidth(40),marginLeft:Calc.getWidth(45)}} source={require("./assets/images/index/x.png")}/>
+                    </View>
+                )
+            }
         }
     }
 })

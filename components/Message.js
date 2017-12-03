@@ -18,6 +18,11 @@ class Message extends Component<{}> {
         super(props)
 
     }
+    haveNewMessage(){
+        return(
+            <View style={styles.newMessage} ></View>
+        )
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -30,6 +35,8 @@ class Message extends Component<{}> {
                             <View style={styles.list}>
                                 <View style={styles.leftWrap}>
                                     <Image  style={styles.listIcon} source={require("../assets/images/message/msg.png")}/>
+                                    {/*是否有最新消息*/}
+                                    {this.haveNewMessage()}
                                 </View>
                                 <View style={styles.rightWrap}>
                                     <Text allowFontScaling={false}  numberOfLines={1} style={styles.listTitle}>优惠折扣</Text>
@@ -43,6 +50,8 @@ class Message extends Component<{}> {
                             <View style={[styles.list2]}>
                                 <View style={styles.leftWrap}>
                                     <Image  style={styles.listIcon} source={require("../assets/images/message/sysMsg.png")}/>
+                                    {/*是否有最新消息*/}
+                                    {this.haveNewMessage()}
                                 </View>
                                 <View style={styles.rightWrap}>
                                     <Text allowFontScaling={false}  numberOfLines={1} style={styles.listTitle}>系统消息</Text>
@@ -94,7 +103,8 @@ const styles = StyleSheet.create({
     },
     leftWrap:{
         paddingLeft:Calc.getWidth(10),
-        marginRight:Calc.getWidth(30)
+        marginRight:Calc.getWidth(30),
+        position:"relative",
     },
     rightWrap:{
         flex:1,
@@ -111,6 +121,15 @@ const styles = StyleSheet.create({
         fontSize:Calc.getFont(12),
         color:"#b8bdc2",
         marginTop:Calc.getHeight(20)
+    },
+    newMessage:{
+        position:"absolute",
+        top:0,
+        right:0,
+        width:Calc.getWidth(10),
+        height:Calc.getWidth(10),
+        backgroundColor:"#f96b8e",
+        borderRadius:99
     }
 
 });

@@ -148,7 +148,14 @@ class Login extends Component<{}> {
     }
     //获取手机验证码
     getCode(){
+        if(!this.state.phone){
+            CommonJS.toastShow("手机号不能为空");return;
+        }
         if(this.state.getCode){
+            if(!CommonJS.phoneTest(this.state.getCode)){
+                CommonJS.toastShow("请输入有效的手机号")
+                return ;
+            }
             this.setState({
                 getCode:false,
                 codeText:this.state.codeTime
@@ -220,11 +227,20 @@ class Login extends Component<{}> {
             if(!this.state.userName&&!this.state.password){CommonJS.toastShow("账号和密码不能为空");return;}
             if(!this.state.userName){CommonJS.toastShow("账号不能为空");return;}
             if(!this.state.password){CommonJS.toastShow("密码不能为空");return;}
+            //登录成功
+            this.props.navigation.navigate("index")
         }
         else{
             if(!this.state.phone && !this.state.code){CommonJS.toastShow("手机号和验证码不能为空");return;}
             if(!this.state.phone){CommonJS.toastShow("手机号不能为空");return;}
             if(!this.state.code){CommonJS.toastShow("验证码不能为空");return;}
+            if(!CommonJS.phoneTest(this.state.phone)){
+                CommonJS.toastShow("请输入有效的手机号")
+                return ;
+            }
+            //登录成功
+            this.props.navigation.navigate("index")
+
         }
 
 

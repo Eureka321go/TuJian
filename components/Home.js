@@ -84,21 +84,23 @@ class Home extends Component<{}> {
     //入住时间
     renderLiveDate(){
         return(
-            <View style={styles.List}>
-                <Image style={styles.smallIcon} source={require("../assets/images/index/liveDate.png")}/>
-                <View allowFontScaling={false}  style={{flex:1,flexDirection:"column",justifyContent:"center"}}>
-                    {/*住房入住*/}
-                    <View style={{flexDirection:"row",marginBottom:Calc.getWidth(10)}}>
-                        <Text style={{fontSize:Calc.getFont(12),color:"#b8bdc2",marginRight:Calc.getWidth(102)}}>入住</Text>
-                        <Text style={{fontSize:Calc.getFont(12),color:"#b8bdc2"}}>退房</Text>
-                    </View>
-                    {/*入住日期*/}
-                    <Text allowFontScaling={false}  numberOfLines={1} style={{fontSize:Calc.getFont(16),color:"#3a3c3c"}}>{this.state.liveDate}</Text>
-                </View>
-                {/*入住几晚*/}
-                <Text allowFontScaling={false}  style={styles.rightText}>共一晚</Text>
-                <Image  style={styles.enterIcon} source={require("../assets/images/common/enter.png")}/>
-            </View>
+           <TouchableOpacity activeOpacity={1} onPress={()=>{this.props.navigation.navigate("Calendar")}}>
+               <View style={styles.List}>
+                   <Image style={styles.smallIcon} source={require("../assets/images/index/liveDate.png")}/>
+                   <View allowFontScaling={false}  style={{flex:1,flexDirection:"column",justifyContent:"center"}}>
+                       {/*住房入住*/}
+                       <View style={{flexDirection:"row",marginBottom:Calc.getWidth(10)}}>
+                           <Text style={{fontSize:Calc.getFont(12),color:"#b8bdc2",marginRight:Calc.getWidth(102)}}>入住</Text>
+                           <Text style={{fontSize:Calc.getFont(12),color:"#b8bdc2"}}>退房</Text>
+                       </View>
+                       {/*入住日期*/}
+                       <Text allowFontScaling={false}  numberOfLines={1} style={{fontSize:Calc.getFont(16),color:"#3a3c3c"}}>{this.state.liveDate}</Text>
+                   </View>
+                   {/*入住几晚*/}
+                   <Text allowFontScaling={false}  style={styles.rightText}>共一晚</Text>
+                   <Image  style={styles.enterIcon} source={require("../assets/images/common/enter.png")}/>
+               </View>
+           </TouchableOpacity>
         )
     }
     //人数
@@ -114,7 +116,8 @@ class Home extends Component<{}> {
     }
     componentWillMount(){
         //没有登录就跳转到登录
-        this.props.navigation.navigate('Login')
+        //判断
+        //this.props.navigation.navigate('Login')
     }
 }
 
