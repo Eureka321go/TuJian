@@ -11,14 +11,14 @@ import {
     Text,
     View,
     Image,
-    StatusBar,
-    ScrollView,
+    FlatList,
     TouchableOpacity
 } from 'react-native';
 import {connect} from "react-redux";
 import CalendarObj from "../common/Calendar"
 import {Calc} from "../common/Calc";
 
+let intent="in";
 class Calendar extends Component<{}> {
     constructor(props) {
         super(props)
@@ -36,18 +36,18 @@ class Calendar extends Component<{}> {
                 date:new Date(new Date().getTime()+86400000).getDate(),
                 month:new Date(new Date().getTime()+86400000).getMonth()+1,
             },
-            //点击意图
-            intent:"in"
+
         }
 
     }
     //获取时间戳
     getTime(obj){
-        return new Date(obj.year+"/"+obj.month+"/"+obj.date).getTime()
+        let date=obj.date?obj.date:"01"
+        return new Date(obj.year+"/"+obj.month+"/"+date).getTime()
     }
     componentWillMount(){
         this.setState({
-            initialData:CalendarObj.allMonths(2)
+            initialData:CalendarObj
         });
     }
     //列表中的星期
@@ -67,32 +67,44 @@ class Calendar extends Component<{}> {
     //日期
     renderDate(v){
         let arr=[];
-        v.data.map((vv,kk)=>{
+        let data=v;
+        data.data.forEach((vv,kk)=>{
             //今天或者明天就选中状态
-            let BgStyle;
-            let chooseFontStyle;
-            if(this.getTime(vv)==this.getTime(this.state.liveIn) || this.getTime(vv)==this.getTime(this.state.liveLeave)){
+            let BgStyle={
+                backgroundColor:"transparent",
+            };
+            let chooseFontStyle={
+                color:"#3a3c3c"
+            };
+            let liveInTime=this.getTime(this.state.liveIn);
+            let liveLeaveTime=this.getTime(this.state.liveLeave);
+            let currentDate=this.getTime(vv);
+            let vText;
+            if(currentDate==liveInTime || currentDate==liveLeaveTime){
                  BgStyle={
                     backgroundColor:"#51cdf1",
                 }
                  chooseFontStyle={
                     color:"#fff"
                 }
+            }
+            if(vv.Text){
+                vText=vv.Text;
             }else{
-                 BgStyle={
-                    backgroundColor:"transparent",
+                if(currentDate==liveInTime){
+                       vText="住店"
                 }
-                 chooseFontStyle={
-                    color:"#3a3c3c"
+                if(currentDate==liveLeaveTime){
+                    vText="离店"
                 }
             }
             arr.push(
-                <TouchableOpacity activeOpacity={1} key={kk} onPress={()=>{this.chooseDate(vv)}}>
+                <TouchableOpacity activeOpacity={1} key={kk+"a"} onPress={()=>{this.chooseDate(vv,currentDate,liveInTime,liveLeaveTime)}}>
                     <View  style={styles.listDate}>
                         <View style={[styles.chooseBg,BgStyle]}>
                             <Text allowFontScaling={false} style={[chooseFontStyle]}>{vv.date}</Text>
                         </View>
-                        <Text style={styles.listText} allowFontScaling={false}>{vv.text}</Text>
+                        <Text style={styles.listText} allowFontScaling={false}>{vText}</Text>
                     </View>
                 </TouchableOpacity>
             )
@@ -100,66 +112,74 @@ class Calendar extends Component<{}> {
         return arr;
     }
     //选择日期
-    chooseDate(vv){
-        if(this.state.intent=="in"){
+    chooseDate(vv,currentDate,liveInTime,liveLeaveTime){
+        if(intent=="in"){
+            intent="out";
             this.setState({
-                intent:"out",
                 liveIn:vv,
                 liveLeave:""
             });
-
         }else{
-            if(this.getTime(vv)<this.getTime(this.state.liveIn)){
+            intent="in";
+            if(currentDate==liveInTime){
+                return;
+            }
+            if(currentDate<liveInTime){
+                let curDate=this.state.liveIn;
+                this.setState({
+                    liveIn:vv,
+                    liveLeave:curDate
+                });
                 return;
             }
             this.setState({
-                intent:"in",
                 liveLeave:vv
             })
         }
     }
     //列表
-    renderList(){
-        let arr=[];
-        this.state.initialData.map((v,k)=>{
-            arr.push(
-                <View key={k} style={styles.listWrap}>
-                    {/*头部*/}
-                    <View style={styles.listTitle}>
-                        <Text allowFontScaling={false} style={styles.titleFont}>{v.info.year+"年"+v.info.month+"月"}</Text>
-                    </View>
-                    {/*星期*/}
-                    {this.renderListWeek()}
-                    {/*日期*/}
-                     <View style={styles.dateWrap}>
-                         {this.renderDate(v)}
-                     </View>
+    renderList(item){
+        let v=item;
+        return(
+            <View  style={styles.listWrap}>
+                  {/*头部*/}
+                  <View style={styles.listTitle}>
+                      <Text allowFontScaling={false} style={styles.titleFont}>{v.info.year+"年"+v.info.month+"月"}</Text>
+                  </View>
+                  {/*星期*/}
+                  {this.renderListWeek()}
+                  {/*日期*/}
+                  <View style={styles.dateWrap}>
+                      {this.renderDate(v)}
+                  </View>
 
-                </View>
-            )
-        });
-        return arr;
+            </View>
+        )
 
     }
     render() {
         return (
-            <ScrollView style={{ backgroundColor: '#fff',}}>
-                <View style={styles.container}>
-                    <StatusBar
-                        hidden={false}
-                    />
-                    {/*列表*/}
-                    {this.renderList()}
-                </View>
-            </ScrollView>
+           <View style={{ backgroundColor: '#fff',flex:1,}}>
+               <FlatList
+                data={this.state.initialData}
+                extraData={this.state}
+                renderItem={({item}) => {
+                    return(
+                        <View>
+                            {this.renderList(item)}
+                        </View>
+                    )
+                }}
+               />
+           </View>
         );
     }
+
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
+        flex: 1
     },
     listWrap:{
 

@@ -25,10 +25,10 @@ function getBorder(w){
 function getFont(size){
   return size;
 }
-
 export const Calc={
     getWidth,
     getHeight,
     getBorder,
     getFont
 }
+global.Calc=Calc

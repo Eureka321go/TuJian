@@ -62,7 +62,7 @@ var  CalendarObj=function(){
   }
 
   //根据年份和月份，返回对象，对象包含年的信息和每天的数组
-  this.initialMonth=function(obj){
+  this.initialMonth=function(obj,i){
     /*
     * obj{
     *   year:xxxx,
@@ -74,15 +74,19 @@ var  CalendarObj=function(){
     //初始化数组，最后要返回的数组
     var  arr={
       data:[], //每天的信息
-      info:obj //包含年份和月份
+      info:obj, //包含年份和月份
+      key:i
     };
     //从第几个星期开始，根据当前月1号星期几，就有几个空的天对象
+    var currentI;//记录date的key
     for(var i=0;i<day;i++){
       arr.data.push({
         ...obj,
         date:"",
-        week:""
-      })
+        week:"",
+        key:i
+      });
+        currentI=i;//记录key
     }
     //获取当前月天数
     var currentMonthNum=this.getMonthNums(obj.year)[obj.month-1];
@@ -97,7 +101,8 @@ var  CalendarObj=function(){
         ...obj,
         week:week,
         date:currentDate,
-        text:text
+        text:text,
+        key:currentI+i+1
       }
       /*
       * other{
@@ -148,35 +153,42 @@ var  CalendarObj=function(){
     }
     //num表示要显示本月后的几个月,Number:1,2,3.....
     var currentMonth=new Date().getMonth()+1;//获取本月
+    var currentTime=new Date().getTime();
     var arr=[];//最后要返回的数组
     for(var i=1;i<=num;i++){
-      var NextYear=0;//最后要返回的年份
       var Nextmonth=0;//最后要返回的月份
-      var afterMonth=currentMonth+i;//月份+你想要的月份
-      var a=12-currentMonth;//距离下一年还有几个月
-      var b=afterMonth-a;//总和的月份扣距离下一年的月数
-      if(b/12<0){
-        //  b/12<0说明你需要的最后一个月份在本年内
-        b=currentMonth+1
+      var NextYear=0;//最后要返回的年份
+      var allMonth=currentMonth+i;//所有的月份
+      var a=12-currentMonth;//距离下一还有几个月
+      var b;
+      if(a==0){
+        b=i%12;
+        b==0&&(b=12);
       }else{
-        /*
-        *说明在本年外，那么b表示在新的一年当中的1月份。
-        * 为何还要+1?
-        * 例子，假设是2年后的1月份。那么24/12=2....0
-        * 2表示正好是年的倍数，余0，是1月份。所以要+1.
-        * */
-        b=b%12+1;
+        if(i<a){
+          b=currentMonth+i;
+        }else{
+          var c=i-a;//剩余的月份
+          b=c%12;
+          b==0&&(b=12);
+        }
       }
       Nextmonth=b;
-      NextYear=Math.floor((afterMonth-a)/12);
-      if(NextYear<0){
-        NextYear=new Date().getFullYear();
+      if(allMonth<a){
+          NextYear=new Date().getFullYear();
       }else{
-        NextYear+=new Date().getFullYear();
+          var c=allMonth-a;
+          var re = /^[1-9]+[0-9]*]*$/;
+          if(re.test(c/12)){
+              NextYear=new Date().getFullYear()+Math.floor((c)/12)-1;
+          }else{
+              NextYear=new Date().getFullYear()+Math.floor((allMonth-a)/12);
+          }
       }
       var obj={
         month:Nextmonth,
-        year:NextYear
+        year:NextYear,
+
       }
       arr.push(obj);
     }
@@ -193,7 +205,7 @@ var  CalendarObj=function(){
      ];
       var arr3=[];
       for(var i=0;i<arr2.length;i++){
-        arr3.push(this.initialMonth(arr2[i]));
+        arr3.push(this.initialMonth(arr2[i],i));
       }
       return arr3;
 
@@ -216,5 +228,5 @@ var calendarObj=new CalendarObj();
 *         注意:所有方法都基于本月往后推，如果需要不同月份，需要分别执行
 *         initialMonth({year:xxx,month:xxxx})返回月份每天的信息
 * */
- export  default calendarObj;
+ export  default calendarObj.allMonths(2);
 

@@ -17,10 +17,11 @@ import {
 
 import {connect} from "react-redux";
 import  {Calc} from "./common/Calc"
+import "./common/Calc"
 import ParallaxView from "./common/ParallaxView"
 import Tabs from "./Index/Tabs"
 import Wonderful from "./Index/Wonderful"
-
+import  "./common/storage"
 class Home extends Component<{}> {
     constructor(props) {
         super(props)
@@ -114,6 +115,9 @@ class Home extends Component<{}> {
         //没有登录就跳转到登录
         //判断
         //this.props.navigation.navigate('Login')
+    }
+    componentDidMount(){
+
     }
 }
 
