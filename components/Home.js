@@ -12,7 +12,8 @@ import {
     View,
     Image,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    StatusBar
 } from 'react-native';
 
 import {connect} from "react-redux";
@@ -36,6 +37,9 @@ class Home extends Component<{}> {
         //const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
+                <StatusBar
+                    barStyle="dark-content"
+                />
                 <ParallaxView
                     backgroundSource={require("../assets/images/index/indexBg.jpg")}
                     windowHeight={Calc.getHeight(547)}
@@ -115,9 +119,6 @@ class Home extends Component<{}> {
         //没有登录就跳转到登录
         //判断
         //this.props.navigation.navigate('Login')
-    }
-    componentDidMount(){
-
     }
 }
 

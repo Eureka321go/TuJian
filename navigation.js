@@ -160,7 +160,8 @@ const SimpleApp =nav.StackNavigator({
         }
     }
 },{
-    headerMode:"screen"
+    headerMode:"screen",
+    mode:"modal"
 })
 
 
