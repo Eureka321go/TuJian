@@ -216,15 +216,15 @@ const styles = StyleSheet.create({
     },
     listDate:{
         width:Calc.getWidth(107),
+        height:Calc.getWidth(100),
         alignItems:"center",
         justifyContent:"center",
-
     },
     chooseBg:{
         alignItems:"center",
         justifyContent:"center",
-        width:Calc.getWidth(80),
-        height:Calc.getWidth(80),
+        width:Calc.getWidth(60),
+        height:Calc.getWidth(60),
         borderRadius:100,
     },
     listText:{
