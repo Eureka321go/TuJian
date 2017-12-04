@@ -35,7 +35,9 @@ class Calendar extends Component<{}> {
                 year:new Date(new Date().getTime()+86400000).getFullYear(),
                 date:new Date(new Date().getTime()+86400000).getDate(),
                 month:new Date(new Date().getTime()+86400000).getMonth()+1,
-            }
+            },
+            //点击意图
+            intent:"in"
         }
 
     }
@@ -85,7 +87,7 @@ class Calendar extends Component<{}> {
                 }
             }
             arr.push(
-                <TouchableOpacity key={kk} onPress={()=>{alert(1)}}>
+                <TouchableOpacity activeOpacity={1} key={kk} onPress={()=>{this.chooseDate(vv)}}>
                     <View  style={styles.listDate}>
                         <View style={[styles.chooseBg,BgStyle]}>
                             <Text allowFontScaling={false} style={[chooseFontStyle]}>{vv.date}</Text>
@@ -96,6 +98,25 @@ class Calendar extends Component<{}> {
             )
         })
         return arr;
+    }
+    //选择日期
+    chooseDate(vv){
+        if(this.state.intent=="in"){
+            this.setState({
+                intent:"out",
+                liveIn:vv,
+                liveLeave:""
+            });
+
+        }else{
+            if(this.getTime(vv)<this.getTime(this.state.liveIn)){
+                return;
+            }
+            this.setState({
+                intent:"in",
+                liveLeave:vv
+            })
+        }
     }
     //列表
     renderList(){
@@ -177,8 +198,6 @@ const styles = StyleSheet.create({
         width:Calc.getWidth(107),
         alignItems:"center",
         justifyContent:"center",
-        //height:Calc.getHeight(60),
-        //marginBottom:Calc.getHeight(40)
 
     },
     chooseBg:{

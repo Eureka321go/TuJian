@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
     tab:{
         flexDirection:"row",
         justifyContent:"center",
-        height:Calc.getHeight(100),
+        height:Calc.getHeight(120),
+        paddingTop:20,
         alignItems:"center",
         backgroundColor:"#fff",
         width:Calc.getHeight(750)

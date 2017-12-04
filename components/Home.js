@@ -12,7 +12,6 @@ import {
     View,
     Image,
     ScrollView,
-    StatusBar,
     TouchableOpacity
 } from 'react-native';
 
@@ -36,9 +35,6 @@ class Home extends Component<{}> {
         //const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
-                <StatusBar
-                    hidden={true}
-                />
                 <ParallaxView
                     backgroundSource={require("../assets/images/index/indexBg.jpg")}
                     windowHeight={Calc.getHeight(547)}
