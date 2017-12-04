@@ -75,11 +75,11 @@ const styles = StyleSheet.create({
     },
     headerWrap:{
         width:Calc.getWidth(750),
-        height:Calc.getHeight(108),
+        height:Platform.OS=='android'?Calc.getHeight(88):Calc.getHeight(108),
         backgroundColor:"#fff",
         alignItems:"center",
         justifyContent:"center",
-        paddingTop:20, //不需要计算，电量条头部固定
+        paddingTop:Platform.OS=='android'?0:20, //不需要计算，电量条头部固定
     },
     listWrap:{
         width:Calc.getWidth(750),
