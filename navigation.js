@@ -161,7 +161,7 @@ const SimpleApp =nav.StackNavigator({
     }
 },{
     headerMode:"screen",
-    mode:"modal",
+    mode:"card",
 })
 
 

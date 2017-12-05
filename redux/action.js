@@ -1,5 +1,6 @@
 export const actionTypes={
-    token:"token"
+    token:"token",
+    indexCalendar:"indexCalendar"
 };
 
 
@@ -11,6 +12,13 @@ export const allActionsFun={
         return {
             type:actionTypes.token,
             newToken:newToken,
+        }
+    },
+   //首页日历
+    indexCalendarAction(dateObj){
+        return{
+            type:actionTypes.indexCalendar,
+            dateObj:dateObj
         }
     }
 }

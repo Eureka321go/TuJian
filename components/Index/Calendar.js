@@ -18,6 +18,7 @@ import {
 import {connect} from "react-redux";
 import CalendarObj from "../common/Calendar"
 import {Calc} from "../common/Calc";
+import {allActionsFun} from "../../redux/action"
 
 let intent="in";//意图
 class Calendar extends Component<{}> {
@@ -180,8 +181,17 @@ class Calendar extends Component<{}> {
     }
     //选择完毕
     chooseOk(){
-
-
+        let inzhu=this.state.liveIn;
+        let out=this.state.liveLeave;
+        if(!out.date){
+            this.props.navigation.goBack();
+            return;
+        }
+        let str=inzhu.month+"月"+inzhu.date+"日-"+out.month+"月"+out.date+"日";
+        this.props.dispatch(allActionsFun.indexCalendarAction({
+            date:str
+        }))
+        this.props.navigation.goBack();
     }
     //底部
     renderFooter(){
@@ -305,4 +315,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Calendar;
+export default connect()(Calendar);

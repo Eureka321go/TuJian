@@ -29,7 +29,6 @@ class Home extends Component<{}> {
         this.state={
             addressText:"目的地/客栈名称",
             addressName:"厦门",
-            liveDate:"10月21日-10月22日",
             peopleNum:"2人"
         }
     }
@@ -94,7 +93,7 @@ class Home extends Component<{}> {
                            <Text style={{fontSize:Calc.getFont(12),color:"#b8bdc2"}}>退房</Text>
                        </View>
                        {/*入住日期*/}
-                       <Text allowFontScaling={false}  numberOfLines={1} style={{fontSize:Calc.getFont(16),color:"#3a3c3c"}}>{this.state.liveDate}</Text>
+                       <Text allowFontScaling={false}  numberOfLines={1} style={{fontSize:Calc.getFont(16),color:"#3a3c3c"}}>{this.props.CalendarDate.date}</Text>
                    </View>
                    {/*入住几晚*/}
                    <Text allowFontScaling={false}  style={styles.rightText}>共一晚</Text>
@@ -177,5 +176,9 @@ const styles = StyleSheet.create({
     },
 });
 
-
-export default Home
+function select(state){
+    return{
+        CalendarDate:state.setIndexCalendar
+    }
+}
+export default connect(select)(Home)
