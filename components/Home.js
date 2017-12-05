@@ -34,7 +34,6 @@ class Home extends Component<{}> {
         }
     }
     render() {
-        //const { navigate } = this.props.navigation;
         return (
             <View style={styles.container}>
                 <StatusBar
@@ -119,6 +118,7 @@ class Home extends Component<{}> {
         //没有登录就跳转到登录
         //判断
         //this.props.navigation.navigate('Login')
+
     }
 }
 

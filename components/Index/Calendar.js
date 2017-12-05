@@ -12,13 +12,14 @@ import {
     View,
     Image,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableHighlight
 } from 'react-native';
 import {connect} from "react-redux";
 import CalendarObj from "../common/Calendar"
 import {Calc} from "../common/Calc";
 
-let intent="in";
+let intent="in";//意图
 class Calendar extends Component<{}> {
     constructor(props) {
         super(props)
@@ -80,7 +81,7 @@ class Calendar extends Component<{}> {
             let liveLeaveTime=this.getTime(this.state.liveLeave);
             let currentDate=this.getTime(vv);
             let vText;
-            if(currentDate==liveInTime || currentDate==liveLeaveTime){
+            if(currentDate==liveInTime && vv.date || currentDate==liveLeaveTime && vv.date){
                  BgStyle={
                     backgroundColor:"#51cdf1",
                 }
@@ -91,10 +92,10 @@ class Calendar extends Component<{}> {
             if(vv.Text){
                 vText=vv.Text;
             }else{
-                if(currentDate==liveInTime){
+                if(currentDate==liveInTime && vv.date){
                        vText="住店"
                 }
-                if(currentDate==liveLeaveTime){
+                if(currentDate==liveLeaveTime && vv.date){
                     vText="离店"
                 }
             }
@@ -157,6 +158,43 @@ class Calendar extends Component<{}> {
         )
 
     }
+    //计算入住如期
+    CalcDate(){
+        let out=this.state.liveLeave;
+        let inzhu=this.state.liveIn;
+        if(out.date){
+            out=out.month+"月"+out.date
+        }else{
+            out=""
+        }
+        return inzhu.month+"月"+inzhu.date+"-"+out
+    }
+    //计算入住时间
+    CalcTime(){
+        let out=this.state.liveLeave;
+        let inzhu=this.state.liveIn;
+        if(!out.date){return "共0天0晚"}
+        let time=(this.getTime(out)-this.getTime(inzhu))/86400000;
+        return "共"+(time+1)+"天"+time+"晚";
+
+    }
+    //选择完毕
+    chooseOk(){
+
+
+    }
+    //底部
+    renderFooter(){
+        return(
+            <View style={styles.footer}>
+                <Text allowFontScaling={false} style={styles.allTime}>{this.CalcDate()}</Text>
+                <Text allowFontScaling={false} style={styles.allTimeText}>{this.CalcTime()}</Text>
+                <TouchableHighlight style={styles.okBtn} underlayColor={"#11c2ee"} activeOpacity={0.9} onPress={()=>{this.chooseOk()}}>
+                    <Text allowFontScaling={false} style={styles.chbtn}>选择完毕</Text>
+                </TouchableHighlight>
+            </View>
+        )
+    }
     render() {
         return (
            <View style={{ backgroundColor: '#fff',flex:1,}}>
@@ -171,6 +209,8 @@ class Calendar extends Component<{}> {
                     )
                 }}
                />
+               {/*底部*/}
+               {this.renderFooter()}
            </View>
         );
     }
@@ -231,7 +271,36 @@ const styles = StyleSheet.create({
         fontSize:Calc.getFont(12),
         color:"#b8bdc2",
         marginTop:Calc.getHeight(10)
+    },
+//  底部
+    footer:{
+        flexDirection:"column",
+        alignItems:"center",
+    },
+    allTime:{
+        fontSize:Calc.getFont(15),
+        color:"#51cdf1",
+    },
+    allTimeText:{
+        fontSize:Calc.getFont(12),
+        color:"#262626",
+        marginTop:Calc.getHeight(20)
+    },
+    okBtn:{
+        width:Calc.getWidth(702),
+        height:Calc.getHeight(88),
+        backgroundColor:"#51cdf1",
+        borderRadius:6,
+        alignItems:"center",
+        justifyContent:"center",
+        marginTop:Calc.getHeight(30),
+        marginBottom:Calc.getHeight(20)
+    },
+    chbtn:{
+        color:"#fff",
+        fontSize:Calc.getFont(18),
     }
+
 
 });
 
