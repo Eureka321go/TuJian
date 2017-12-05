@@ -11,6 +11,8 @@ function setToken(state="",action){
             return state;
     }
 }
+
+
 //日历的子reducer
 /*
 * action参数
@@ -19,7 +21,15 @@ function setToken(state="",action){
 * }
 *
 */
-function setIndexCalendar(state='',action){
+//默认的日历日期为:x月x日-x月x日，今天的日期
+let currentTime=new Date();
+let nextTime=new Date(currentTime.getTime()+86400000);
+let date=(currentTime.getMonth()+1)+"月"+currentTime.getDate()+"日"+"-"+(nextTime.getMonth()+1)+"月"+nextTime.getDate()+"日";
+let dateObj={
+    date,
+    time:"一"
+}
+function setIndexCalendar(state=dateObj,action){
     switch (action.type){
         case actionTypes.indexCalendar:
             return action.dateObj
@@ -27,6 +37,11 @@ function setIndexCalendar(state='',action){
             return state;
     }
 }
+
+
+
+
+
 
 
 

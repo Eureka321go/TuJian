@@ -96,7 +96,7 @@ class Home extends Component<{}> {
                        <Text allowFontScaling={false}  numberOfLines={1} style={{fontSize:Calc.getFont(16),color:"#3a3c3c"}}>{this.props.CalendarDate.date}</Text>
                    </View>
                    {/*入住几晚*/}
-                   <Text allowFontScaling={false}  style={styles.rightText}>共一晚</Text>
+                   <Text allowFontScaling={false}  style={styles.rightText}>共{this.props.CalendarDate.time}晚</Text>
                    <Image  style={styles.enterIcon} source={require("../assets/images/common/enter.png")}/>
                </View>
            </TouchableOpacity>
