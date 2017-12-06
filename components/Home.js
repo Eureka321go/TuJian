@@ -82,7 +82,7 @@ class Home extends Component<{}> {
     //入住时间
     renderLiveDate(){
         return(
-           <TouchableOpacity activeOpacity={1} onPress={()=>{this.props.navigation.navigate("Calendar")}}>
+           <TouchableOpacity activeOpacity={1} onPress={()=>{this.props.navigation.navigate("Calendar",{transition:"ToVertical"})}}>
                <View style={styles.List}>
                    <Image style={styles.smallIcon} source={require("../assets/images/index/liveDate.png")}/>
                    <View allowFontScaling={false}  style={{flex:1,flexDirection:"column",justifyContent:"center"}}>

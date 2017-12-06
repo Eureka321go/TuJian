@@ -16,7 +16,6 @@ import {
     Animated
 } from 'react-native';
 
-import CardStackStyleInterpolator from "react-navigation/src/views/CardStack/CardStackStyleInterpolator"
 
 import My from "./components/My"
 import Home from "./components/Home"
@@ -25,8 +24,7 @@ import Order from "./components/Order"
 import Login from "./components/My/Login"
 import Calendar from "./components/Index/Calendar"
 import PeopleNum from "./components/Index/PeopleNum"
-
-
+import defaultTransitionConfig from "react-navigation/src/views/CardStack/CardStackStyleInterpolator"
 
 
 
@@ -153,6 +151,7 @@ const SimpleApp =nav.StackNavigator({
                     color:"#262626",
                     fontWeight:"normal",
                 },
+                gesturesEnabled:false,
                 headerLeft:()=>{
                     return (
                         <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
@@ -198,27 +197,23 @@ const SimpleApp =nav.StackNavigator({
     mode:"card",
     transitionConfig: () => ({
         transitionSpec: {
-            duration: 250,
-            easing: Easing.out(Easing.poly(4)),
+            duration: 230,  //动画时间
             timing: Animated.timing,
         },
         screenInterpolator: sceneProps => {
             const { layout, position, scene } = sceneProps
             const { index } = scene
+            const {route}=scene; //路由
+            const params=route.params || {};  //从路由获取参数
+            const height = layout.initHeight;  //屏幕的高度
+            const width=layout.initWidth;  //屏幕的宽度
+            switch(params.transition){
+                case "ToVertical":
+                    return defaultTransitionConfig.forVertical(sceneProps);
+                default:
+                    return defaultTransitionConfig.forHorizontal(sceneProps);
+            }
 
-            const height = layout.initHeight;
-            const width=layout.initWidth;
-            const translateX = position.interpolate({
-                inputRange: [index - 1, index, index + 1],
-                outputRange: [-width, 0, width],
-            })
-
-            const opacity = position.interpolate({
-                inputRange: [index - 1, index - 0.99, index],
-                outputRange: [0, 1, 1],
-            })
-
-            return { opacity, transform: [{ translateX }] }
         },
     }),
 })
@@ -228,6 +223,9 @@ const SimpleApp =nav.StackNavigator({
 class Container extends Component<{}> {
     constructor(props){
         super(props)
+        this.state={
+
+        }
     }
     render() {
         return (
