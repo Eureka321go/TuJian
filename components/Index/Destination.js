@@ -11,7 +11,8 @@ import {
     Text,
     View,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    TextInput
 } from 'react-native';
 import {connect} from "react-redux";
 let Calc=global.Calc;
@@ -25,9 +26,20 @@ class Destination extends Component<{}> {
     renderHeader(){
         return(
             <View style={styles.header}>
-                <View></View>
-                <TouchableOpacity>
-                    <Text>取消</Text>
+                <View style={styles.inputWrap}>
+                    <Image style={styles.searchIcon} source={require("../../assets/images/index/search_icon.png")}/>
+                    <TextInput
+                        style={styles.textinput}
+                        placeholder={"搜索目的地、客栈"}
+                        onChangeText={(text)=>{
+
+                        }}
+                    />
+                </View>
+                <TouchableOpacity style={styles.cancelWrap} activeOpacity={1} onPress={()=>{
+                    this.props.navigation.goBack();
+                }}>
+                    <Text style={styles.cancelText}>取消</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -52,8 +64,35 @@ const styles = StyleSheet.create({
     header:{
         flexDirection:"row",
         height:Calc.getHeight(88),
-        paddingTop:Calc.getHeight()
-    }
+        paddingTop:Calc.getHeight(26),
+        marginTop:Platform.OS=='android'?0:20,//电量栏不用转换
+        justifyContent:"center"
+    },
+    inputWrap:{
+        paddingLeft:Calc.getWidth(20),
+        backgroundColor:"#f0f5f8",
+        flex:1,
+        flexDirection:"row",
+        alignItems:"center"
+    },
+    textinput:{
+        backgroundColor:"#f0f5f8",
+        flex:1,
+    },
+    searchIcon:{
+        width:Calc.getWidth(28),
+        height:Calc.getWidth(28),
+        marginRight:Calc.getWidth(20),
+    },
+    cancelWrap:{
+        alignItems:"center",
+        justifyContent:"center",
+        marginLeft:Calc.getWidth(34),
+    },
+    cancelText:{
+        fontSize:Calc.getFont(18),
+        color:"#51cdf1"
+    },
 
 });
 

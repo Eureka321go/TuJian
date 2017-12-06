@@ -28,8 +28,6 @@ import Destination from "./components/Index/Destination"  //首页目的地
 
 
 
-
-
 import defaultTransitionConfig from "react-navigation/src/views/CardStack/CardStackStyleInterpolator"
 import nav from 'react-navigation';
 import {Calc} from "./components/common/Calc"
@@ -202,7 +200,7 @@ const SimpleApp =nav.StackNavigator({
         navigationOptions:{
             header:null
         }
-    }
+    },//首页目的地
 },{
     headerMode:"screen",
     mode:"card",
