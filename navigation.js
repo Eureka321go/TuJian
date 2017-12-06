@@ -153,6 +153,7 @@ const SimpleApp =nav.StackNavigator({
                     fontSize:Calc.getFont(18),
                     color:"#262626",
                     fontWeight:"normal",
+                    alignSelf:"center"
                 },
                 gesturesEnabled:false,
                 headerLeft:()=>{
@@ -162,6 +163,11 @@ const SimpleApp =nav.StackNavigator({
                                 <Image style={styles.chaImg} source={require("./assets/images/index/x.png")}/>
                             </View>
                         </TouchableOpacity>
+                    )
+                },
+                headerRight:()=>{
+                    return (
+                          <Image style={styles.chaImg}/>
                     )
                 }
             }
