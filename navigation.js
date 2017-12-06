@@ -165,11 +165,7 @@ const SimpleApp =nav.StackNavigator({
                         </TouchableOpacity>
                     )
                 },
-                headerRight:()=>{
-                    return (
-                          <Image style={styles.chaImg}/>
-                    )
-                }
+
             }
         }
     },//首页日历
