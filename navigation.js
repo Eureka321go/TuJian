@@ -11,9 +11,12 @@ import {
     View,
     Image,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    Easing,
+    Animated
 } from 'react-native';
 
+import CardStackStyleInterpolator from "react-navigation/src/views/CardStack/CardStackStyleInterpolator"
 
 import My from "./components/My"
 import Home from "./components/Home"
@@ -21,7 +24,7 @@ import Message from "./components/Message"
 import Order from "./components/Order"
 import Login from "./components/My/Login"
 import Calendar from "./components/Index/Calendar"
-
+import PeopleNum from "./components/Index/PeopleNum"
 
 
 
@@ -30,6 +33,7 @@ import Calendar from "./components/Index/Calendar"
 import nav from 'react-navigation';
 import {Calc} from "./components/common/Calc"
 
+//TabBar参数
 const TabObj=function () {
     if(Platform.OS=='android'){
         return {
@@ -64,6 +68,7 @@ const TabObj=function () {
     }
 }
 
+//TabBar
 const TabBarOptions = nav.TabNavigator({
     Home: {
         screen: Home,
@@ -117,6 +122,7 @@ const TabBarOptions = nav.TabNavigator({
     tabBarOptions:TabObj()
 });
 
+//页面跳转
 const SimpleApp =nav.StackNavigator({
     index:{
         screen:TabBarOptions,
@@ -151,17 +157,69 @@ const SimpleApp =nav.StackNavigator({
                     return (
                         <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
                             <View>
-                                <Image style={{width:Calc.getWidth(40),height:Calc.getWidth(40),marginLeft:Calc.getWidth(45)}} source={require("./assets/images/index/x.png")}/>
+                                <Image style={styles.chaImg} source={require("./assets/images/index/x.png")}/>
                             </View>
                         </TouchableOpacity>
                     )
                 }
             }
         }
-    }
+    },//首页日历
+    PeopleNum:{
+        screen:PeopleNum,
+        navigationOptions:({navigation})=>{
+            return {
+                headerTitle:"选择入住人数",
+                headerStyle:{
+                    borderBottomWidth:0,
+                    borderColor:"transparent",
+                    backgroundColor:"#fff",
+                    elevation:0,
+                },
+                headerTitleStyle:{
+                    fontSize:Calc.getFont(18),
+                    color:"#262626",
+                    fontWeight:"normal",
+                },
+                headerLeft:()=>{
+                    return (
+                        <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
+                            <View>
+                                <Image style={styles.chaImg} source={require("./assets/images/index/x.png")}/>
+                            </View>
+                        </TouchableOpacity>
+                    )
+                }
+            }
+        }
+    },//首页选择入住人数
 },{
     headerMode:"screen",
     mode:"card",
+    transitionConfig: () => ({
+        transitionSpec: {
+            duration: 250,
+            easing: Easing.out(Easing.poly(4)),
+            timing: Animated.timing,
+        },
+        screenInterpolator: sceneProps => {
+            const { layout, position, scene } = sceneProps
+            const { index } = scene
+
+            const height = layout.initHeight
+            const translateY = position.interpolate({
+                inputRange: [index - 1, index, index + 1],
+                outputRange: [height, 0, 0],
+            })
+
+            const opacity = position.interpolate({
+                inputRange: [index - 1, index - 0.99, index],
+                outputRange: [0, 1, 1],
+            })
+
+            return { opacity, transform: [{ translateY }] }
+        },
+    }),
 })
 
 
@@ -172,7 +230,7 @@ class Container extends Component<{}> {
     }
     render() {
         return (
-            <SimpleApp2/>
+            <SimpleApp/>
         );
     }
 }
@@ -187,7 +245,12 @@ const styles = StyleSheet.create({
     tabIcon:{
         width:21,
         height:21
-    }
+    },
+    chaImg:{
+        width:Calc.getWidth(40),
+        height:Calc.getWidth(40),
+        marginLeft:Calc.getWidth(45)
+    },
 
 });
 

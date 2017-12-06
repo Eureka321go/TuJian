@@ -189,6 +189,7 @@ class Calendar extends Component<{}> {
         }
         let str=inzhu.month+"月"+inzhu.date+"日-"+out.month+"月"+out.date+"日";
         let time=(this.getTime(out)-this.getTime(inzhu))/86400000;
+        //存入redux
         this.props.dispatch(allActionsFun.indexCalendarAction({
             date:str,
             time,

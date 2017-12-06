@@ -29,7 +29,6 @@ class Home extends Component<{}> {
         this.state={
             addressText:"目的地/客栈名称",
             addressName:"厦门",
-            peopleNum:"2人"
         }
     }
     render() {
@@ -105,12 +104,14 @@ class Home extends Component<{}> {
     //人数
     renderPeopleNum(){
         return(
-            <View style={[styles.List,{borderColor:"#fff"}]}>
-                <Image style={styles.smallIcon} source={require("../assets/images/index/peopleNum.png")}/>
-                <Text allowFontScaling={false}  numberOfLines={1} style={{flex:1,fontSize:Calc.getFont(15),color:"#b8bdc2"}}>人数</Text>
-                <Text allowFontScaling={false}  style={styles.rightText}>{this.state.peopleNum}</Text>
-                <Image style={styles.enterIcon} source={require("../assets/images/common/enter.png")}/>
-            </View>
+           <TouchableOpacity activeOpacity={0.9} onPress={()=>{ this.props.navigation.navigate("PeopleNum")}}>
+               <View style={[styles.List,{borderColor:"#fff"}]}>
+                   <Image style={styles.smallIcon} source={require("../assets/images/index/peopleNum.png")}/>
+                   <Text allowFontScaling={false}  numberOfLines={1} style={{flex:1,fontSize:Calc.getFont(15),color:"#b8bdc2"}}>人数</Text>
+                   <Text allowFontScaling={false}  style={styles.rightText}>{this.props.peopleNum}</Text>
+                   <Image style={styles.enterIcon} source={require("../assets/images/common/enter.png")}/>
+               </View>
+           </TouchableOpacity>
         )
     }
     componentWillMount(){
@@ -178,7 +179,8 @@ const styles = StyleSheet.create({
 
 function select(state){
     return{
-        CalendarDate:state.setIndexCalendar
+        CalendarDate:state.getIndexCalendar,
+        peopleNum:state.getindexNum
     }
 }
 export default connect(select)(Home)
