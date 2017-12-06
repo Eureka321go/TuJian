@@ -206,10 +206,11 @@ const SimpleApp =nav.StackNavigator({
             const { layout, position, scene } = sceneProps
             const { index } = scene
 
-            const height = layout.initHeight
-            const translateY = position.interpolate({
+            const height = layout.initHeight;
+            const width=layout.initWidth;
+            const translateX = position.interpolate({
                 inputRange: [index - 1, index, index + 1],
-                outputRange: [height, 0, 0],
+                outputRange: [-width, 0, width],
             })
 
             const opacity = position.interpolate({
@@ -217,7 +218,7 @@ const SimpleApp =nav.StackNavigator({
                 outputRange: [0, 1, 1],
             })
 
-            return { opacity, transform: [{ translateY }] }
+            return { opacity, transform: [{ translateX }] }
         },
     }),
 })
