@@ -10,20 +10,33 @@ import {
     StyleSheet,
     Text,
     View,
-    Image
+    Image,
+    TouchableOpacity
 } from 'react-native';
 import {connect} from "react-redux";
+let Calc=global.Calc;
 
 class Destination extends Component<{}> {
     constructor(props) {
         super(props)
 
     }
-
+    //头部
+    renderHeader(){
+        return(
+            <View style={styles.header}>
+                <View></View>
+                <TouchableOpacity>
+                    <Text>取消</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
     render() {
         return (
             <View style={styles.container}>
-                <Text>我是目的地</Text>
+                {/*头部*/}
+                {this.renderHeader()}
             </View>
         );
     }
@@ -32,9 +45,14 @@ class Destination extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#fff',
+        paddingLeft:Calc.getWidth(24),
+        paddingRight:Calc.getWidth(24),
+    },
+    header:{
+        flexDirection:"row",
+        height:Calc.getHeight(88),
+        paddingTop:Calc.getHeight()
     }
 
 });
