@@ -22,12 +22,15 @@ import Home from "./components/Home"
 import Message from "./components/Message"
 import Order from "./components/Order"
 import Login from "./components/My/Login"
-import Calendar from "./components/Index/Calendar"
-import PeopleNum from "./components/Index/PeopleNum"
+import Calendar from "./components/Index/Calendar"     //日历
+import PeopleNum from "./components/Index/PeopleNum"    //首页选择人数
+import Destination from "./components/Index/Destination"  //首页目的地
+
+
+
+
+
 import defaultTransitionConfig from "react-navigation/src/views/CardStack/CardStackStyleInterpolator"
-
-
-
 import nav from 'react-navigation';
 import {Calc} from "./components/common/Calc"
 
@@ -192,6 +195,12 @@ const SimpleApp =nav.StackNavigator({
             }
         }
     },//首页选择入住人数
+    Destination:{
+        screen:Destination,
+        navigationOptions:{
+            header:null
+        }
+    }
 },{
     headerMode:"screen",
     mode:"card",

@@ -110,7 +110,7 @@ class Calendar extends Component<{}> {
                     </View>
                 </TouchableOpacity>
             )
-        })
+        });
         return arr;
     }
     //选择日期

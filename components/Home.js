@@ -71,12 +71,16 @@ class Home extends Component<{}> {
     //目的地
     renderAddress(){
         return (
-            <View style={styles.List}>
-                <Image style={styles.smallIcon} source={require("../assets/images/index/addressIcon.png")}/>
-                <Text allowFontScaling={false}  numberOfLines={1} style={{flex:1,fontSize:Calc.getFont(15),color:"#b8bdc2"}}>{this.state.addressText}</Text>
-                <Text allowFontScaling={false}  style={styles.rightText}>{this.state.addressName}</Text>
-                <Image style={styles.enterIcon} source={require("../assets/images/common/enter.png")}/>
-            </View>
+            <TouchableOpacity activeOpacity={0.9} onPress={()=>{
+                this.props.navigation.navigate("Destination")
+            }}>
+                <View style={styles.List}>
+                    <Image style={styles.smallIcon} source={require("../assets/images/index/addressIcon.png")}/>
+                    <Text allowFontScaling={false}  numberOfLines={1} style={{flex:1,fontSize:Calc.getFont(15),color:"#b8bdc2"}}>{this.state.addressText}</Text>
+                    <Text allowFontScaling={false}  style={styles.rightText}>{this.state.addressName}</Text>
+                    <Image style={styles.enterIcon} source={require("../assets/images/common/enter.png")}/>
+                </View>
+            </TouchableOpacity>
         )
     }
     //入住时间
