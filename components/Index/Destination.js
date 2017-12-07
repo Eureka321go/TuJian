@@ -31,27 +31,20 @@ class Destination extends Component<{}> {
         let self=this;
         navigator.geolocation.getCurrentPosition(
             (position)=>{
-                let url="http://restapi.amap.com/v3/geocode/regeo?key=dd2d0034ef81bc9734d619373e18181c&location="+position.coords.longitude+","+position.coords.latitude
+                let key="HEPBZ-MW2WG-US2QP-I7HZ6-HQNFF-5XFIS";
+                let url="http://apis.map.qq.com/ws/geocoder/v1/?location="+position.coords.latitude+","+position.coords.longitude+"&coord_type=1&get_poi=1&poi_options=address_format=short&key="+key+"&output=json";
                 self.setState({
                     location:"定位中..."
                 })
-                fetch(url)
+                fetch(url,{method:"GET"})
                     .then((response)=>response.json())
                     .then((responseJson)=>{
-                           if(responseJson.info=='OK'){
-                               self.setState({
-                                   location:responseJson.regeocode.formatted_address
-                               })
-                           }else{
-                               self.setState({
-                                   location:"定位出错"
-                               })
+                           if(responseJson.message=="query ok"){
+                              let recommend=responseJson.result.formatted_address.recommend;
                            }
                     })
                     .catch((err)=>{
-                        self.setState({
-                            location:"定位出错"
-                        })
+                        console.log(err)
                     })
             }
             ,
