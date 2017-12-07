@@ -28,10 +28,10 @@ class Destination extends Component<{}> {
     }
     //定位
     getlocation(){
+        let self=this;
         navigator.geolocation.getCurrentPosition(
             (position)=>{
                 let url="http://restapi.amap.com/v3/geocode/regeo?key=dd2d0034ef81bc9734d619373e18181c&location="+position.coords.longitude+","+position.coords.latitude
-                let self=this;
                 self.setState({
                     location:"定位中..."
                 })
@@ -55,7 +55,7 @@ class Destination extends Component<{}> {
                     })
             }
             ,
-            (error)=>{this.etState({location:"定位出错"})},
+            (error)=>{self.setState({location:"定位出错"})},
             {enableHighAccuracy:true} //高精准定位
         )
     }
