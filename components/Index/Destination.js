@@ -68,6 +68,7 @@ class Destination extends Component<{}> {
                     <TextInput
                         style={styles.textinput}
                         placeholder={"搜索目的地、客栈"}
+                        underlineColorAndroid={"transparent"}
                         onChangeText={(text)=>{
 
                         }}
@@ -130,6 +131,7 @@ const styles = StyleSheet.create({
     textinput:{
         backgroundColor:"#f0f5f8",
         flex:1,
+        padding:0
     },
     searchIcon:{
         width:Calc.getWidth(28),
