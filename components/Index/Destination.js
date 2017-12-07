@@ -23,7 +23,8 @@ class Destination extends Component<{}> {
         super(props)
         this.state={
             initState:"",
-            location:"使用当前位置"
+            location:"使用当前位置",
+            hotDesitination:["丽江","大理","厦门","三亚","杭州","深圳","北京"]
         }
     }
     //定位
@@ -40,15 +41,21 @@ class Destination extends Component<{}> {
                     .then((response)=>response.json())
                     .then((responseJson)=>{
                            if(responseJson.message=="query ok"){
-                              let recommend=responseJson.result.formatted_address.recommend;
+                               let recommend=responseJson.result.formatted_addresses.recommend;
+                               let rough=responseJson.result.formatted_addresses.rough;
+                               if(recommend){
+                                   self.setState({location:recommend})
+                               }else if(rough){
+                                   self.setState({location:rough})
+                               }
                            }
                     })
                     .catch((err)=>{
-                        console.log(err)
+                        self.setState({location:"定位失败"})
                     })
             }
             ,
-            (error)=>{self.setState({location:"定位出错"})},
+            (error)=>{self.setState({location:"定位失败"})},
             {enableHighAccuracy:true} //高精准定位
         )
     }
@@ -75,6 +82,25 @@ class Destination extends Component<{}> {
             </View>
         )
     }
+    //热门目的地
+    renderHotDestination(){
+        let arr=[];
+        let date=this.state.hotDesitination;
+        date.forEach((v,k)=>{
+            arr.push(
+                <View key={k} style={{
+                    borderColor:"#51cdf1",
+                    borderWidth:1,
+                    height:Calc.getHeight(62),
+                    fontScale:Calc.getFont(16),
+                    borderRadius:6,
+                    color:"#3a3c3c",
+                }}>
+                    <Text>k</Text>
+                </View>
+            )
+        })
+    }
     //初始状态
     renderInitState(){
         return(
@@ -85,6 +111,8 @@ class Destination extends Component<{}> {
                        <Text style={{fontSize:16,color:"#262626"}}>{this.state.location}</Text>
                    </View>
                </TouchableOpacity>
+                {/*热门目的地*/}
+
             </ScrollView>
         )
     }
