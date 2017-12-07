@@ -25,7 +25,7 @@ import Login from "./components/My/Login"
 import Calendar from "./components/Index/Calendar"     //日历
 import PeopleNum from "./components/Index/PeopleNum"    //首页选择人数
 import Destination from "./components/Index/Destination"  //首页目的地
-
+import Setting from "./components/My/Setting/Setting"  //设置页面
 
 
 import defaultTransitionConfig from "react-navigation/src/views/CardStack/CardStackStyleInterpolator"
@@ -201,6 +201,36 @@ const SimpleApp =nav.StackNavigator({
             header:null
         }
     },//首页目的地
+    Setting:{
+        screen:Setting,
+        navigationOptions:({navigation})=>{
+            return {
+                headerTitle:"设置",
+                headerStyle:{
+                    borderBottomWidth:0,
+                    borderColor:"transparent",
+                    backgroundColor:"#fff",
+                    elevation:0,
+                },
+                headerTitleStyle:{
+                    fontSize:Calc.getFont(18),
+                    color:"#262626",
+                    fontWeight:"normal",
+                    alignSelf:"center"
+                },
+                headerLeft:()=>{
+                    return (
+                        <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
+                            <View>
+                                <Image style={styles.chaImg} source={require("./assets/images/index/x.png")}/>
+                            </View>
+                        </TouchableOpacity>
+                    )
+                },
+
+            }
+        }
+    },//设置
 },{
     headerMode:"screen",
     mode:"card",

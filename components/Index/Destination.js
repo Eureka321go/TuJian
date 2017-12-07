@@ -110,7 +110,7 @@ class Destination extends Component<{}> {
             if((k+1)%3==0 && (k+1)!=0){
                 marStyle={marginRight:0}
             }else{
-                marStyle={marginRight:Calc.getWidth(99)}
+                marStyle={marginRight:Calc.getWidth(90)}
             }
             arr.push(
                 <TouchableOpacity  key={k} activeOpacity={1} onPress={()=>{
