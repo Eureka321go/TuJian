@@ -12,7 +12,8 @@ import {
     View,
     Image,
     TouchableOpacity,
-    TextInput
+    TextInput,
+    ScrollView
 } from 'react-native';
 import {connect} from "react-redux";
 let Calc=global.Calc;
@@ -20,7 +21,43 @@ let Calc=global.Calc;
 class Destination extends Component<{}> {
     constructor(props) {
         super(props)
-
+        this.state={
+            initState:"",
+            location:"使用当前位置"
+        }
+    }
+    //定位
+    getlocation(){
+        navigator.geolocation.getCurrentPosition(
+            (position)=>{
+                let url="http://restapi.amap.com/v3/geocode/regeo?key=dd2d0034ef81bc9734d619373e18181c&location="+position.coords.longitude+","+position.coords.latitude
+                let self=this;
+                self.setState({
+                    location:"定位中..."
+                })
+                fetch(url)
+                    .then((response)=>response.json())
+                    .then((responseJson)=>{
+                           if(responseJson.info=='OK'){
+                               self.setState({
+                                   location:responseJson.regeocode.formatted_address
+                               })
+                           }else{
+                               self.setState({
+                                   location:"定位出错"
+                               })
+                           }
+                    })
+                    .catch((err)=>{
+                        self.setState({
+                            location:"定位出错"
+                        })
+                    })
+            }
+            ,
+            (error)=>{this.etState({location:"定位出错"})},
+            {enableHighAccuracy:true} //高精准定位
+        )
     }
     //头部
     renderHeader(){
@@ -37,11 +74,24 @@ class Destination extends Component<{}> {
                     />
                 </View>
                 <TouchableOpacity style={styles.cancelWrap} activeOpacity={1} onPress={()=>{
-                    this.props.navigation.goBack();
+                    this.props.navigation.navigate("index");
                 }}>
                     <Text style={styles.cancelText}>取消</Text>
                 </TouchableOpacity>
             </View>
+        )
+    }
+    //初始状态
+    renderInitState(){
+        return(
+            <ScrollView>
+               <TouchableOpacity activeOpacity={1} onPress={()=>{this.getlocation()}}>
+                   <View style={styles.initWrap}>
+                       <Image style={{width:Calc.getWidth(42),height:Calc.getWidth(42),marginRight:Calc.getWidth(30)}} source={require("../../assets/images/index/location.png")}/>
+                       <Text style={{fontSize:16,color:"#262626"}}>{this.state.location}</Text>
+                   </View>
+               </TouchableOpacity>
+            </ScrollView>
         )
     }
     render() {
@@ -49,6 +99,8 @@ class Destination extends Component<{}> {
             <View style={styles.container}>
                 {/*头部*/}
                 {this.renderHeader()}
+                {/*初始的状态*/}
+                {this.renderInitState()}
             </View>
         );
     }
@@ -88,11 +140,19 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center",
         marginLeft:Calc.getWidth(34),
+        marginRight:Calc.getWidth(10)
     },
     cancelText:{
         fontSize:Calc.getFont(18),
         color:"#51cdf1"
     },
+    //初始状态
+    initWrap:{
+        marginTop:Calc.getHeight(50),
+        marginBottom:Calc.getHeight(50),
+        flexDirection:"row",
+        alignItems:"center",
+    }
 
 });
 
