@@ -19,23 +19,6 @@ let storage=global.storage
 class My extends Component<{}> {
     constructor(props) {
         super(props)
-        this.state={
-            token:{
-                userName:"登录/注册",
-                userType:"注册送300元新人优惠券",
-                userImg:"",
-            },
-            isLogin:false,
-        }
-    }
-    //获取用户信息
-    componentWillMount(){
-        if(this.props.token){
-            this.setState({
-                isLogin:true,
-                token:this.props.token
-            })
-        }
     }
     //渲染积分收益余额
     renderMoney(){
@@ -129,7 +112,7 @@ class My extends Component<{}> {
     }
     //用户头像
     renderUserImg(){
-        if(!this.state.token.userImg){
+        if(!this.props.token.userImg){
             return (
                 <TouchableOpacity activeOpacity={1}onPress={()=>{this.isLogin()}}>
                     <Image style={styles.userImg} source={require("../assets/images/my/userImg.png")}/>
@@ -138,7 +121,7 @@ class My extends Component<{}> {
         }else{
             return (
                 <TouchableOpacity activeOpacity={1}onPress={()=>{this.isLogin()}}>
-                    <Image style={styles.userImg} source={{uri:this.state.token.userImg}}/>
+                    <Image style={styles.userImg} source={{uri:this.props.token.userImg}}/>
                 </TouchableOpacity>
             )
         }
@@ -149,7 +132,7 @@ class My extends Component<{}> {
     }
     //点击用户头像是跳转登录还是个人资料
     isLogin(){
-       if(!this.state.isLogin){
+       if(!this.props.token.isLogin){
            this.props.navigation.navigate("Login");
        }else{
            this.props.navigation.navigate("Profile");
@@ -174,8 +157,8 @@ class My extends Component<{}> {
                                      {this.renderUserImg()}
                                  </View>
                                  <View style={{flex:1,marginRight:Calc.getWidth(50)}}>
-                                     <Text allowFontScaling={false}  style={styles.userName} numberOfLines={1}>{this.state.token.userName}</Text>
-                                     <Text allowFontScaling={false}  style={styles.userType} numberOfLines={1}>{this.state.token.userType}</Text>
+                                     <Text allowFontScaling={false}  style={styles.userName} numberOfLines={1}>{this.props.token.userName?this.props.token.userName:"登录/注册"}</Text>
+                                     <Text allowFontScaling={false}  style={styles.userType} numberOfLines={1}>{this.props.token.userType?this.props.token.userType:"注册送新人300优惠券"}</Text>
                                  </View>
                             </View>
                             {/*我的银行卡*/}

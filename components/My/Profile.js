@@ -16,7 +16,7 @@ import {
 import {connect} from "react-redux";
 let Calc=global.Calc;
 
-
+//头部保存按钮
 class BtnRight extends  Component<{}>{
     render(){
         return(
@@ -34,6 +34,7 @@ class Profile extends Component<{}> {
         super(props)
 
     }
+    //配置navigation
     static navigationOptions=({navigation})=>{
         return{
             headerRight:<BtnRight/> ,
@@ -51,8 +52,6 @@ class Profile extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#fff',
     }
 

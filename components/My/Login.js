@@ -13,6 +13,7 @@ import {
     Image,
     ImageBackground,
     TouchableOpacity,
+    KeyboardAvoidingView,
     ScrollView,
     TextInput
 } from 'react-native';
@@ -95,28 +96,34 @@ class Login extends Component<{}> {
     //账号输入
     renderUserName(){
         return(
-            <View style={styles.inputWrap}>
-                <Image source={require("../../assets/images/login/userIn.png")} style={styles.inputIcon}/>
-                <TextInput maxLength={20}  underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"请输入账号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({userName:text})}}/>
-            </View>
+            <KeyboardAvoidingView behavior={'position'}>
+                <View style={styles.inputWrap}>
+                    <Image source={require("../../assets/images/login/userIn.png")} style={styles.inputIcon}/>
+                    <TextInput maxLength={20}  underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"请输入账号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({userName:text})}}/>
+                </View>
+            </KeyboardAvoidingView>
         )
     }
     //密码输入
     renderPassword(){
         return(
-            <View style={styles.inputWrap}>
-                <Image source={require("../../assets/images/login/userPassword.png")} style={styles.inputIcon}/>
-                <TextInput maxLength={20} underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"请输入密码"} placeholderTextColor={"#fff"} secureTextEntry={true} style={styles.inputInput} onChangeText={(text)=>{this.setState({password:text})}}/>
-            </View>
+            <KeyboardAvoidingView behavior={'position'}>
+                <View style={styles.inputWrap}>
+                    <Image source={require("../../assets/images/login/userPassword.png")} style={styles.inputIcon}/>
+                    <TextInput maxLength={20} underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"请输入密码"} placeholderTextColor={"#fff"} secureTextEntry={true} style={styles.inputInput} onChangeText={(text)=>{this.setState({password:text})}}/>
+                </View>
+            </KeyboardAvoidingView>
         )
     }
     //手机号输入
     renderPhone(){
         return(
-            <View style={styles.inputWrap}>
-                <Image source={require("../../assets/images/login/userIn.png")} style={styles.inputIcon}/>
-                <TextInput keyboardType={"numeric"} maxLength={11}  underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"手机号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({phone:text})}}/>
-            </View>
+            <KeyboardAvoidingView behavior={'position'}>
+                <View style={styles.inputWrap}>
+                    <Image source={require("../../assets/images/login/userIn.png")} style={styles.inputIcon}/>
+                    <TextInput keyboardType={"numeric"} maxLength={11}  underlineColorAndroid={"transparent"} clearButtonMode={"while-editing"} placeholder={"手机号"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({phone:text})}}/>
+                </View>
+            </KeyboardAvoidingView>
         )
     }
     //手机验证码
@@ -139,13 +146,15 @@ class Login extends Component<{}> {
             }
         }
         return(
-            <View style={styles.inputWrap}>
-                <Image source={require("../../assets/images/login/QrCode.png")} style={styles.inputIcon}/>
-                <TextInput keyboardType={"numeric"} maxLength={6}  underlineColorAndroid={"transparent"}  placeholder={"验证码"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({code:text})}}/>
-                <TouchableOpacity style={[styles.getCode,codeBg]} activeOpacity={1} onPress={()=>{this.getCode()}}>
-                    <Text allowFontScaling={false} style={[styles.getcodeText,fontColor]}>{this.state.codeText}</Text>
-                </TouchableOpacity>
-            </View>
+            <KeyboardAvoidingView behavior={'position'}>
+                <View style={styles.inputWrap}>
+                    <Image source={require("../../assets/images/login/QrCode.png")} style={styles.inputIcon}/>
+                    <TextInput keyboardType={"numeric"} maxLength={6}  underlineColorAndroid={"transparent"}  placeholder={"验证码"} placeholderTextColor={"#fff"} style={styles.inputInput} onChangeText={(text)=>{this.setState({code:text})}}/>
+                    <TouchableOpacity style={[styles.getCode,codeBg]} activeOpacity={1} onPress={()=>{this.getCode()}}>
+                        <Text allowFontScaling={false} style={[styles.getcodeText,fontColor]}>{this.state.codeText}</Text>
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAvoidingView>
         )
     }
     //获取手机验证码
@@ -247,9 +256,10 @@ class Login extends Component<{}> {
             this.props.dispatch(allActionsFun.tokenAction({
                 userName:"大家好,我是一只猫",
                 userImg:"",
-                userType:"注册送300元新人优惠券"
+                userType:"注册送300元新人优惠券",
+                isLogin:true
             }));
-            this.props.navigation.navigate("index")
+            this.props.navigation.goBack()
         }
         else{
             //验证码登录
