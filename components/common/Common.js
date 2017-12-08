@@ -34,3 +34,4 @@ export const CommonJS={
     toastShow,
     phoneTest,
 }
+global.CommonJS=CommonJS

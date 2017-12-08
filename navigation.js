@@ -222,7 +222,7 @@ const SimpleApp =nav.StackNavigator({
                     return (
                         <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
                             <View>
-                                <Image style={styles.chaImg} source={require("./assets/images/index/x.png")}/>
+                                <Image style={styles.back} source={require("./assets/images/common/arrowBack.png")}/>
                             </View>
                         </TouchableOpacity>
                     )
@@ -289,6 +289,11 @@ const styles = StyleSheet.create({
         height:Calc.getWidth(40),
         marginLeft:Calc.getWidth(45)
     },
+    back:{
+        width:Calc.getWidth(42),
+        height:Calc.getWidth(42),
+        marginLeft:Calc.getWidth(45)
+    }
 
 });
 

@@ -123,7 +123,7 @@ class Destination extends Component<{}> {
                 }}>
                     <View style={[{
                         borderColor:"#51cdf1",
-                        borderWidth:1,
+                        borderWidth:Calc.getBorder(1),
                         height:Calc.getHeight(62),
                         borderRadius:6,
                         justifyContent:"center",

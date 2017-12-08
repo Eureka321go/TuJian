@@ -11,11 +11,21 @@ import {
 import {connect} from "react-redux";
 import  {Calc} from "./common/Calc"
 import ParallaxView from "./common/ParallaxView"
+import  "./common/storage"
+import "./common/Common"
+let storage=global.storage
+
 
 class My extends Component<{}> {
     constructor(props) {
         super(props)
-
+        this.state={
+            token:{
+                userName:"登录/注册",
+                userType:"注册送300元新人优惠券",
+                userImg:"http://img5.imgtn.bdimg.com/it/u=2305018486,73320709&fm=27&gp=0.jpg"
+            }
+        }
     }
     //渲染积分收益余额
     renderMoney(){
@@ -107,6 +117,18 @@ class My extends Component<{}> {
             </View>
         )
     }
+    //用户头像
+    renderUserImg(){
+        if(!this.state.token.userImg){
+            return (
+                <Image style={styles.userImg} source={require("../assets/images/my/userImg.jpg")}/>
+            )
+        }else{
+            return (
+                <Image style={styles.userImg} source={{uri:this.state.token.userImg}}/>
+            )
+        }
+    }
     //设置
     jumpSetting(){
         this.props.navigation.navigate("Setting")
@@ -127,18 +149,18 @@ class My extends Component<{}> {
                             {/*用户信息*/}
                             <View style={styles.userInfo}>
                                 <View style={styles.userImgWrap}>
-                                    <Image style={styles.userImg} source={require("../assets/images/my/userImg.jpg")}/>
+                                    {this.renderUserImg()}
                                 </View>
                                 <View style={{flex:1,marginRight:Calc.getWidth(50)}}>
-                                    <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(16),color:"#fff" }} numberOfLines={1}>洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫洛杉矶的猫</Text>
-                                    <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(12),color:"#fff",marginTop:Calc.getHeight(12)}} numberOfLines={1}>业主</Text>
+                                    <Text allowFontScaling={false}  style={styles.userName} numberOfLines={1}>{this.state.token.userName}</Text>
+                                    <Text allowFontScaling={false}  style={styles.userType} numberOfLines={1}>{this.state.token.userType}</Text>
                                 </View>
                             </View>
                             {/*我的银行卡*/}
                             <TouchableOpacity style={styles.cardWrap} onPress={()=>{alert(1)}} activeOpacity={0.9}>
                                 <View style={styles.MyCard}>
-                                    <Image style={{width:Calc.getWidth(40),height:Calc.getHeight(30),marginRight:Calc.getWidth(10)}} source={require("../assets/images/my/card.png")}/>
-                                    <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(12),color:"#fff",flex:1}}>我的银行卡</Text>
+                                    <Image style={styles.cardImg} source={require("../assets/images/my/card.png")}/>
+                                    <Text allowFontScaling={false}  style={styles.cardText}>我的银行卡</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -200,6 +222,14 @@ const styles = StyleSheet.create({
         width:Calc.getWidth(140),
         height:Calc.getWidth(140),
     },
+    userName:{
+        fontSize:Calc.getFont(16),color:"#fff"
+    },
+    userType:{
+        fontSize:Calc.getFont(12),
+        color:"#fff",
+        marginTop:Calc.getHeight(12)
+    },
     cardWrap:{
         position:"absolute",
         bottom:Calc.getHeight(60),
@@ -217,6 +247,14 @@ const styles = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center",
         flex:1,
+    },
+    cardText:{
+        fontSize:Calc.getFont(12),color:"#fff",flex:1
+    },
+    cardImg:{
+        width:Calc.getWidth(40),
+        height:Calc.getHeight(30),
+        marginRight:Calc.getWidth(10)
     },
     //三个Tab
     tabWrap:{

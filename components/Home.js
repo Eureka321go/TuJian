@@ -23,6 +23,7 @@ import ParallaxView from "./common/ParallaxView"
 import Tabs from "./Index/Tabs"
 import Wonderful from "./Index/Wonderful"
 import  "./common/storage"
+import "./common/Common"
 class Home extends Component<{}> {
     constructor(props) {
         super(props)

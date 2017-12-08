@@ -11,7 +11,6 @@ import Container from "./Container"
 import  {createStore} from "redux";
 import {Provider} from "react-redux"
 import mainReducer from "./redux/reducer"
-
 let store=createStore(mainReducer);
 
 

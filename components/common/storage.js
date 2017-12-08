@@ -37,4 +37,21 @@ var storage = new Storage({
 // 注意：全局变量一定是先声明，后使用
 // 如果你在某处调用storage报错未定义
 // 请检查global.storage = storage语句是否确实已经执行过了
+
+
+
+/*
+*存的信息
+*token  :用户登录
+*
+*
+*
+*
+*
+**/
+
+
+
+
+
 global.storage = storage
