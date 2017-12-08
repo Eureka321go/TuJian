@@ -19,7 +19,9 @@ import {
 import {connect} from "react-redux";
 import {Calc} from "../common/Calc"
 import {CommonJS} from "../common/Common";
+let storage=global.storage
 
+let allActionsFun=global.allActionsFun;//action生成函数
 class Login extends Component<{}> {
     constructor(props) {
         super(props)
@@ -224,13 +226,31 @@ class Login extends Component<{}> {
     loginPress(){
        //当前登录类型
         if(this.state.active=='general'){
+            //普通登录
             if(!this.state.userName&&!this.state.password){CommonJS.toastShow("账号和密码不能为空");return;}
             if(!this.state.userName){CommonJS.toastShow("账号不能为空");return;}
             if(!this.state.password){CommonJS.toastShow("密码不能为空");return;}
             //登录成功
+              //模拟账号,
+            //登陆成功将信息保存到storage
+            storage.save({
+                key:"token",
+                data:{
+                    userName:"大家好,我是一只猫",
+                    userImg:"",
+                    userType:"注册送300元新人优惠券"
+                }
+            })
+            //登录成功将信息保存到redux
+            this.props.dispatch(allActionsFun.tokenAction({
+                userName:"大家好,我是一只猫",
+                userImg:"",
+                userType:"注册送300元新人优惠券"
+            }));
             this.props.navigation.navigate("index")
         }
         else{
+            //验证码登录
             if(!this.state.phone && !this.state.code){CommonJS.toastShow("手机号和验证码不能为空");return;}
             if(!this.state.phone){CommonJS.toastShow("手机号不能为空");return;}
             if(!this.state.code){CommonJS.toastShow("验证码不能为空");return;}
@@ -418,4 +438,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Login;
+export default connect()(Login);

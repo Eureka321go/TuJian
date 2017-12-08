@@ -23,7 +23,7 @@ class My extends Component<{}> {
             token:{
                 userName:"登录/注册",
                 userType:"注册送300元新人优惠券",
-                userImg:""
+                userImg:"",
             },
             isLogin:false,
         }
@@ -143,10 +143,12 @@ class My extends Component<{}> {
     jumpSetting(){
         this.props.navigation.navigate("Setting")
     }
-    //点击用户是否登录
+    //点击用户头像是跳转登录还是个人资料
     isLogin(){
        if(!this.state.isLogin){
            this.props.navigation.navigate("Login");
+       }else{
+           this.props.navigation.navigate("Profile");
        }
 
     }
