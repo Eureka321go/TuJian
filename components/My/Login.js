@@ -238,7 +238,9 @@ class Login extends Component<{}> {
                 data:{
                     userName:"大家好,我是一只猫",
                     userImg:"",
-                    userType:"注册送300元新人优惠券"
+                    userType:"注册送300元新人优惠券",
+                    openGesture:false, //是否开启手势解锁
+                    fingeprint:false, //是否开启指纹解锁
                 }
             })
             //登录成功将信息保存到redux
