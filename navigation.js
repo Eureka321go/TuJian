@@ -128,7 +128,8 @@ const SimpleApp =nav.StackNavigator({
     index:{
         screen:TabBarOptions,
         navigationOptions:{
-            header:null
+            header:null,
+            gesturesEnabled:false,
         }
     },
     Login:{

@@ -10,16 +10,35 @@ import {
     StyleSheet,
     Text,
     View,
-    Image
+    Image,
+    TouchableOpacity,
 } from 'react-native';
 import {connect} from "react-redux";
+let Calc=global.Calc;
+
+
+class BtnRight extends  Component<{}>{
+    render(){
+        return(
+            <TouchableOpacity activeOpacity={1} style={{marginRight:Calc.getWidth(24)}} onPress={()=>{
+                alert(111)
+            }}>
+                <Text style={{fontSize:Calc.getFont(16),color:"#51cdf1"}}>保存</Text>
+            </TouchableOpacity>
+        )
+    }
+}
 
 class Profile extends Component<{}> {
     constructor(props) {
         super(props)
 
     }
-
+    static navigationOptions=({navigation})=>{
+        return{
+            headerRight:<BtnRight/> ,
+        }
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -34,7 +53,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#fff',
     }
 
 });

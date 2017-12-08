@@ -131,11 +131,15 @@ class My extends Component<{}> {
     renderUserImg(){
         if(!this.state.token.userImg){
             return (
-                <Image style={styles.userImg} source={require("../assets/images/my/userImg.png")}/>
+                <TouchableOpacity activeOpacity={1}onPress={()=>{this.isLogin()}}>
+                    <Image style={styles.userImg} source={require("../assets/images/my/userImg.png")}/>
+                </TouchableOpacity>
             )
         }else{
             return (
-                <Image style={styles.userImg} source={{uri:this.state.token.userImg}}/>
+                <TouchableOpacity activeOpacity={1}onPress={()=>{this.isLogin()}}>
+                    <Image style={styles.userImg} source={{uri:this.state.token.userImg}}/>
+                </TouchableOpacity>
             )
         }
     }
@@ -165,17 +169,15 @@ class My extends Component<{}> {
                                 <Image style={styles.settingIcon} source={require("../assets/images/my/settingIcon.png")}/>
                             </TouchableOpacity>
                             {/*用户信息*/}
-                            <TouchableOpacity activeOpacity={1}onPress={()=>{this.isLogin()}}>
-                                <View style={styles.userInfo}>
-                                    <View style={styles.userImgWrap}>
-                                        {this.renderUserImg()}
-                                    </View>
-                                    <View style={{flex:1,marginRight:Calc.getWidth(50)}}>
-                                        <Text allowFontScaling={false}  style={styles.userName} numberOfLines={1}>{this.state.token.userName}</Text>
-                                        <Text allowFontScaling={false}  style={styles.userType} numberOfLines={1}>{this.state.token.userType}</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
+                            <View style={styles.userInfo}>
+                                 <View style={styles.userImgWrap}>
+                                     {this.renderUserImg()}
+                                 </View>
+                                 <View style={{flex:1,marginRight:Calc.getWidth(50)}}>
+                                     <Text allowFontScaling={false}  style={styles.userName} numberOfLines={1}>{this.state.token.userName}</Text>
+                                     <Text allowFontScaling={false}  style={styles.userType} numberOfLines={1}>{this.state.token.userType}</Text>
+                                 </View>
+                            </View>
                             {/*我的银行卡*/}
                             <TouchableOpacity style={styles.cardWrap} onPress={()=>{alert(1)}} activeOpacity={0.9}>
                                 <View style={styles.MyCard}>
