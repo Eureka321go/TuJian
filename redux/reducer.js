@@ -8,7 +8,7 @@ import {actionTypes} from "./action" //导入所有action名字
 *  userName:"大家好,我是一只猫",
    userImg:"",
    userType:"注册送300元新人优惠券",
-   isLogin:true
+
 * */
 function getToken(state="",action){
     switch(action.type){

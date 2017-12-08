@@ -249,7 +249,6 @@ class Login extends Component<{}> {
                 userName:"大家好,我是一只猫",
                 userImg:"",
                 userType:"注册送300元新人优惠券",
-                isLogin:true
             }));
             this.props.navigation.goBack()
         }

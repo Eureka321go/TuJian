@@ -132,7 +132,7 @@ class My extends Component<{}> {
     }
     //点击用户头像是跳转登录还是个人资料
     isLogin(){
-       if(!this.props.token.isLogin){
+       if(!this.props.token){
            this.props.navigation.navigate("Login");
        }else{
            this.props.navigation.navigate("Profile");
