@@ -133,7 +133,6 @@ const SimpleApp =nav.StackNavigator({
         screen:Login,
         navigationOptions:{
             header:null,
-            gesturesEnabled:false
         }
     },
     Calendar:{

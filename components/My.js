@@ -23,8 +23,18 @@ class My extends Component<{}> {
             token:{
                 userName:"登录/注册",
                 userType:"注册送300元新人优惠券",
-                userImg:"http://img5.imgtn.bdimg.com/it/u=2305018486,73320709&fm=27&gp=0.jpg"
-            }
+                userImg:""
+            },
+            isLogin:false,
+        }
+    }
+    //获取用户信息
+    componentWillMount(){
+        if(this.props.token){
+            this.setState({
+                isLogin:true,
+                token:this.props.token
+            })
         }
     }
     //渲染积分收益余额
@@ -121,7 +131,7 @@ class My extends Component<{}> {
     renderUserImg(){
         if(!this.state.token.userImg){
             return (
-                <Image style={styles.userImg} source={require("../assets/images/my/userImg.jpg")}/>
+                <Image style={styles.userImg} source={require("../assets/images/my/userImg.png")}/>
             )
         }else{
             return (
@@ -133,8 +143,14 @@ class My extends Component<{}> {
     jumpSetting(){
         this.props.navigation.navigate("Setting")
     }
+    //点击用户是否登录
+    isLogin(){
+       if(!this.state.isLogin){
+           this.props.navigation.navigate("Login");
+       }
+
+    }
     render() {
-        //const { params } = this.props.navigation.state;
         return (
             <View style={styles.container}>
                 <ParallaxView
@@ -147,15 +163,17 @@ class My extends Component<{}> {
                                 <Image style={styles.settingIcon} source={require("../assets/images/my/settingIcon.png")}/>
                             </TouchableOpacity>
                             {/*用户信息*/}
-                            <View style={styles.userInfo}>
-                                <View style={styles.userImgWrap}>
-                                    {this.renderUserImg()}
+                            <TouchableOpacity activeOpacity={1}onPress={()=>{this.isLogin()}}>
+                                <View style={styles.userInfo}>
+                                    <View style={styles.userImgWrap}>
+                                        {this.renderUserImg()}
+                                    </View>
+                                    <View style={{flex:1,marginRight:Calc.getWidth(50)}}>
+                                        <Text allowFontScaling={false}  style={styles.userName} numberOfLines={1}>{this.state.token.userName}</Text>
+                                        <Text allowFontScaling={false}  style={styles.userType} numberOfLines={1}>{this.state.token.userType}</Text>
+                                    </View>
                                 </View>
-                                <View style={{flex:1,marginRight:Calc.getWidth(50)}}>
-                                    <Text allowFontScaling={false}  style={styles.userName} numberOfLines={1}>{this.state.token.userName}</Text>
-                                    <Text allowFontScaling={false}  style={styles.userType} numberOfLines={1}>{this.state.token.userType}</Text>
-                                </View>
-                            </View>
+                            </TouchableOpacity>
                             {/*我的银行卡*/}
                             <TouchableOpacity style={styles.cardWrap} onPress={()=>{alert(1)}} activeOpacity={0.9}>
                                 <View style={styles.MyCard}>
@@ -358,5 +376,9 @@ const styles = StyleSheet.create({
     }
 });
 
-
-export default My;
+function select(state){
+    return{
+        token:state.getToken
+    }
+}
+export default connect(select)(My);

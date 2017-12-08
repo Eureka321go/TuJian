@@ -33,5 +33,6 @@ function phoneTest(val) {
 export const CommonJS={
     toastShow,
     phoneTest,
+
 }
 global.CommonJS=CommonJS
