@@ -22,8 +22,10 @@ class Setting extends Component<{}> {
 
     }
     //跳转
-    jump(){
-        alert(1)
+    jump(name){
+       if(name){
+           this.props.navigation.navigate(name)
+       }
     }
     //注销登录
     logout(){
@@ -32,7 +34,7 @@ class Setting extends Component<{}> {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity activeOpacity={1} onPress={()=>{this.jump()}}>
+                <TouchableOpacity activeOpacity={1} onPress={()=>{this.jump("CurrencySetting")}}>
                     <View style={styles.item}>
                         <Text style={styles.itemText}>通用</Text>
                         <Image style={styles.itemImg} source={require("../../../assets/images/common/listArrow.png")}/>

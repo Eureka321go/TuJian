@@ -27,7 +27,7 @@ import PeopleNum from "./components/Index/PeopleNum"    //首页选择人数
 import Destination from "./components/Index/Destination"  //首页目的地
 import Setting from "./components/My/Setting/Setting"  //设置页面
 import Profile from "./components/My/Profile" //个人资料
-
+import CurrencySetting from "./components/My/Setting/CurrencySetting"  //设置里的通常设置
 
 
 import defaultTransitionConfig from "react-navigation/src/views/CardStack/CardStackStyleInterpolator"
@@ -237,10 +237,40 @@ const SimpleApp =nav.StackNavigator({
         }
     },//设置
     Profile:{
-        screen:Profile,
+    screen:Profile,
+    navigationOptions:({navigation})=>{
+        return {
+            headerTitle:"个人中心",
+            headerStyle:{
+                borderBottomWidth:0,
+                borderColor:"transparent",
+                backgroundColor:"#fff",
+                elevation:0,
+            },
+            headerTitleStyle:{
+                fontSize:Calc.getFont(18),
+                color:"#262626",
+                fontWeight:"normal",
+                alignSelf:"center"
+            },
+            headerLeft:()=>{
+                return (
+                    <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
+                        <View>
+                            <Image style={styles.back} source={require("./assets/images/common/arrowBack.png")}/>
+                        </View>
+                    </TouchableOpacity>
+                )
+            },
+
+        }
+    }
+},//个人资料
+    CurrencySetting:{
+        screen:CurrencySetting,
         navigationOptions:({navigation})=>{
             return {
-                headerTitle:"个人中心",
+                headerTitle:"通用",
                 headerStyle:{
                     borderBottomWidth:0,
                     borderColor:"transparent",
