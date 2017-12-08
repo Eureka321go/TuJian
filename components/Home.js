@@ -123,12 +123,6 @@ class Home extends Component<{}> {
            </TouchableOpacity>
         )
     }
-    componentWillMount(){
-        //没有登录就跳转到登录
-        //判断
-        //this.props.navigation.navigate('Login')
-
-    }
 }
 
 const styles = StyleSheet.create({
@@ -161,7 +155,7 @@ const styles = StyleSheet.create({
     List:{
         flexDirection:"row",
         alignItems:"center",
-        height:Calc.getWidth(112),
+        height:Calc.getHeight(112),
         borderBottomWidth:Calc.getBorder(1),
         borderColor:"#d9e1e9",
         borderStyle:"solid",

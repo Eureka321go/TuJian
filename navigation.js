@@ -165,7 +165,7 @@ const SimpleApp =nav.StackNavigator({
                         </TouchableOpacity>
                     )
                 },
-
+                headerRight:<Btn/>
             }
         }
     },//首页日历
@@ -184,6 +184,7 @@ const SimpleApp =nav.StackNavigator({
                     fontSize:Calc.getFont(18),
                     color:"#262626",
                     fontWeight:"normal",
+                    alignSelf:"center"
                 },
                 headerLeft:()=>{
                     return (
@@ -193,7 +194,8 @@ const SimpleApp =nav.StackNavigator({
                             </View>
                         </TouchableOpacity>
                     )
-                }
+                },
+                headerRight:<Btn/>
             }
         }
     },//首页选择入住人数
@@ -229,6 +231,7 @@ const SimpleApp =nav.StackNavigator({
                         </TouchableOpacity>
                     )
                 },
+                headerRight:<Btn/>
 
             }
         }
@@ -289,7 +292,14 @@ const SimpleApp =nav.StackNavigator({
     }),
 })
 
-
+//解决安卓头部文字不居中
+class Btn extends Component<{}> {
+    render(){
+        return(
+            <View></View>
+        )
+    }
+}
 
 class Container extends Component<{}> {
     constructor(props){
