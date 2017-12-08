@@ -37,11 +37,16 @@ class Destination extends Component<{}> {
     //搜索结果
     renderResult(){
        if(this.state.searchText.length>0){
-           return(
-               <View style={styles.resultWrap}>
-                   <Text>111</Text>
-               </View>
-           )
+           let arr=[];
+           for(let i=0;i<5;i++){
+               arr.push(
+                   <View key={i} style={styles.resultWrap}>
+                       <Text style={styles.resultTitle}>三亚公寓</Text>
+                       <Text style={styles.resultStle}>三亚|房型</Text>
+                   </View>
+               )
+           }
+           return arr;
        }
     }
     //定位
@@ -179,6 +184,7 @@ const styles = StyleSheet.create({
         marginTop:Platform.OS=='android'?0:20,//电量栏不用转换
         justifyContent:"center",
         position:"relative",
+        marginBottom:Calc.getHeight(20)
     },
     inputWrap:{
         paddingLeft:Calc.getWidth(20),
@@ -209,14 +215,27 @@ const styles = StyleSheet.create({
     },
     //初始状态
     initWrap:{
-        marginTop:Calc.getHeight(50),
+        marginTop:Calc.getHeight(30),
         marginBottom:Calc.getHeight(50),
         flexDirection:"row",
         alignItems:"center",
     },
     //搜索结果
     resultWrap:{
-
+      height:Calc.getHeight(112),
+      paddingLeft:Calc.getWidth(20),
+      borderBottomWidth:Calc.getBorder(1),
+      borderColor:"#d9e1e9",
+      justifyContent:"center"
+    },
+    resultTitle:{
+        fontSize:Calc.getFont(15),
+        color:"#3a3c3c"
+    },
+    resultStle:{
+        fontSize:Calc.getFont(12),
+        color:"#b8bdc2",
+        marginTop:Calc.getHeight(10)
     }
 
 });
