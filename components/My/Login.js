@@ -223,6 +223,7 @@ class Login extends Component<{}> {
             </View>
         )
     }
+    //成功登陆
     loginOk(){
         //模拟账号,
         //登陆成功将信息保存到storage
@@ -234,7 +235,7 @@ class Login extends Component<{}> {
                 userType:"注册送300元新人优惠券",
             }
         });
-        //手势指纹解锁默认关闭
+        //手势指纹解锁,后期手势指纹应该判断登陆的是之前登陆过的吗
         storage.save({
             key:"unLock",
             data:{
