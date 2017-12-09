@@ -11,7 +11,6 @@ import {
     Text,
     View,
     Image,
-    ScrollView,
     TouchableOpacity,
     StatusBar
 } from 'react-native';
@@ -27,7 +26,9 @@ import  "./common/storage"
 import "./common/Common"
 import "../redux/action"
 let storage=global.storage;
+let CommonJS=global.CommonJS;
 let allActionsFun=global.allActionsFun;
+
 class Home extends Component<{}> {
     constructor(props) {
         super(props)
@@ -41,7 +42,7 @@ class Home extends Component<{}> {
         //判断是否第一次进去App
         if(this.props.isFirst){
             //第一次进入app弹出手势
-            this.props.dispatch(allActionsFun.getFirst(false));
+            this.props.dispatch(allActionsFun.getFirst(false));//将第一次进入app设置false
             //判断是否登录
             storage.load({
                 key:"token",
@@ -52,12 +53,33 @@ class Home extends Component<{}> {
                     storage.load({
                         key:"unLock",
                     }).then((ret)=>{
-                        alert(JSON.stringify(ret))
+                        //alert(JSON.stringify(ret));
+                        //判断平台
+                        if(Platform.OS=='android'){
+                            //android,android不开放指纹
+                            if(ret.Gesture){
+                                alert("安卓手势开启")
+                            }else{
+                                self.props.navigation.navigate("Login")
+                            }
+                        }else{
+                            //ios
+                            if(ret.FingePrint){
+                                alert("ios指纹开启");
+                            }else if(ret.Gesture){
+                                alert("ios手势开启");
+                            }else{
+                                self.props.navigation.navigate("Login");
+                            }
+                        }
                     }).catch((err)=>{
-                        alert("err")
+                        CommonJS.toastShow("storage.load{key:unLock}",{
+                            position:0
+                        })
                     })
                 }else{
-                    self.navigation.navigate("Login")
+                    //没登陆过
+                    self.props.navigation.navigate("Login");
                 }
 
             }).catch((err)=>{
