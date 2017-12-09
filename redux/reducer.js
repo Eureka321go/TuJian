@@ -57,7 +57,16 @@ function getindexNum(state='1人',action) {
     }
 }
 
+//是否第一次登录App
+function isFirst(state=true,action){
+    switch (action.type){
+        case actionTypes.isFirst:
+            return action.bool;
+        default:
+            return state;
 
+    }
+}
 
 
 
@@ -68,6 +77,7 @@ const mainReducer=combineReducers({
     getToken,
     getIndexCalendar,//首页日历
     getindexNum,//首页选择人数
+    isFirst,//是否是第一次登录app
 })
 
 export default mainReducer;

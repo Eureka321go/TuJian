@@ -14,7 +14,7 @@ import ParallaxView from "./common/ParallaxView"
 import  "./common/storage"
 import "./common/Common"
 let storage=global.storage
-
+let CommonJS=global.CommonJS
 
 class My extends Component<{}> {
     constructor(props) {
@@ -128,7 +128,13 @@ class My extends Component<{}> {
     }
     //设置
     jumpSetting(){
-        this.props.navigation.navigate("Setting")
+        if(this.props.token){
+            this.props.navigation.navigate("Setting")
+        }else{
+            CommonJS.toastShow("请先登录",{
+                position:0
+            })
+        }
     }
     //点击用户头像是跳转登录还是个人资料
     isLogin(){

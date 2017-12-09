@@ -15,6 +15,8 @@ import {
 } from 'react-native';
 import {connect} from "react-redux";
 let Calc=global.Calc;
+let allActionsFun=global.allActionsFun;
+let CommonJS=global.CommonJS
 
 class Setting extends Component<{}> {
     constructor(props) {
@@ -29,7 +31,15 @@ class Setting extends Component<{}> {
     }
     //注销登录
     logout(){
-        alert(2)
+        //清除storage数据
+        storage.remove({
+            key:"token"
+        });
+        //清除redux数据
+        this.props.dispatch(allActionsFun.tokenAction(""));
+        CommonJS.toastShow("退出成功",{
+            position: 0
+        })
     }
     render() {
         return (
@@ -106,4 +116,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Setting;
+export default connect()(Setting);

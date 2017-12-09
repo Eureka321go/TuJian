@@ -26,14 +26,30 @@ import Wonderful from "./Index/Wonderful"
 import  "./common/storage"
 import "./common/Common"
 import "../redux/action"
-
-
+let storage=global.storage;
+let allActionsFun=global.allActionsFun;
 class Home extends Component<{}> {
     constructor(props) {
         super(props)
         this.state={
             addressText:"目的地/客栈名称",
             addressName:"厦门",
+        }
+    }
+    componentWillMount(){
+        let self=this;
+        //判断是否第一次进去App
+        if(this.props.isFirst){
+            //第一次进入app弹出手势
+            this.props.dispatch(allActionsFun.getFirst(false));
+            //判断是否登录
+            storage.load({
+                key:"token",
+            }).then((ret)=>{
+                alert("弹出手势")
+            }).catch((err)=>{
+                self.props.navigation.navigate("Login");
+            })
         }
     }
     render() {
@@ -183,7 +199,9 @@ const styles = StyleSheet.create({
 function select(state){
     return{
         CalendarDate:state.getIndexCalendar,
-        peopleNum:state.getindexNum
+        peopleNum:state.getindexNum,
+        token:state.getToken,
+        isFirst:state.isFirst
     }
 }
 export default connect(select)(Home)

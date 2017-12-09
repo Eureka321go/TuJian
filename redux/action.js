@@ -3,6 +3,7 @@ export const actionTypes={
     token:"token",//登录token
     indexCalendar:"indexCalendar",//首页日历
     indexPeopleNum:"indexPeopleNum",//首页选择人数
+    isFirst:"isFirst",//用于判断是否是第一次登入APP
 };
 
 
@@ -28,6 +29,13 @@ export const allActionsFun={
         return{
             type:actionTypes.indexPeopleNum,
             num,
+        }
+    },
+    //是否是第一次登录App
+    getFirst(bool){
+        return{
+            type:actionTypes.isFirst,
+            bool,
         }
     }
 }
