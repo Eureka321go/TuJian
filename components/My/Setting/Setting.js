@@ -18,6 +18,9 @@ let Calc=global.Calc;
 let allActionsFun=global.allActionsFun;
 let CommonJS=global.CommonJS
 
+
+
+
 class Setting extends Component<{}> {
     constructor(props) {
         super(props)
@@ -39,7 +42,9 @@ class Setting extends Component<{}> {
         this.props.dispatch(allActionsFun.tokenAction(""));
         CommonJS.toastShow("退出成功",{
             position: 0
-        })
+        });
+
+
     }
     render() {
         return (
