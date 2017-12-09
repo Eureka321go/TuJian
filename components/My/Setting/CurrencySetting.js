@@ -15,13 +15,16 @@ import {
 import {connect} from "react-redux";
 import Switch from 'react-native-switch-pro'
 let Calc=global.Calc;
+let storage=global.storage;
+let CommonJS=global.CommonJS;
+
 
 class CurrencySetting extends Component<{}> {
     constructor(props) {
         super(props)
         this.state={
-            fingerPrintSwitch:false,//指纹解锁
-            gestureSwitch:false,//手势解锁
+            FingePrint:false,//指纹解锁
+            Gesture:false,//手势解锁
         }
 
     }
@@ -31,12 +34,46 @@ class CurrencySetting extends Component<{}> {
             return(
                 <View style={styles.item}>
                     <Text style={styles.text}>指纹解锁</Text>
-                    <Switch value={this.state.fingerPrintSwitch}
+                    <Switch value={this.state.FingePrint}
                             width={Calc.getWidth(100)}
                             height={Calc.getHeight(50)}
                             onAsyncPress={(callback) => {
+                                let self=this;
                                 callback(true,value=>{
-                                    this.setState({fingerPrintSwitch:value});
+                                    //开启指纹解锁，修改storage，且手势解锁必须关闭
+                                    if(value){
+                                       storage.save({
+                                           key:"unLock",
+                                           data:{
+                                               Gesture:false,//是否开启手势解锁
+                                               FingePrint:true //是否开启指纹解锁
+                                           }
+                                       });
+                                        self.setState({
+                                            FingePrint:value,
+                                            Gesture:false
+                                        });
+                                    }else{
+                                        //指纹关闭
+                                        storage.load({
+                                            key:"unLock"
+                                        }).then((ret)=>{
+                                            storage.save({
+                                                key:"unLock",
+                                                data:{
+                                                    Gesture:ret.Gesture,//是否开启手势解锁
+                                                    FingePrint:false //是否开启指纹解锁
+                                                }
+                                            });
+                                            self.setState({
+                                                FingePrint:false,
+                                            });
+                                        }).catch((err)=>{
+                                            CommonJS.toastShow("操作失败",{
+                                                position:0
+                                            })
+                                        })
+                                    }
                                 })
                             }}
                     />
@@ -50,12 +87,46 @@ class CurrencySetting extends Component<{}> {
                 {this.renderFingerPrint()}
                 <View style={styles.item}>
                     <Text style={styles.text}>手势解锁</Text>
-                    <Switch value={this.state.gestureSwitch}
+                    <Switch value={this.state.Gesture}
                             width={Calc.getWidth(100)}
                             height={Calc.getHeight(50)}
                             onAsyncPress={(callback) => {
                                 callback(true,value=>{
-                                    this.setState({gestureSwitch:value});
+                                    let self=this;
+                                    //开启手指解锁，修改storage，且指纹解锁必须关闭
+                                    if(value){
+                                        storage.save({
+                                            key:"unLock",
+                                            data:{
+                                                Gesture:value,//是否开启手势解锁
+                                                FingePrint:false //是否开启指纹解锁
+                                            }
+                                        });
+                                        self.setState({
+                                            FingePrint:false,
+                                            Gesture:value
+                                        });
+                                    }else{
+                                        //手势关闭
+                                        storage.load({
+                                            key:"unLock"
+                                        }).then((ret)=>{
+                                            storage.save({
+                                                key:"unLock",
+                                                data:{
+                                                    Gesture:false,//是否开启手势解锁
+                                                    FingePrint:ret.FingePrint //是否开启指纹解锁
+                                                }
+                                            });
+                                            self.setState({
+                                                Gesture:false,
+                                            });
+                                        }).catch((err)=>{
+                                            CommonJS.toastShow("操作失败",{
+                                                position:0
+                                            })
+                                        })
+                                    }
                                 })
                             }}
                     />

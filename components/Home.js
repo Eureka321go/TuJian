@@ -46,7 +46,20 @@ class Home extends Component<{}> {
             storage.load({
                 key:"token",
             }).then((ret)=>{
-                alert("弹出手势")
+                //已登陆过
+                if(ret){
+                    //弹出指纹解锁
+                    storage.load({
+                        key:"unLock",
+                    }).then((ret)=>{
+                        alert(JSON.stringify(ret))
+                    }).catch((err)=>{
+                        alert("err")
+                    })
+                }else{
+                    self.navigation.navigate("Login")
+                }
+
             }).catch((err)=>{
                 self.props.navigation.navigate("Login");
             })

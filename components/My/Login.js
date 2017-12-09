@@ -223,6 +223,33 @@ class Login extends Component<{}> {
             </View>
         )
     }
+    loginOk(){
+        //模拟账号,
+        //登陆成功将信息保存到storage
+        storage.save({
+            key:"token",
+            data:{
+                userName:"大家好,我是一只猫",
+                userImg:"",
+                userType:"注册送300元新人优惠券",
+            }
+        });
+        //手势指纹解锁默认关闭
+        storage.save({
+            key:"unLock",
+            data:{
+                FingePrint:false,
+                Gesture:false
+            }
+        });
+        //登录成功将信息保存到redux
+        this.props.dispatch(allActionsFun.tokenAction({
+            userName:"大家好,我是一只猫",
+            userImg:"",
+            userType:"注册送300元新人优惠券",
+        }));
+        this.props.navigation.goBack()
+    }
     //登录点击
     loginPress(){
        //当前登录类型
@@ -232,25 +259,7 @@ class Login extends Component<{}> {
             if(!this.state.userName){CommonJS.toastShow("账号不能为空");return;}
             if(!this.state.password){CommonJS.toastShow("密码不能为空");return;}
             //登录成功
-              //模拟账号,
-            //登陆成功将信息保存到storage
-            storage.save({
-                key:"token",
-                data:{
-                    userName:"大家好,我是一只猫",
-                    userImg:"",
-                    userType:"注册送300元新人优惠券",
-                    openGesture:false, //是否开启手势解锁
-                    fingeprint:false, //是否开启指纹解锁
-                }
-            })
-            //登录成功将信息保存到redux
-            this.props.dispatch(allActionsFun.tokenAction({
-                userName:"大家好,我是一只猫",
-                userImg:"",
-                userType:"注册送300元新人优惠券",
-            }));
-            this.props.navigation.goBack()
+              this.loginOk()
         }
         else{
             //验证码登录
@@ -262,7 +271,7 @@ class Login extends Component<{}> {
                 return ;
             }
             //登录成功
-            this.props.navigation.navigate("index")
+            this.loginOk()
 
         }
 

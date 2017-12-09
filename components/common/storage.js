@@ -45,9 +45,14 @@ var storage = new Storage({
 *token  :用户登录      userName:"大家好,我是一只猫",
 *                     userImg:"",
 *                     userType:"注册送300元新人优惠券",
-*                     openGesture:false, //是否开启手势解锁
-*                     fingeprint:false, //是否开启指纹解锁
+* .....................................................
 *
+* 指纹手势解锁
+* key:unLock
+* data:{
+*   Gesture:boolean //是否开启手势解锁
+*   FingePrint:boolean //是否开启指纹解锁
+* }
 *
 *
 *

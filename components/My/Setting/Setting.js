@@ -38,6 +38,10 @@ class Setting extends Component<{}> {
         storage.remove({
             key:"token"
         });
+        //清除storage手势指纹数据
+        storage.remove({
+            key:"unLock"
+        });
         //清除redux数据
         this.props.dispatch(allActionsFun.tokenAction(""));
         CommonJS.toastShow("退出成功",{
