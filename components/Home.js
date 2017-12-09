@@ -36,7 +36,7 @@ class Home extends Component<{}> {
             addressName:"厦门",
         }
     }
-    componentWillMount(){
+    componentDidMount(){
         let self=this;
         //判断是否第一次进去App
         if(this.props.isFirst){
