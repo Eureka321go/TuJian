@@ -20,19 +20,6 @@ class Gesture extends Component<{}> {
         super(props)
 
     }
-    static navigationOptions=({navigation})=>{
-        return{
-            headerLeft:()=>{
-                return (
-                    <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
-                        <View>
-                            <Image  style={CommonJS.backStyle()} source={require("../../assets/images/common/arrowBack.png")}/>
-                        </View>
-                    </TouchableOpacity>
-                )
-            },
-        }
-    }
     render() {
         return (
             <View style={styles.container}>

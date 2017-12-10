@@ -28,7 +28,7 @@ import Destination from "./components/Index/Destination"  //首页目的地
 import Setting from "./components/My/Setting/Setting"  //设置页面
 import Profile from "./components/My/Profile" //个人资料
 import CurrencySetting from "./components/My/Setting/CurrencySetting"  //设置里的通常设置
-import Gesture from  "./components/common/Gesture";   //手势解锁
+import Gesture from "./components/common/Gesture"  //手势指纹解锁
 
 import defaultTransitionConfig from "react-navigation/src/views/CardStack/CardStackStyleInterpolator"
 import nav from 'react-navigation';
@@ -222,6 +222,15 @@ const SimpleApp =nav.StackNavigator({
                     fontWeight:"normal",
                     alignSelf:"center"
                 },
+                headerLeft:()=>{
+                    return (
+                        <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
+                            <View>
+                                <Image style={styles.back} source={require("./assets/images/common/arrowBack.png")}/>
+                            </View>
+                        </TouchableOpacity>
+                    )
+                },
                 headerRight:<Btn/>
 
             }
@@ -244,6 +253,15 @@ const SimpleApp =nav.StackNavigator({
                 fontWeight:"normal",
                 alignSelf:"center"
             },
+            headerLeft:()=>{
+                return (
+                    <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
+                        <View>
+                            <Image style={styles.back} source={require("./assets/images/common/arrowBack.png")}/>
+                        </View>
+                    </TouchableOpacity>
+                )
+            },
 
         }
     }
@@ -265,6 +283,16 @@ const SimpleApp =nav.StackNavigator({
                     fontWeight:"normal",
                     alignSelf:"center"
                 },
+                headerLeft:()=>{
+                    return (
+                        <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
+                            <View>
+                                <Image style={styles.back} source={require("./assets/images/common/arrowBack.png")}/>
+                            </View>
+                        </TouchableOpacity>
+                    )
+                },
+
             }
         }
     },//个人资料
@@ -285,10 +313,19 @@ const SimpleApp =nav.StackNavigator({
                     fontWeight:"normal",
                     alignSelf:"center"
                 },
-                gesturesEnabled:false,
+                headerLeft:()=>{
+                    return (
+                        <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
+                            <View>
+                                <Image style={styles.back} source={require("./assets/images/common/arrowBack.png")}/>
+                            </View>
+                        </TouchableOpacity>
+                    )
+                },
+
             }
         }
-    }  //手势密码
+    },//手势指纹解锁
 },{
     headerMode:"screen",
     mode:"card",
@@ -349,13 +386,11 @@ const styles = StyleSheet.create({
         width:21,
         height:21
     },
-    //日历返回X的样式
     chaImg:{
         width:Calc.getWidth(40),
         height:Calc.getWidth(40),
         marginLeft:Calc.getWidth(45)
     },
-    //返回箭头的样式
     back:{
         width:Calc.getWidth(42),
         height:Calc.getWidth(42),

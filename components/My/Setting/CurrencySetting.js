@@ -20,22 +20,10 @@ let storage=global.storage;
 let CommonJS=global.CommonJS;
 let allActionsFun=global.allActionsFun;
 
+
 class CurrencySetting extends Component<{}> {
     constructor(props) {
         super(props)
-    }
-    static navigationOptions=({navigation})=>{
-        return{
-            headerLeft:()=>{
-                return (
-                    <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
-                        <View>
-                            <Image  style={CommonJS.backStyle()} source={require("../../../assets/images/common/arrowBack.png")}/>
-                        </View>
-                    </TouchableOpacity>
-                )
-            },
-        }
     }
     //指纹解锁
     renderFingerPrint(){

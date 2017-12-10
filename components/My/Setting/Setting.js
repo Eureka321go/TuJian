@@ -26,19 +26,6 @@ class Setting extends Component<{}> {
         super(props)
 
     }
-    static navigationOptions=({navigation})=>{
-        return{
-            headerLeft:()=>{
-                return (
-                    <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
-                        <View>
-                            <Image  style={CommonJS.backStyle()} source={require("../../../assets/images/common/arrowBack.png")}/>
-                        </View>
-                    </TouchableOpacity>
-                )
-            },
-        }
-    }
     //跳转
     jump(name){
        if(name){
@@ -59,7 +46,7 @@ class Setting extends Component<{}> {
         this.props.dispatch(allActionsFun.tokenAction(""));
         this.props.dispatch(allActionsFun.getUnLock({
             Gesture:false,
-            FingerPrint:false
+            FingePrint:false
         }))
         CommonJS.toastShow("退出成功",{
             position: 0

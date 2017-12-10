@@ -34,21 +34,6 @@ class Profile extends Component<{}> {
         super(props)
 
     }
-    //配置navigation
-    static navigationOptions=({navigation})=>{
-        return{
-            headerRight:<BtnRight/> ,
-            headerLeft:()=>{
-                return (
-                    <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
-                        <View>
-                            <Image  style={CommonJS.backStyle()} source={require("../../assets/images/common/arrowBack.png")}/>
-                        </View>
-                    </TouchableOpacity>
-                )
-            },
-        }
-    }
     render() {
         return (
             <View style={styles.container}>
