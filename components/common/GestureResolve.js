@@ -16,11 +16,16 @@ import {
 import {connect} from "react-redux";
 let storage=global.storage;
 let allActionsFun=global.allActionsFun;
+var PasswordGesture = require('./react-native-gesture-password');
 
+var Password= '';
 class GestureResolve extends Component<{}> {
     constructor(props) {
         super(props)
-
+        this.state={
+            message: 'Please input your password.',
+            status: 'normal'
+        }
     }
     componentWillMount(){
         this.props.navigation.setParams({
@@ -71,10 +76,44 @@ class GestureResolve extends Component<{}> {
             },
         }
     }
+    onEnd(password){
+        if (password == '123') {
+            this.setState({
+                status: 'right',
+                message: 'Password is right, success.'
+            });
+
+            // your codes to close this view
+        } else {
+            this.setState({
+                status: 'wrong',
+                message: 'Password is wrong, try again.'
+            });
+        }
+    }
+
+    onStart(){
+        this.setState({
+            status: 'normal',
+            message: 'Please input your password.'
+        });
+    }
+    onReset(){
+        this.setState({
+            status: 'normal',
+            message: 'Please input your password (again).'
+        });
+    }
     render() {
         return (
             <View style={styles.container}>
-                <Text>我是手势解锁</Text>
+                <PasswordGesture
+                    ref='pg'
+                    status={this.state.status}
+                    message={this.state.message}
+                    onStart={() => this.onStart()}
+                    onEnd={(password) => this.onEnd(password)}
+                />
             </View>
         );
     }
@@ -83,9 +122,7 @@ class GestureResolve extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#fff',
     }
 
 });
