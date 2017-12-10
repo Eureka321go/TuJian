@@ -28,11 +28,20 @@ function phoneTest(val) {
     return true;
 }
 
+//返回图标的样式
+function backStyle(){
+    return{
+        width:Calc.getWidth(42),
+        height:Calc.getWidth(42),
+        marginLeft:Calc.getWidth(45)
+    }
+}
 
 
 export const CommonJS={
     toastShow,
     phoneTest,
+    backStyle,
 
 }
 global.CommonJS=CommonJS

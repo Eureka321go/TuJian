@@ -11,33 +11,17 @@ import {
     Text,
     View,
     Image,
-    TouchableOpacity,
+    TouchableOpacity
 } from 'react-native';
 import {connect} from "react-redux";
-let Calc=global.Calc;
-
-//头部保存按钮
-class BtnRight extends  Component<{}>{
-    render(){
-        return(
-            <TouchableOpacity activeOpacity={1} style={{marginRight:Calc.getWidth(24)}} onPress={()=>{
-                alert(111)
-            }}>
-                <Text style={{fontSize:Calc.getFont(16),color:"#51cdf1"}}>保存</Text>
-            </TouchableOpacity>
-        )
-    }
-}
-
-class Profile extends Component<{}> {
+let CommonJS=global.CommonJS;
+class Gesture extends Component<{}> {
     constructor(props) {
         super(props)
 
     }
-    //配置navigation
     static navigationOptions=({navigation})=>{
         return{
-            headerRight:<BtnRight/> ,
             headerLeft:()=>{
                 return (
                     <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
@@ -52,7 +36,7 @@ class Profile extends Component<{}> {
     render() {
         return (
             <View style={styles.container}>
-                <Text>我是个人资料</Text>
+                <Text>我是手势解锁</Text>
             </View>
         );
     }
@@ -61,10 +45,12 @@ class Profile extends Component<{}> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
     }
 
 });
 
 
-export default connect()(Profile);
+export default connect()(Gesture);

@@ -4,6 +4,7 @@ export const actionTypes={
     indexCalendar:"indexCalendar",//首页日历
     indexPeopleNum:"indexPeopleNum",//首页选择人数
     isFirst:"isFirst",//用于判断是否是第一次登入APP
+    unlock:"unlock",//手势指纹解锁
 };
 
 
@@ -37,6 +38,13 @@ export const allActionsFun={
             type:actionTypes.isFirst,
             bool,
         }
+    },
+    //手势指纹解锁
+    getUnLock(obj){
+        return{
+            type:actionTypes.unlock,
+            state:obj
+         }
     }
 }
 global.allActionsFun=allActionsFun;

@@ -243,6 +243,11 @@ class Login extends Component<{}> {
                 Gesture:false
             }
         });
+        //手势指纹保存到redux
+        this.props.dispatch(allActionsFun.getUnLock({
+            FingePrint:false,
+            Gesture:false
+        }))
         //登录成功将信息保存到redux
         this.props.dispatch(allActionsFun.tokenAction({
             userName:"大家好,我是一只猫",

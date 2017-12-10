@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'  //导入combineReducers
-
 import {actionTypes} from "./action" //导入所有action名字
+
 
 //token的子reducer
 /*
@@ -68,7 +68,15 @@ function isFirst(state=true,action){
     }
 }
 
-
+//手指指纹解锁
+function getUnLock(state={Gesture:false,FingerPrint:false},action){
+    switch (action.type){
+        case actionTypes.unlock:
+            return action.state
+        default:
+            return state
+    }
+}
 
 
 
@@ -78,6 +86,7 @@ const mainReducer=combineReducers({
     getIndexCalendar,//首页日历
     getindexNum,//首页选择人数
     isFirst,//是否是第一次登录app
+    getUnLock,//手势指纹解锁
 })
 
 export default mainReducer;

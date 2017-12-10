@@ -12,6 +12,7 @@
 		"react-native": "0.50.3",
 		"react-native-root-toast": "^2.2.0",
 		"react-native-scrollable-mixin": "^1.0.1",
+		"react-native-smart-gesture-password": "^2.1.0",
 		"react-native-snap-carousel": "^3.4.0",
 		"react-native-storage": "^0.2.2",
 		"react-native-switch-pro": "^0.4.6",

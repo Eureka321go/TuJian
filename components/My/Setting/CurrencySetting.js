@@ -10,23 +10,32 @@ import {
     StyleSheet,
     Text,
     View,
-    Image
+    Image,
+    TouchableOpacity
 } from 'react-native';
 import {connect} from "react-redux";
 import Switch from 'react-native-switch-pro'
 let Calc=global.Calc;
 let storage=global.storage;
 let CommonJS=global.CommonJS;
-
+let allActionsFun=global.allActionsFun;
 
 class CurrencySetting extends Component<{}> {
     constructor(props) {
         super(props)
-        this.state={
-            FingePrint:false,//指纹解锁
-            Gesture:false,//手势解锁
+    }
+    static navigationOptions=({navigation})=>{
+        return{
+            headerLeft:()=>{
+                return (
+                    <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
+                        <View>
+                            <Image  style={CommonJS.backStyle()} source={require("../../../assets/images/common/arrowBack.png")}/>
+                        </View>
+                    </TouchableOpacity>
+                )
+            },
         }
-
     }
     //指纹解锁
     renderFingerPrint(){
@@ -34,7 +43,7 @@ class CurrencySetting extends Component<{}> {
             return(
                 <View style={styles.item}>
                     <Text style={styles.text}>指纹解锁</Text>
-                    <Switch value={this.state.FingePrint}
+                    <Switch value={this.props.unLock.FingePrint}
                             width={Calc.getWidth(100)}
                             height={Calc.getHeight(50)}
                             onAsyncPress={(callback) => {
@@ -49,10 +58,12 @@ class CurrencySetting extends Component<{}> {
                                                FingePrint:true //是否开启指纹解锁
                                            }
                                        });
-                                        self.setState({
-                                            FingePrint:value,
-                                            Gesture:false
-                                        });
+                                        self.props.dispatch(allActionsFun.getUnLock(
+                                            {
+                                                FingePrint:value,
+                                                Gesture:false
+                                            }
+                                        ))
                                     }else{
                                         //指纹关闭
                                         storage.load({
@@ -65,9 +76,12 @@ class CurrencySetting extends Component<{}> {
                                                     FingePrint:false //是否开启指纹解锁
                                                 }
                                             });
-                                            self.setState({
-                                                FingePrint:false,
-                                            });
+                                            self.props.dispatch(allActionsFun.getUnLock(
+                                                {
+                                                    FingePrint:false,
+                                                    Gesture:self.props.unLock.Gesture
+                                                }
+                                            ))
                                         }).catch((err)=>{
                                             CommonJS.toastShow("操作失败",{
                                                 position:0
@@ -87,7 +101,7 @@ class CurrencySetting extends Component<{}> {
                 {this.renderFingerPrint()}
                 <View style={styles.item}>
                     <Text style={styles.text}>手势解锁</Text>
-                    <Switch value={this.state.Gesture}
+                    <Switch value={this.props.unLock.Gesture}
                             width={Calc.getWidth(100)}
                             height={Calc.getHeight(50)}
                             onAsyncPress={(callback) => {
@@ -102,10 +116,13 @@ class CurrencySetting extends Component<{}> {
                                                 FingePrint:false //是否开启指纹解锁
                                             }
                                         });
-                                        self.setState({
-                                            FingePrint:false,
-                                            Gesture:value
-                                        });
+                                        self.props.dispatch(allActionsFun.getUnLock(
+                                            {
+                                                FingePrint:false,
+                                                Gesture:value
+                                            }
+                                        ))
+                                        self.props.navigation.navigate("Gesture")
                                     }else{
                                         //手势关闭
                                         storage.load({
@@ -118,9 +135,12 @@ class CurrencySetting extends Component<{}> {
                                                     FingePrint:ret.FingePrint //是否开启指纹解锁
                                                 }
                                             });
-                                            self.setState({
-                                                Gesture:false,
-                                            });
+                                            self.props.dispatch(allActionsFun.getUnLock(
+                                                {
+                                                    FingePrint:self.props.unLock.FingePrint,
+                                                    Gesture:false,
+                                                }
+                                            ))
                                         }).catch((err)=>{
                                             CommonJS.toastShow("操作失败",{
                                                 position:0
@@ -158,5 +178,9 @@ const styles = StyleSheet.create({
 
 });
 
-
-export default CurrencySetting
+function selecr(state){
+    return{
+        unLock:state.getUnLock
+    }
+}
+export default connect(selecr)(CurrencySetting)
