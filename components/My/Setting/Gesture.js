@@ -19,7 +19,7 @@ let allActionsFun=global.allActionsFun;
 var PasswordGesture = require('./react-native-gesture-password');
 
 var Password= '';
-class GestureResolve extends Component<{}> {
+class Gesture extends Component<{}> {
     constructor(props) {
         super(props)
         this.state={
@@ -133,4 +133,4 @@ function select(state){
         unLock:state.getUnLock
     }
 }
-export default connect(select)(GestureResolve);
+export default connect(select)(Gesture);
