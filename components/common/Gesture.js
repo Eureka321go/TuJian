@@ -10,16 +10,16 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
-    TouchableOpacity
+    Image
 } from 'react-native';
 import {connect} from "react-redux";
-let CommonJS=global.CommonJS;
+
 class Gesture extends Component<{}> {
     constructor(props) {
         super(props)
 
     }
+
     render() {
         return (
             <View style={styles.container}>
