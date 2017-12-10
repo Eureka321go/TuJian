@@ -110,7 +110,7 @@ class CurrencySetting extends Component<{}> {
                                                 Gesture:value
                                             }
                                         ))
-                                        self.props.navigation.navigate("Gesture")
+                                        self.props.navigation.navigate("GestureResolve")
                                     }else{
                                         //手势关闭
                                         storage.load({
