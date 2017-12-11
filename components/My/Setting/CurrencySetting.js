@@ -37,53 +37,52 @@ class CurrencySetting extends Component<{}> {
         })
     }
     //指纹解锁
-    renderFingerPrint(){
-        if(Platform.OS='ios'){
-            return(
+    renderFingerPrint() {
+            return (
                 <View style={styles.item}>
                     <Text style={styles.text}>指纹解锁</Text>
                     <Switch value={this.props.unLock.FingePrint}
                             width={Calc.getWidth(100)}
                             height={Calc.getHeight(50)}
                             onAsyncPress={(callback) => {
-                                let self=this;
-                                callback(true,value=>{
+                                let self = this;
+                                callback(true, value => {
                                     //开启指纹解锁，修改storage，且手势解锁必须关闭
-                                    if(value){
-                                       storage.save({
-                                           key:"unLock",
-                                           data:{
-                                               Gesture:false,//是否开启手势解锁
-                                               FingePrint:true //是否开启指纹解锁
-                                           }
-                                       });
+                                    if (value) {
+                                        storage.save({
+                                            key: "unLock",
+                                            data: {
+                                                Gesture: false,//是否开启手势解锁
+                                                FingePrint: true //是否开启指纹解锁
+                                            }
+                                        });
                                         self.props.dispatch(allActionsFun.getUnLock(
                                             {
-                                                FingePrint:value,
-                                                Gesture:false
+                                                FingePrint: value,
+                                                Gesture: false
                                             }
                                         ))
-                                    }else{
+                                    } else {
                                         //指纹关闭
                                         storage.load({
-                                            key:"unLock"
-                                        }).then((ret)=>{
+                                            key: "unLock"
+                                        }).then((ret) => {
                                             storage.save({
-                                                key:"unLock",
-                                                data:{
-                                                    Gesture:ret.Gesture,//是否开启手势解锁
-                                                    FingePrint:false //是否开启指纹解锁
+                                                key: "unLock",
+                                                data: {
+                                                    Gesture: ret.Gesture,//是否开启手势解锁
+                                                    FingePrint: false //是否开启指纹解锁
                                                 }
                                             });
                                             self.props.dispatch(allActionsFun.getUnLock(
                                                 {
-                                                    FingePrint:false,
-                                                    Gesture:self.props.unLock.Gesture
+                                                    FingePrint: false,
+                                                    Gesture: self.props.unLock.Gesture
                                                 }
                                             ))
-                                        }).catch((err)=>{
-                                            CommonJS.toastShow("操作失败",{
-                                                position:0
+                                        }).catch((err) => {
+                                            CommonJS.toastShow("操作失败", {
+                                                position: 0
                                             })
                                         })
                                     }
@@ -92,12 +91,12 @@ class CurrencySetting extends Component<{}> {
                     />
                 </View>
             )
-        }
     }
+
     render() {
         return (
             <View style={styles.container}>
-                {this.renderFingerPrint()}
+                {Platform.OS=='ios'&& this.renderFingerPrint()}
                 <View style={styles.item}>
                     <Text style={styles.text}>手势解锁</Text>
                     <Switch value={this.props.unLock.Gesture}
