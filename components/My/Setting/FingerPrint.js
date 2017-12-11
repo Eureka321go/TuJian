@@ -22,10 +22,7 @@ class FingerPrint extends Component<{}> {
 
     }
     componentDidMount(){
-        TouchID.authenticate('to demo this react-native component', {
-            Title:"哈喽",
-            color:"red"
-        }).then(success => {
+        TouchID.authenticate('to demo this react-native component').then(success => {
                 // Success code
                 alert("解锁成功")
             })
