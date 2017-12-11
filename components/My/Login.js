@@ -235,7 +235,7 @@ class Login extends Component<{}> {
                 userType:"注册送300元新人优惠券",
             }
         });
-        //手势指纹解锁,后期手势指纹应该判断登陆的是之前登陆过的吗
+        //手势指纹解锁,
         storage.save({
             key:"unLock",
             data:{

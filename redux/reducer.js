@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'  //导入combineReducers
 import {actionTypes} from "./action" //导入所有action名字
-
+import "../components/common/storage"
+let storage=global.storage;
 
 //token的子reducer
 /*
@@ -68,7 +69,7 @@ function isFirst(state=true,action){
     }
 }
 
-//手指指纹解锁
+//手指指纹解锁,初始数据，不决定最终的弹出页面，storage才是决定redux的手势指纹的是否弹出
 function getUnLock(state={Gesture:false,FingerPrint:false},action){
     switch (action.type){
         case actionTypes.unlock:

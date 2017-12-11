@@ -17,13 +17,13 @@ import {connect} from "react-redux";
 let storage=global.storage;
 let allActionsFun=global.allActionsFun;
 var PasswordGesture = require('./react-native-gesture-password');
+let CommonJS=global.CommonJS;
 
-var Password= '';
 class GestureResolve extends Component<{}> {
     constructor(props) {
         super(props)
         this.state={
-            message: 'Please input your password.',
+            message: '请设置你的手势密码',
             status: 'normal',
 
         }
@@ -77,26 +77,29 @@ class GestureResolve extends Component<{}> {
             },
         }
     }
-    onEnd(password){
-        if (password == '123') {
-            this.setState({
-                status: 'right',
-                message: 'Password is right, success.'
-            });
 
-            // your codes to close this view
-        } else {
+    onEnd(password){
+            let self=this;
             this.setState({
-                status: 'wrong',
-                message: 'Password is wrong, try again.'
+                status: 'normal',
+                message: '设置成功'
             });
-        }
+            storage.save({
+                key:"GesturePassword",
+                data:password
+            });
+            CommonJS.toastShow("设置成功",{
+                position:0
+            });
+            setTimeout(()=>{
+                self.props.navigation.goBack();
+            },300)
     }
 
     onStart(){
         this.setState({
             status: 'normal',
-            message: 'Please input your password.'
+            message: '请设置你的手势密码.'
         });
     }
     onReset(){

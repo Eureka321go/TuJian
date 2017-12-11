@@ -25,6 +25,17 @@ class CurrencySetting extends Component<{}> {
     constructor(props) {
         super(props)
     }
+    componentDidMount(){
+        let self=this;
+        //获取指纹和解锁状态
+        storage.load({
+            key:"unLock"
+        }).then((ret)=>{
+            self.props.dispatch(allActionsFun.getUnLock(ret))
+        }).catch((err)=>{
+
+        })
+    }
     //指纹解锁
     renderFingerPrint(){
         if(Platform.OS='ios'){
@@ -123,12 +134,16 @@ class CurrencySetting extends Component<{}> {
                                                     FingePrint:ret.FingePrint //是否开启指纹解锁
                                                 }
                                             });
+                                            //删除手势密码
+                                            storage.remove({
+                                                key:"GesturePassword"
+                                            })
                                             self.props.dispatch(allActionsFun.getUnLock(
                                                 {
                                                     FingePrint:self.props.unLock.FingePrint,
                                                     Gesture:false,
                                                 }
-                                            ))
+                                            ));
                                         }).catch((err)=>{
                                             CommonJS.toastShow("操作失败",{
                                                 position:0

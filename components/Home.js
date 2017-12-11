@@ -58,18 +58,28 @@ class Home extends Component<{}> {
                         if(Platform.OS=='android'){
                             //android,android不开放指纹
                             if(ret.Gesture){
-                                alert("安卓手势开启")
+                                //alert("安卓手势开启")
+                                setTimeout(()=>{
+                                    self.props.navigation.navigate("Gesture")
+                                },500)
                             }else{
-                                self.props.navigation.navigate("Login")
+                                setTimeout(()=>{
+                                    self.props.navigation.navigate("Login")
+                                },500)
                             }
                         }else{
                             //ios
                             if(ret.FingePrint){
                                 alert("ios指纹开启");
                             }else if(ret.Gesture){
-                                alert("ios手势开启");
+                                //alert("ios手势开启");
+                                setTimeout(()=>{
+                                    self.props.navigation.navigate("Gesture")
+                                },500)
                             }else{
-                                self.props.navigation.navigate("Login");
+                                setTimeout(()=>{
+                                    self.props.navigation.navigate("Login")
+                                },500)
                             }
                         }
                     }).catch((err)=>{
@@ -79,11 +89,15 @@ class Home extends Component<{}> {
                     })
                 }else{
                     //没登陆过
-                    self.props.navigation.navigate("Login");
+                    setTimeout(()=>{
+                        self.props.navigation.navigate("Login")
+                    },500)
                 }
 
             }).catch((err)=>{
-                self.props.navigation.navigate("Login");
+                setTimeout(()=>{
+                    self.props.navigation.navigate("Login")
+                },500)
             })
         }
     }

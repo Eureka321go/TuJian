@@ -297,7 +297,7 @@ GesturePassword.defaultProps = {
 
 const styles = StyleSheet.create({
     frame: {
-        backgroundColor: '#292B38'
+        backgroundColor: '#fff'
     },
     board: {
         position: 'absolute',

@@ -54,6 +54,10 @@ var storage = new Storage({
 *   FingePrint:boolean //是否开启指纹解锁
 * }
 *
+* //手势密码
+* key:GesturePassword
+* data:{number}
+*
 *
 *
 *

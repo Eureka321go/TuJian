@@ -29,6 +29,7 @@ import Setting from "./components/My/Setting/Setting"  //设置页面
 import Profile from "./components/My/Profile" //个人资料
 import CurrencySetting from "./components/My/Setting/CurrencySetting"  //设置里的通常设置
 import GestureResolve from "./components/common/GestureResolve"  //手势解锁的设置
+import Gesture from "./components/My/Setting/Gesture"  //手势解锁页面
 
 import defaultTransitionConfig from "react-navigation/src/views/CardStack/CardStackStyleInterpolator"
 import nav from 'react-navigation';
@@ -317,6 +318,32 @@ const SimpleApp =nav.StackNavigator({
             }
         }
     },//手势解锁设置
+    Gesture:{
+        screen:Gesture,
+        navigationOptions:({navigation})=>{
+            return {
+                headerTitle:"",
+                headerLeft:()=>{
+                    return(
+                        <View></View>
+                    )
+                },
+                headerStyle:{
+                    borderBottomWidth:0,
+                    borderColor:"transparent",
+                    backgroundColor:"#fff",
+                    elevation:0,
+                },
+                gesturesEnabled:false,
+                headerTitleStyle:{
+                    fontSize:Calc.getFont(18),
+                    color:"#262626",
+                    fontWeight:"normal",
+                    alignSelf:"center"
+                },
+            }
+        }
+    },//手势解锁页面
 },{
     headerMode:"screen",
     mode:"card",

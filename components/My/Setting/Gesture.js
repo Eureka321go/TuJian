@@ -16,9 +16,9 @@ import {
 import {connect} from "react-redux";
 let storage=global.storage;
 let allActionsFun=global.allActionsFun;
-var PasswordGesture = require('./react-native-gesture-password');
+var PasswordGesture = require('../../common/react-native-gesture-password');
 
-var Password= '';
+
 class Gesture extends Component<{}> {
     constructor(props) {
         super(props)
@@ -28,69 +28,38 @@ class Gesture extends Component<{}> {
 
         }
     }
-    componentWillMount(){
-        this.props.navigation.setParams({
-            closeGesture:()=>{this.closeGesture()}
-        })
-    }
-    //关闭手势指纹
-    closeGesture(){
+    onEnd(password){
         let self=this;
         storage.load({
-            key:"unLock"
+            key:"GesturePassword"
         }).then((ret)=>{
-            storage.save({
-                key:"unLock",
-                data:{
-                    Gesture:false,
-                    FingePrint:ret.FingePrint
+            if(ret){
+                if(password==ret){
+                    self.setState({
+                        status: 'right',
+                        message: 'Password is right, success.'
+                    });
+                    //读取数据
+                    storage.load({
+                        key:"token",
+                    }).then((ret)=>{
+                        self.props.dispatch(allActionsFun.tokenAction(ret))
+                    }).catch((err)=>{
+                        self.props.navigation.navigate("Login")
+                    })
+                    self.props.navigation.goBack();
+                }else{
+                    self.setState({
+                        status: 'wrong',
+                        message: 'Password is wrong, try again.'
+                    });
                 }
-            });
-            self.props.dispatch(allActionsFun.getUnLock({
-                Gesture:false,
-                FingePrint:this.props.unLock.FingePrint
-            }));
+            }else{
+                self.props.navigation.navigate("Login")
+            }
         }).catch((err)=>{
-            self.props.dispatch(allActionsFun.getUnLock({
-                Gesture:false,
-                FingePrint:false
-            }));
+            self.props.navigation.navigate("Login")
         })
-    }
-    static navigationOptions({navigation}){
-        return{
-            headerLeft:()=>{
-                return (
-                    <TouchableOpacity onPress={()=>{
-                        navigation.state.params.closeGesture()
-                        navigation.goBack()
-                    }} activeOpacity={1}>
-                        <View>
-                            <Image style={{
-                                width:Calc.getWidth(42),
-                                height:Calc.getWidth(42),
-                                marginLeft:Calc.getWidth(45)
-                            }} source={require("../../assets/images/common/arrowBack.png")}/>
-                        </View>
-                    </TouchableOpacity>
-                )
-            },
-        }
-    }
-    onEnd(password){
-        if (password == '123') {
-            this.setState({
-                status: 'right',
-                message: 'Password is right, success.'
-            });
-
-            // your codes to close this view
-        } else {
-            this.setState({
-                status: 'wrong',
-                message: 'Password is wrong, try again.'
-            });
-        }
     }
 
     onStart(){
