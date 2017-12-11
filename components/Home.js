@@ -28,7 +28,7 @@ import "../redux/action"
 let storage=global.storage;
 let CommonJS=global.CommonJS;
 let allActionsFun=global.allActionsFun;
-
+import TouchID from 'react-native-touch-id'
 class Home extends Component<{}> {
     constructor(props) {
         super(props)
@@ -36,6 +36,17 @@ class Home extends Component<{}> {
             addressText:"目的地/客栈名称",
             addressName:"厦门",
         }
+    }
+    //指纹解锁
+    FingerPrint(){
+        TouchID.authenticate('to demo this react-native component').then(success => {
+            // Success code
+            alert("解锁成功")
+        })
+            .catch(error => {
+                // Failure code
+                alert("解锁失败")
+            });
     }
     componentDidMount(){
         let self=this;
@@ -62,11 +73,6 @@ class Home extends Component<{}> {
                                 setTimeout(()=>{
                                     self.props.navigation.navigate("Gesture")
                                 },500)
-                            }else if(ret.FingePrint){
-                                //测试安卓指纹
-                                setTimeout(()=>{
-                                    self.props.navigation.navigate("FingerPrint")
-                                },500)
                             }else{
                                 setTimeout(()=>{
                                     self.props.navigation.navigate("Login")
@@ -77,7 +83,7 @@ class Home extends Component<{}> {
                             if(ret.FingePrint){
                                 //alert("ios指纹开启");
                                 setTimeout(()=>{
-                                    self.props.navigation.navigate("FingerPrint")
+                                    self.FingerPrint()
                                 },500)
                             }else if(ret.Gesture){
                                 //alert("ios手势开启");
