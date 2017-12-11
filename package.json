@@ -15,6 +15,7 @@
 		"react-native-snap-carousel": "^3.4.0",
 		"react-native-storage": "^0.2.2",
 		"react-native-switch-pro": "^0.4.6",
+		"react-native-touch-id": "^3.1.0",
 		"react-native-video": "^2.0.0",
 		"react-navigation": "^1.0.0-beta.19",
 		"react-redux": "^5.0.6",

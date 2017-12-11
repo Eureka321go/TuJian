@@ -62,6 +62,11 @@ class Home extends Component<{}> {
                                 setTimeout(()=>{
                                     self.props.navigation.navigate("Gesture")
                                 },500)
+                            }else if(ret.FingePrint){
+                                //测试安卓指纹
+                                setTimeout(()=>{
+                                    self.props.navigation.navigate("FingerPrint")
+                                },500)
                             }else{
                                 setTimeout(()=>{
                                     self.props.navigation.navigate("Login")
@@ -70,7 +75,10 @@ class Home extends Component<{}> {
                         }else{
                             //ios
                             if(ret.FingePrint){
-                                alert("ios指纹开启");
+                                //alert("ios指纹开启");
+                                setTimeout(()=>{
+                                    self.props.navigation.navigate("FingerPrint")
+                                },500)
                             }else if(ret.Gesture){
                                 //alert("ios手势开启");
                                 setTimeout(()=>{
