@@ -38,7 +38,14 @@ class Login extends Component<{}> {
             codeTime:10,  //总的倒计时时间
         }
     }
-
+    componentWillMount(){
+        //请求
+        CommonJS.axios.get({
+            url:"/user"
+        }).then((ret)=>{
+           console.log(ret)
+        })
+    }
     changeTab(name){
         if(name=='general'){
             this.refs.scrollview.scrollTo({x:0});
