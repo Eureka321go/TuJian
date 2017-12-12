@@ -28,7 +28,7 @@ import "../redux/action"
 let storage=global.storage;
 let CommonJS=global.CommonJS;
 let allActionsFun=global.allActionsFun;
-import TouchID from 'react-native-touch-id'
+
 class Home extends Component<{}> {
     constructor(props) {
         super(props)
