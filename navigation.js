@@ -30,7 +30,7 @@ import Profile from "./components/My/Profile" //个人资料
 import CurrencySetting from "./components/My/Setting/CurrencySetting"  //设置里的通常设置
 import GestureResolve from "./components/common/GestureResolve"  //手势解锁的设置
 import Gesture from "./components/My/Setting/Gesture"  //手势解锁页面
-
+import FingerPrint from "./components/My/Setting/FingerPrint" //指纹解锁
 
 import defaultTransitionConfig from "react-navigation/src/views/CardStack/CardStackStyleInterpolator"
 import nav from 'react-navigation';
@@ -344,7 +344,16 @@ const SimpleApp =nav.StackNavigator({
                 },
             }
         }
-    },//手势解锁页面
+    },//手势解锁
+    FingerPrint:{
+        screen:FingerPrint,
+        navigationOptions:({navigation})=>{
+            return {
+                header:null,
+                gesturesEnabled:false,
+            }
+        }
+    },//指纹解锁
 
 },{
     headerMode:"screen",

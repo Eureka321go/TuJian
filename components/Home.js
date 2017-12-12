@@ -37,17 +37,6 @@ class Home extends Component<{}> {
             addressName:"厦门",
         }
     }
-    //指纹解锁
-    FingerPrint(){
-        TouchID.authenticate('to demo this react-native component').then(success => {
-            // Success code
-            alert("解锁成功")
-        })
-            .catch(error => {
-                // Failure code
-                alert("解锁失败")
-            });
-    }
     componentDidMount(){
         let self=this;
         //判断是否第一次进去App
@@ -83,7 +72,7 @@ class Home extends Component<{}> {
                             if(ret.FingePrint){
                                 //alert("ios指纹开启");
                                 setTimeout(()=>{
-                                    self.FingerPrint()
+                                    self.props.navigation.navigate("FingerPrint")
                                 },500)
                             }else if(ret.Gesture){
                                 //alert("ios手势开启");
