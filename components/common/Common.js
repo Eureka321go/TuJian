@@ -1,6 +1,7 @@
 import Toast from "react-native-root-toast"
 let axios=require("axios");
 import "./storage"
+import qs from "qs"
 let storage=global.storage;
 let isToast=true; //避免吐司重叠
 
@@ -49,6 +50,11 @@ axiosIns.defaults.headers.get['X-Requested-With'] = 'XMLHttpRequest';
 axiosIns.defaults.headers.delete['X-Requested-With'] = 'XMLHttpRequest';
 axiosIns.defaults.headers.put['X-Requested-With'] = 'XMLHttpRequest';
 axiosIns.defaults.responseType = 'json';
+axiosIns.defaults.transformRequest = [function (data) {
+    //数据序列化
+    return qs.stringify(data);
+}
+];
 axiosIns.defaults.validateStatus = function (status) {
     return true;
 };
@@ -92,10 +98,10 @@ ajaxMethod.forEach((method) => {
     api[method] = function (obj) {
         return new Promise(function (resolve, reject) {
             if(!obj.loadingFun){
-                // Indicator.open({
-                //     text: '加载中',
-                //     spinnerType: 'fading-circle'
-                // });
+                toastShow("加载中",{
+                    position:0,
+                    visible:true,
+                })
             }else{ obj.loadingFun();}
             axiosIns[method](obj.url, obj.data, obj.config).then((response) => {
                 //!obj.loadiing && Indicator.close();
@@ -113,16 +119,15 @@ ajaxMethod.forEach((method) => {
                 }
                 resolve(response);
             }).catch((e) => {
+                console.log(e)
                 //!obj.loadiing && Indicator.close();
                 if(e.status){
                     if (e.status === 404) {
                         if(!obj.notFound){
-                            // Toast({
-                            //     position: 'bottom',
-                            //     message: '资源不存在,请求失败',
-                            //     iconClass: 'icon-error',
-                            //     duration:10000
-                            // });
+                            toastShow("资源不存在，请求失败",{
+                                position:0,
+                                visible:true,
+                            })
                         }else{
                             obj.notFound()
                         }
@@ -130,20 +135,20 @@ ajaxMethod.forEach((method) => {
                     }
                 }
                 if(!obj.timeOut){
-                    // Toast({
-                    //     position: 'bottom',
-                    //     message: "请求超时,请重试",
-                    //     iconClass: 'icon-error'
-                    // });
+                    toastShow("请求超时，请重试",{
+                        position:0,
+                        visible:true,
+                    })
                 }else{obj.timeOut()}
             })
         })
     }
 });
 
+
 export const CommonJS={
     toastShow,
     phoneTest,
-    axios:api
+    $axios:api
 }
 global.CommonJS=CommonJS

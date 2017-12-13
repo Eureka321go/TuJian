@@ -19,10 +19,12 @@ import {
 } from 'react-native';
 import {connect} from "react-redux";
 import {Calc} from "../common/Calc"
-import {CommonJS} from "../common/Common";
-let storage=global.storage
-
+import "../common/Common"
+let storage=global.storage;
+let CommonJS=global.CommonJS;
 let allActionsFun=global.allActionsFun;//action生成函数
+
+
 class Login extends Component<{}> {
     constructor(props) {
         super(props)
@@ -37,14 +39,6 @@ class Login extends Component<{}> {
             codeText:"获取验证码", //倒计时内容
             codeTime:10,  //总的倒计时时间
         }
-    }
-    componentWillMount(){
-        //请求
-        CommonJS.axios.get({
-            url:"/user"
-        }).then((ret)=>{
-           console.log(ret)
-        })
     }
     changeTab(name){
         if(name=='general'){
@@ -231,16 +225,11 @@ class Login extends Component<{}> {
         )
     }
     //成功登陆
-    loginOk(){
-        //模拟账号,
-        //登陆成功将信息保存到storage
+    loginOk(ret){
+        //保存到storage
         storage.save({
             key:"token",
-            data:{
-                userName:"大家好,我是一只猫",
-                userImg:"",
-                userType:"注册送300元新人优惠券",
-            }
+            data:ret
         });
         //手势指纹解锁,
         storage.save({
@@ -255,24 +244,38 @@ class Login extends Component<{}> {
             FingePrint:false,
             Gesture:false
         }))
-        //登录成功将信息保存到redux
-        this.props.dispatch(allActionsFun.tokenAction({
-            userName:"大家好,我是一只猫",
-            userImg:"",
-            userType:"注册送300元新人优惠券",
-        }));
-        this.props.navigation.goBack()
+        //将token信息保存到redux
+        this.props.dispatch(allActionsFun.tokenAction(ret));
+        //reset路由到首页
     }
     //登录点击
     loginPress(){
+        let self=this;
        //当前登录类型
         if(this.state.active=='general'){
             //普通登录
             if(!this.state.userName&&!this.state.password){CommonJS.toastShow("账号和密码不能为空");return;}
             if(!this.state.userName){CommonJS.toastShow("账号不能为空");return;}
             if(!this.state.password){CommonJS.toastShow("密码不能为空");return;}
-            //登录成功
-              this.loginOk()
+            //登录
+            CommonJS.$axios.post({
+                url:"/user/login",
+                data:{
+                    account:self.state.userName,
+                    password:self.state.password
+                }
+            }).then((ret)=>{
+                if(ret.data && ret.data.success){
+                    self.loginOk(ret)
+                    return;
+                }
+                //密码错误
+                CommonJS.toastShow("账号或密码错误",{
+                    position:0,
+                    visible:true,
+                })
+            })
+
         }
         else{
             //验证码登录
@@ -284,7 +287,7 @@ class Login extends Component<{}> {
                 return ;
             }
             //登录成功
-            this.loginOk()
+           // this.loginOk()
 
         }
 

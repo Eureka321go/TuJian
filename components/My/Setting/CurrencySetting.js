@@ -25,7 +25,7 @@ class CurrencySetting extends Component<{}> {
     constructor(props) {
         super(props)
     }
-    componentDidMount(){
+    componentWillMount(){
         let self=this;
         //获取指纹和解锁状态
         storage.load({
