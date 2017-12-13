@@ -38,7 +38,7 @@ class Login extends Component<{}> {
             code:"",//验证码
             getCode:true,   //是否点击
             codeText:"获取验证码", //倒计时内容
-            codeTime:10,  //总的倒计时时间
+            codeTime:30,  //总的倒计时时间
         }
     }
     changeTab(name){
@@ -153,11 +153,12 @@ class Login extends Component<{}> {
     }
     //获取手机验证码
     getCode(){
+        let self=this;
         if(!this.state.phone){
             CommonJS.toastShow("手机号不能为空");return;
         }
         if(this.state.getCode){
-            if(!CommonJS.phoneTest(this.state.getCode)){
+            if(!CommonJS.phoneTest(this.state.phone)){
                 CommonJS.toastShow("请输入有效的手机号")
                 return ;
             }
@@ -165,16 +166,24 @@ class Login extends Component<{}> {
                 getCode:false,
                 codeText:this.state.codeTime
             });
+            //发送验证码
+            CommonJS.$axios.get({
+                url:"/authCode/login?mobile="+self.state.phone,
+            }).then((ret)=>{
+                if(ret.data && ret.data.success){
+                    return;
+                }
+            })
             let allTime=this.state.codeTime;
             this.timer=setInterval(()=>{
-                let time=this.state.codeTime-1;
-                this.setState({
+                let time=self.state.codeTime-1;
+                self.setState({
                     codeText:time,
                     codeTime:time
                 });
                 if(time-1<-1){
                     clearInterval(this.timer);
-                    this.setState({
+                    self.setState({
                         codeText:"获取验证码",
                         codeTime:allTime,
                         getCode:true
@@ -294,8 +303,24 @@ class Login extends Component<{}> {
                 CommonJS.toastShow("请输入有效的手机号")
                 return ;
             }
-            //登录成功
-           // this.loginOk()
+            // //登录成功
+            CommonJS.$axios.post({
+                url:"/user/login/code",
+                data:{
+                    mobile:self.state.phone,
+                    code:self.state.code
+                }
+            }).then((ret)=>{
+                if(ret.data && ret.data.success){
+                    self.loginOk(ret.data.data);
+                    return;
+                }
+                //密码错误
+                CommonJS.toastShow("验证码错误",{
+                    position:0,
+                    visible:true,
+                })
+            })
 
         }
 
@@ -329,7 +354,7 @@ class Login extends Component<{}> {
             </View>
         );
     }
-    componentsWillUnmount(){
+    componentWillUnmount(){
         clearInterval(this.timer);
     }
 

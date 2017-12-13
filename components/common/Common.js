@@ -24,7 +24,7 @@ function toastShow(text,obj) {
 
 //验证手机号
 function phoneTest(val) {
-    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
     if(!myreg.test(val)){
         return false
     }
