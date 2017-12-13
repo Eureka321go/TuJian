@@ -98,10 +98,10 @@ ajaxMethod.forEach((method) => {
     api[method] = function (obj) {
         return new Promise(function (resolve, reject) {
             if(!obj.loadingFun){
-                toastShow("加载中",{
-                    position:0,
-                    visible:true,
-                })
+                // toastShow("加载中",{
+                //     position:0,
+                //     visible:true,
+                // })
             }else{ obj.loadingFun();}
             axiosIns[method](obj.url, obj.data, obj.config).then((response) => {
                 //!obj.loadiing && Indicator.close();
@@ -121,6 +121,7 @@ ajaxMethod.forEach((method) => {
             }).catch((e) => {
                 console.log(e)
                 //!obj.loadiing && Indicator.close();
+                console.log(e)
                 if(e.status){
                     if (e.status === 404) {
                         if(!obj.notFound){

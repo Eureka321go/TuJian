@@ -39,6 +39,7 @@ class Home extends Component<{}> {
     }
     componentDidMount(){
         let self=this;
+        let key=this.props.navigation.state.key;
         //判断是否第一次进去App
         if(this.props.isFirst){
             //第一次进入app弹出手势
@@ -49,6 +50,8 @@ class Home extends Component<{}> {
             }).then((ret)=>{
                 //已登陆过
                 if(ret){
+                    //先把token存到redux
+                    self.props.dispatch(allActionsFun.tokenAction(ret));
                     //弹出指纹解锁
                     storage.load({
                         key:"unLock",
@@ -60,11 +63,11 @@ class Home extends Component<{}> {
                             if(ret.Gesture){
                                 //alert("安卓手势开启")
                                 setTimeout(()=>{
-                                    self.props.navigation.navigate("Gesture")
+                                    self.props.navigation.navigate("Gesture",{key:key})
                                 },500)
                             }else{
                                 setTimeout(()=>{
-                                    self.props.navigation.navigate("Login")
+                                    self.props.navigation.navigate("Login",{key:key})
                                 },500)
                             }
                         }else{
@@ -72,16 +75,16 @@ class Home extends Component<{}> {
                             if(ret.FingePrint){
                                 //alert("ios指纹开启");
                                 setTimeout(()=>{
-                                    self.props.navigation.navigate("FingerPrint")
+                                    self.props.navigation.navigate("FingerPrint",{key:key})
                                 },500)
                             }else if(ret.Gesture){
                                 //alert("ios手势开启");
                                 setTimeout(()=>{
-                                    self.props.navigation.navigate("Gesture")
+                                    self.props.navigation.navigate("Gesture",{key:key})
                                 },500)
                             }else{
                                 setTimeout(()=>{
-                                    self.props.navigation.navigate("Login")
+                                    self.props.navigation.navigate("Login",{key:key})
                                 },500)
                             }
                         }
@@ -93,13 +96,13 @@ class Home extends Component<{}> {
                 }else{
                     //没登陆过
                     setTimeout(()=>{
-                        self.props.navigation.navigate("Login")
+                        self.props.navigation.navigate("Login",{key:key})
                     },500)
                 }
 
             }).catch((err)=>{
                 setTimeout(()=>{
-                    self.props.navigation.navigate("Login")
+                    self.props.navigation.navigate("Login",{key:key})
                 },500)
             })
         }

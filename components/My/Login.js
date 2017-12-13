@@ -18,6 +18,7 @@ import {
     TextInput
 } from 'react-native';
 import {connect} from "react-redux";
+import { NavigationActions } from 'react-navigation'
 import {Calc} from "../common/Calc"
 import "../common/Common"
 let storage=global.storage;
@@ -247,6 +248,13 @@ class Login extends Component<{}> {
         //将token信息保存到redux
         this.props.dispatch(allActionsFun.tokenAction(ret));
         //reset路由到首页
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({ routeName: 'index'}),
+            ]
+        })
+        this.props.navigation.dispatch(resetAction)
     }
     //登录点击
     loginPress(){
@@ -266,7 +274,7 @@ class Login extends Component<{}> {
                 }
             }).then((ret)=>{
                 if(ret.data && ret.data.success){
-                    self.loginOk(ret)
+                    self.loginOk(ret.data.data)
                     return;
                 }
                 //密码错误
@@ -324,6 +332,7 @@ class Login extends Component<{}> {
     componentsWillUnmount(){
         clearInterval(this.timer);
     }
+
 
 }
 

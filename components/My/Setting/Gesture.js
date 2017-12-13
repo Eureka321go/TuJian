@@ -47,6 +47,7 @@ class Gesture extends Component<{}> {
                     }).catch((err)=>{
                         self.props.navigation.navigate("Login")
                     })
+
                     self.props.navigation.goBack();
                 }else{
                     self.setState({

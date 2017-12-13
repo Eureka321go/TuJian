@@ -81,6 +81,17 @@ function getUnLock(state={Gesture:false,FingerPrint:false},action){
 
 
 
+//用户信息
+function getUserInfo(state='',action){
+    switch (action.type){
+        case actionTypes.userInfo:
+            return action.data
+        default:
+            return state;
+    }
+}
+
+
 //将多个子reducer合并成一个主reducer
 const mainReducer=combineReducers({
     getToken,
@@ -88,6 +99,7 @@ const mainReducer=combineReducers({
     getindexNum,//首页选择人数
     isFirst,//是否是第一次登录app
     getUnLock,//手势指纹解锁
+    getUserInfo,//用户信息
 })
 
 export default mainReducer;

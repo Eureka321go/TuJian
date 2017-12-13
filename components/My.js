@@ -13,8 +13,11 @@ import  {Calc} from "./common/Calc"
 import ParallaxView from "./common/ParallaxView"
 import  "./common/storage"
 import "./common/Common"
+import "../redux/action"
 let storage=global.storage
 let CommonJS=global.CommonJS
+let allActionsFun=global.allActionsFun;
+
 
 class My extends Component<{}> {
     constructor(props) {
@@ -22,12 +25,25 @@ class My extends Component<{}> {
     }
     //渲染积分收益余额
     renderMoney(){
+        let bonusPoints;//积分
+        let repay;//收益
+        let balance;//余额
+        if(!this.props.token || !this.props.userInfo || !this.props.userInfo.user || !this.props.userInfo.user.bonusPoints){
+            bonusPoints=0
+        }else{bonusPoints=this.props.userInfo.user.bonusPoints}
+        if(!this.props.token || !this.props.userInfo || !this.props.userInfo.user || !this.props.userInfo.user.repay){
+            repay=0
+        }else{repay=this.props.userInfo.user.repay}
+        if(!this.props.token || !this.props.userInfo || !this.props.userInfo.user || !this.props.userInfo.user.balance){
+            balance=0
+        }else{balance=this.props.userInfo.user.repay}
+
         return(
             <View style={styles.tabWrap}>
                 <TouchableOpacity style={styles.tabOpWrap} activeOpacity={1} onPress={()=>{this.jumpScore()}}>
                     <View style={styles.tab}>
                         <View style={styles.scoreWrap}>
-                            <Text allowFontScaling={false}  style={styles.score}>200</Text>
+                            <Text allowFontScaling={false}  style={styles.score}>{bonusPoints}</Text>
                             <Text allowFontScaling={false}  style={styles.scoreName}>分</Text>
                         </View>
                         <Text allowFontScaling={false}  style={styles.describe}>积分</Text>
@@ -36,7 +52,7 @@ class My extends Component<{}> {
                 <TouchableOpacity style={styles.tabOpWrap} activeOpacity={1} onPress={()=>{this.jumpScore()}}>
                     <View style={styles.tab}>
                         <View style={styles.scoreWrap}>
-                            <Text allowFontScaling={false}  style={styles.score}>620</Text>
+                            <Text allowFontScaling={false}  style={styles.score}>{repay}</Text>
                             <Text allowFontScaling={false}  style={styles.scoreName}>元</Text>
                         </View>
                         <Text allowFontScaling={false}  style={styles.describe}>收益</Text>
@@ -48,7 +64,7 @@ class My extends Component<{}> {
                 <TouchableOpacity style={styles.tabOpWrap} activeOpacity={1} onPress={()=>{this.jumpScore()}}>
                     <View style={styles.tab}>
                         <View style={styles.scoreWrap}>
-                            <Text allowFontScaling={false}  style={styles.score}>100</Text>
+                            <Text allowFontScaling={false}  style={styles.score}>{balance}</Text>
                             <Text allowFontScaling={false}  style={styles.scoreName}>元</Text>
                         </View>
                         <Text allowFontScaling={false}  style={styles.describe}>余额</Text>
@@ -112,7 +128,7 @@ class My extends Component<{}> {
     }
     //用户头像
     renderUserImg(){
-        if(!this.props.token.userImg){
+        if( !this.props.token ||!this.props.userInfo || !this.props.userInfo.user|| !this.props.userInfo.user.headImgUrl){
             return (
                 <TouchableOpacity activeOpacity={1}onPress={()=>{this.isLogin()}}>
                     <Image style={styles.userImg} source={require("../assets/images/my/userImg.png")}/>
@@ -121,7 +137,7 @@ class My extends Component<{}> {
         }else{
             return (
                 <TouchableOpacity activeOpacity={1}onPress={()=>{this.isLogin()}}>
-                    <Image style={styles.userImg} source={{uri:this.props.token.userImg}}/>
+                    <Image style={styles.userImg} source={{uri:this.props.userInfo.user.headImgUrl}}/>
                 </TouchableOpacity>
             )
         }
@@ -145,6 +161,30 @@ class My extends Component<{}> {
        }
 
     }
+    //是否卖方或者会员
+    renderSeller(){
+        if(!this.props.token){
+            return "注册送新人300优惠券"
+        }
+        if(this.props.userInfo){
+            if(this.props.userInfo.user.isSeller){
+                return "业主"
+            }else if(this.props.userInfo.user.isMember){
+                return "普通会员"
+            }else{
+                return "普通会员"
+            }
+        }
+    }
+    //昵称
+    renderNickName(){
+        if(!this.props.token){
+            return "登录|注册"
+        }
+        if(this.props.userInfo){
+            return this.props.userInfo.user.nickname?this.props.userInfo.user.nickname:"匿名"
+        }
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -163,8 +203,8 @@ class My extends Component<{}> {
                                      {this.renderUserImg()}
                                  </View>
                                  <View style={{flex:1,marginRight:Calc.getWidth(50)}}>
-                                     <Text allowFontScaling={false}  style={styles.userName} numberOfLines={1}>{this.props.token.userName?this.props.token.userName:"登录/注册"}</Text>
-                                     <Text allowFontScaling={false}  style={styles.userType} numberOfLines={1}>{this.props.token.userType?this.props.token.userType:"注册送新人300优惠券"}</Text>
+                                     <Text allowFontScaling={false}  style={styles.userName} numberOfLines={1}>{this.renderNickName()}</Text>
+                                     <Text allowFontScaling={false}  style={styles.userType} numberOfLines={1}>{this.renderSeller()}</Text>
                                  </View>
                             </View>
                             {/*我的银行卡*/}
@@ -186,6 +226,26 @@ class My extends Component<{}> {
                 </ParallaxView>
             </View>
         );
+    }
+    //请求
+    fetch(){
+        let self=this;
+        CommonJS.$axios.get({
+            url:"/user",
+        }).then((ret)=>{
+            if(ret.data && ret.data.success){
+                console.log(ret.data.data)
+                self.props.dispatch(allActionsFun.userInfoAction(ret.data.data));
+                return;
+            }
+            self.props.navigation.navigate("Login");
+
+        })
+    }
+    componentWillMount(){
+        if(this.props.token){
+            this.fetch()
+        }
     }
 
 }
@@ -372,7 +432,8 @@ const styles = StyleSheet.create({
 
 function select(state){
     return{
-        token:state.getToken
+        token:state.getToken,
+        userInfo:state.getUserInfo
     }
 }
 export default connect(select)(My);

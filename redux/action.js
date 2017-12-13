@@ -5,6 +5,7 @@ export const actionTypes={
     indexPeopleNum:"indexPeopleNum",//首页选择人数
     isFirst:"isFirst",//用于判断是否是第一次登入APP
     unlock:"unlock",//手势指纹解锁
+    userInfo:"userInfo",//用户的信息
 };
 
 
@@ -45,6 +46,13 @@ export const allActionsFun={
             type:actionTypes.unlock,
             state:obj
          }
+    },
+    //用户信息
+    userInfoAction(obj){
+        return{
+            type:actionTypes.userInfo,
+            data:obj
+        }
     }
 }
 global.allActionsFun=allActionsFun;
