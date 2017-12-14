@@ -31,9 +31,13 @@ class Wonderful extends Component<{}> {
     //顶部轮播
     renderSwiper({item,index}){
         return (
-            <View>
-                <Image style={{width:Calc.getWidth(622),height:Calc.getHeight(311)}} source={require("../../assets/images/index/swiper1.png")}/>
-            </View>
+            <TouchableOpacity activeOpacity={1} onPress={()=>{
+                this.props.navigation.navigate("GuestDetail")
+            }}>
+                <View>
+                    <Image style={{width:Calc.getWidth(622),height:Calc.getHeight(311)}} source={require("../../assets/images/index/swiper1.png")}/>
+                </View>
+            </TouchableOpacity>
         );
     }
     //特色风格轮播的slider
@@ -124,7 +128,7 @@ class Wonderful extends Component<{}> {
                <Carousel
                    ref={(c) => { this._carousel = c; }}
                    data={this.state.entries}
-                   renderItem={this.renderSwiper}
+                   renderItem={this.renderSwiper.bind(this)}
                    sliderWidth={Calc.getWidth(750)}
                    sliderHeight={Calc.getHeight(311)}
                    itemWidth={Calc.getWidth(622)}
@@ -228,4 +232,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Wonderful;
+export default connect()(Wonderful);

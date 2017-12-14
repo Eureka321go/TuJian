@@ -31,6 +31,8 @@ import CurrencySetting from "./components/My/Setting/CurrencySetting"  //设置�
 import GestureResolve from "./components/common/GestureResolve"  //手势解锁的设置
 import Gesture from "./components/My/Setting/Gesture"  //手势解锁页面
 import FingerPrint from "./components/My/Setting/FingerPrint" //指纹解锁
+import GuestDetail from "./components/Hourse/GuestDetail"  //客房详情
+
 
 import defaultTransitionConfig from "react-navigation/src/views/CardStack/CardStackStyleInterpolator"
 import nav from 'react-navigation';
@@ -354,6 +356,14 @@ const SimpleApp =nav.StackNavigator({
             }
         }
     },//指纹解锁
+    GuestDetail:{
+        screen:GuestDetail,
+        navigationOptions:({navigation})=>{
+            return {
+                header:null,
+            }
+        }
+    },//客房详情
 
 },{
     headerMode:"screen",

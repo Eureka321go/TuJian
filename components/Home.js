@@ -138,7 +138,7 @@ class Home extends Component<{}> {
                   </View>
                   {/*tabContainer精彩等列表容器*/}
                   <View>
-                      <Wonderful/>
+                      <Wonderful navigation={this.props.navigation}/>
                   </View>
                 </ParallaxView>
             </View>
