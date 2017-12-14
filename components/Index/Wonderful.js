@@ -55,20 +55,16 @@ class Wonderful extends Component<{}> {
                    ref={(c) => { this._teSeSwiper = c; }}
                    data={this.state.teSeSwiper}
                    renderItem={this.renderTeSeSlider}
-                   sliderWidth={Calc.getWidth(726)}
+                   sliderWidth={Calc.getWidth(750)}
                    itemWidth={Calc.getWidth(330)}
                    itemHeight={Calc.getWidth(330)}
                    inactiveSlideScale={1}
                    slideStyle={styles.smallSlider}
                    firstItem={1}
-                   containerCustomStyle={[styles.swiperContainer,{marginLeft:Calc.getWidth(24)}]}
+                   containerCustomStyle={[styles.swiperContainer]}
                />
            </View>
         )
-    }
-    //收藏图标点击
-    CollectionPress(){
-        alert(11)
     }
     //渲染收藏图标
     renderCollection(self,item){
