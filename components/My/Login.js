@@ -173,6 +173,10 @@ class Login extends Component<{}> {
                 if(ret.data && ret.data.success){
                     return;
                 }
+                CommonJS.toastShow(ret.data.msg,{
+                    position:0,
+                    visible:true,
+                })
             })
             let allTime=this.state.codeTime;
             this.timer=setInterval(()=>{

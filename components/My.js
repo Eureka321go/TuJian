@@ -234,7 +234,6 @@ class My extends Component<{}> {
             url:"/user",
         }).then((ret)=>{
             if(ret.data && ret.data.success){
-                console.log(ret.data.data)
                 self.props.dispatch(allActionsFun.userInfoAction(ret.data.data));
                 return;
             }

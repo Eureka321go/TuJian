@@ -66,9 +66,9 @@ class Home extends Component<{}> {
                                     self.props.navigation.navigate("Gesture",{key:key})
                                 },500)
                             }else{
-                                setTimeout(()=>{
-                                    self.props.navigation.navigate("Login",{key:key})
-                                },500)
+                                // setTimeout(()=>{
+                                //     self.props.navigation.navigate("Login",{key:key})
+                                // },500)
                             }
                         }else{
                             //ios
@@ -83,9 +83,9 @@ class Home extends Component<{}> {
                                     self.props.navigation.navigate("Gesture",{key:key})
                                 },500)
                             }else{
-                                setTimeout(()=>{
-                                    self.props.navigation.navigate("Login",{key:key})
-                                },500)
+                                // setTimeout(()=>{
+                                //     self.props.navigation.navigate("Login",{key:key})
+                                // },500)
                             }
                         }
                     }).catch((err)=>{
