@@ -266,6 +266,7 @@ const SimpleApp =nav.StackNavigator({
                     </TouchableOpacity>
                 )
             },
+            headerRight:<Btn/>
 
         }
     }
@@ -360,7 +361,29 @@ const SimpleApp =nav.StackNavigator({
         screen:GuestDetail,
         navigationOptions:({navigation})=>{
             return {
-                header:null,
+                headerTitle:"",
+                headerStyle:{
+                    borderBottomWidth:0,
+                    borderColor:"transparent",
+                    backgroundColor:"#fff",
+                    elevation:0,
+                },
+                headerTitleStyle:{
+                    fontSize:Calc.getFont(18),
+                    color:"#262626",
+                    fontWeight:"normal",
+                    alignSelf:"center"
+                },
+                headerLeft:()=>{
+                    return (
+                        <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
+                            <View>
+                                <Image style={styles.back} source={require("./assets/images/common/arrowBack.png")}/>
+                            </View>
+                        </TouchableOpacity>
+                    )
+                },
+
             }
         }
     },//客房详情

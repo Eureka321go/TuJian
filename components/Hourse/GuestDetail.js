@@ -14,12 +14,26 @@ import {
 } from 'react-native';
 import {connect} from "react-redux";
 
+class HeaderRight extends Component<{}>{
+    render(){
+        return(
+            <View>
+                <Text>11</Text>
+            </View>
+        )
+    }
+}
+
 class GuestDetail extends Component<{}> {
     constructor(props) {
         super(props)
 
     }
-
+    static navigationOptions({navigation}){
+        return{
+            headerRight:<HeaderRight/>
+        }
+    }
     render() {
         return (
             <View style={styles.container}>
