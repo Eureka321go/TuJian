@@ -126,7 +126,7 @@ ajaxMethod.forEach((method) => {
                     if (e.status === 404) {
                         if(!obj.notFound){
                             toastShow("资源不存在，请求失败",{
-                                position:0,
+                                position:-20,
                                 visible:true,
                             })
                         }else{
@@ -137,7 +137,7 @@ ajaxMethod.forEach((method) => {
                 }
                 if(!obj.timeOut){
                     toastShow("请求超时，请重试",{
-                        position:0,
+                        position:-20,
                         visible:true,
                     })
                 }else{obj.timeOut()}

@@ -18,14 +18,15 @@ import {connect} from "react-redux";
 import  {Calc} from "../common/Calc"
 import Carousel from 'react-native-snap-carousel';
 import Star from "../common/Star"
+let CommonJS=global.CommonJS;
 
 class Wonderful extends Component<{}> {
     constructor(props) {
         super(props)
         this.state={
-            entries:["item1","item2","item3"],  //顶部轮播数组
-            teSeSwiper:["item","item","item"],  //特色风格轮播
-            youXuanList:[{key:"item1",collection:false},{key:"item2",collection:true}],//优选列表,数组中的数据注意要key
+            entries:[],  //顶部轮播数组
+            teSeSwiper:[],  //特色风格轮播
+            youXuanList:[],//优选列表,数组中的数据注意要key
         }
     }
     //顶部轮播
@@ -35,17 +36,17 @@ class Wonderful extends Component<{}> {
                 this.props.navigation.navigate("GuestDetail")
             }}>
                 <View>
-                    <Image style={{width:Calc.getWidth(622),height:Calc.getHeight(311)}} source={require("../../assets/images/index/swiper1.png")}/>
+                    <Image style={{width:Calc.getWidth(622),height:Calc.getHeight(311)}} source={{uri:item.cover}}/>
                 </View>
             </TouchableOpacity>
         );
     }
     //特色风格轮播的slider
-    renderTeSeSlider(){
+    renderTeSeSlider(v){
         return(
             <View>
-                <Image style={{width:Calc.getWidth(330),height:Calc.getWidth(330)}} source={require("../../assets/images/index/teSe.png")}/>
-                <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(15),color:"#3a3c3c", marginTop:Calc.getHeight(50), marginBottom:Calc.getHeight(40)}}>海边美屋</Text>
+                <Image style={{width:Calc.getWidth(330),height:Calc.getWidth(330)}} source={{uri:v.item.cover}}/>
+                <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(15),color:"#3a3c3c", marginTop:Calc.getHeight(50), marginBottom:Calc.getHeight(40)}}>{v.item.name}</Text>
             </View>
         )
     }
@@ -74,17 +75,25 @@ class Wonderful extends Component<{}> {
     renderCollection(self,item){
         function clickIcon() {
             let arr=self.state.youXuanList;
-            if(arr[item.index].collection){
-                arr[item.index].collection=false
-            }else{
-                arr[item.index].collection=true
-            }
-            self.setState({
-                youXuanList:arr
+            let isTrue=item.item.isCollected?true:false;
+            let isRental=item.item.isRental?"house_rental":"house_sell";
+            CommonJS.$axios.get({
+                url:"/operate?module="+isRental+"&moduleId="+item.item.id+"&type=collect&cancel="+isTrue
+            }).then((ret)=>{
+                if(ret.data && ret.data.success){
+                    arr[item.index].isCollected=!isTrue;
+                    self.setState({
+                        youXuanList:arr
+                    })
+                    return;
+                }
+                CommonJS.toastShow(ret.data.msg,{
+                    visible:true,
+                })
             })
 
         }
-        if(item.item.collection){
+        if(item.item.isCollected){
             return (
                 <TouchableOpacity activeOpacity={1} style={styles.collectionIcon} onPress={()=>{clickIcon()}}>
                     <Image  style={styles.Icon} source={require("../../assets/images/common/collection.png")}/>
@@ -103,12 +112,12 @@ class Wonderful extends Component<{}> {
         return(
             <View style={[styles.allPadding,{marginBottom:Calc.getHeight(50)}]}>
                 <View style={styles.yXImgWrap}>
-                    <Image style={styles.youXuanListImg} source={require("../../assets/images/index/youXuanList.png")}/>
+                    <Image style={styles.youXuanListImg} source={{uri:item.item.coverBig}}/>
                     {/*收藏图标*/}
                     {this.renderCollection(this,item)}
                 </View>
-                <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(18),color:"#262626",marginTop:Calc.getHeight(20),marginBottom:Calc.getHeight(16)}}>三亚名宿清晰名宿含早1室0厅1卫</Text>
-                <Star score={4.8}/>
+                <Text allowFontScaling={false}  style={{fontSize:Calc.getFont(18),color:"#262626",marginTop:Calc.getHeight(20),marginBottom:Calc.getHeight(16)}}>{item.item.name}</Text>
+                <Star score={item.item.point}/>
                 {/*实拍，免押金*/}
                 <View style={{flexDirection:"row",marginTop:Calc.getHeight(20)}}>
                     <View allowFontScaling={false}  style={styles.mianYaJin}>
@@ -153,6 +162,67 @@ class Wonderful extends Component<{}> {
                />
            </View>
         );
+    }
+    //轮播数据
+    fetchLunbo(){
+        let self=this;
+        CommonJS.$axios.get({
+            url:"/carousel?module=途见首页"
+        }).then((ret)=>{
+            if(ret.data && ret.data.success){
+                this.setState({
+                    entries:ret.data.data
+                })
+                return;
+            }
+            CommonJS.toastShow(ret.data.msg,{
+                visible:true,
+            })
+        })
+    }
+    //精彩的特色风格
+    fetchTeSe(){
+        let self=this;
+        CommonJS.$axios.get({
+            url:"/house/ctg"
+        }).then((ret)=>{
+            if(ret.data && ret.data.success){
+                this.setState({
+                    teSeSwiper:ret.data.data
+                })
+                return;
+            }
+            CommonJS.toastShow(ret.data.msg,{
+                visible:true,
+            })
+        })
+    }
+    //优选推荐
+    fetchYouXuan(){
+        let self=this;
+        CommonJS.$axios.get({
+            url:"/house/recommend"
+        }).then((ret)=>{
+            if(ret.data && ret.data.success){
+                let arr=[];
+                ret.data.data.forEach((v,k)=>{
+                   v.key=k;
+                   arr.push(v);
+                });
+                 this.setState({
+                     youXuanList:arr
+                 })
+                return;
+            }
+            CommonJS.toastShow(ret.data.msg,{
+                visible:true,
+            })
+        })
+    }
+    componentDidMount(){
+        this.fetchLunbo();
+        this.fetchTeSe();
+        this.fetchYouXuan()
     }
 }
 
