@@ -67,11 +67,48 @@ class GuestDetail extends Component<{}> {
             </View>
         )
     }
+    //客房描述
+    renderDescribe(){
+        return(
+            <View style={styles.descriptWrap}>
+                <Text style={{fontSize:Calc.getFont(19),color:"#262626"}}>湖上美景公寓</Text>
+                <View style={{flexDirection:"row",marginTop:Calc.getHeight(20)}}>
+                    <View style={styles.tagBieSuWrap}>
+                        <Text style={styles.tagBieSu}>别墅</Text>
+                    </View>
+                    <View  style={styles.tagShiPaiWrap}>
+                        <Text style={styles.tagShiPai}>实拍</Text>
+                    </View>
+                </View>
+            </View>
+        )
+    }
+    //用户详情
+    renderCat(){
+        return(
+          <TouchableOpacity activeOpacity={1}>
+              <View style={styles.catWrap}>
+                  <View style={{marginRight:Calc.getWidth(30)}}>
+                      <Image style={styles.catUser} source={require("../../assets/images/my/userImg.png")}/>
+                  </View>
+                  <View style={{flex:1}}>
+                      <Text numberOfLines={1} style={styles.catTitle}>花与海的夏天海景公寓</Text>
+                      <Text style={styles.catStyle}>商户业主</Text>
+                  </View>
+                  <Image style={{width:Calc.getWidth(15),height:Calc.getHeight(26)}} source={require("../../assets/images/common/listArrow.png")}/>
+              </View>
+          </TouchableOpacity>
+        )
+    }
     render() {
         return (
             <ScrollView style={styles.container} alwaysBounceVertical={false}>
                 {/*头部图片*/}
                 {this.renderTop()}
+                {/*客房描述*/}
+                {this.renderDescribe()}
+                {/*用户详情*/}
+                {this.renderCat()}
             </ScrollView>
         );
     }
@@ -103,6 +140,61 @@ const styles = StyleSheet.create({
         height:Calc.getWidth(200),
         borderRadius:6,
     },
+//    描述
+    descriptWrap:{
+        paddingTop:Calc.getHeight(40),
+        paddingBottom:Calc.getHeight(50),
+        borderBottomWidth:Calc.getBorder(1),
+        borderColor:"#d9e1e9"
+    },
+    tagBieSuWrap:{
+        height:Calc.getHeight(40),
+        backgroundColor:"#97d2ec",
+        marginRight:Calc.getWidth(10),
+        paddingLeft:Calc.getWidth(10),
+        paddingRight:Calc.getWidth(10),
+        borderRadius:Calc.getWidth(6),
+        alignItems:"center",
+        justifyContent:"center"
+    },
+    tagShiPaiWrap:{
+        height:Calc.getHeight(40),
+        backgroundColor:"#f4fafd",
+        paddingLeft:Calc.getWidth(10),
+        paddingRight:Calc.getWidth(10),
+        borderRadius:Calc.getWidth(6),
+        alignItems:"center",
+        justifyContent:"center"
+    },
+    tagBieSu:{
+        color:"#fff",
+    },
+    tagShiPai:{
+        color:"#97d2ec",
+    },
+//    商户信息
+    catWrap:{
+        height:Calc.getHeight(182),
+        flexDirection:"row",
+        paddingLeft:Calc.getWidth(10),
+        paddingRight:Calc.getWidth(10),
+        alignItems:"center",
+        borderBottomWidth:Calc.getBorder(1),
+        borderColor:"#d9e1e9"
+    },
+    catUser:{
+      width:Calc.getWidth(100),
+      height:Calc.getWidth(100),
+    },
+    catTitle:{
+       fontSize:Calc.getFont(16),
+        color:"#262626"
+    },
+    catStyle:{
+        fontSize:Calc.getFont(12),
+        color:"#b8bdc2",
+        marginTop:Calc.getHeight(10),
+    }
 
 });
 
