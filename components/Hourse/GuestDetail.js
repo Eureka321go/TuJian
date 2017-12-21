@@ -117,10 +117,28 @@ class GuestDetail extends Component<{}> {
                 <View style={styles.evalContWrap}>
                     <Text style={styles.evalContent}>老板人很好，服务周到，房间有韵味特别喜欢下次还来。独家好房推荐哦！</Text>
                 </View>
-                <View style={styles.moreEval}>
+                <View style={styles.moreDataWrap}>
                     <TouchableOpacity activeOpacity={1}>
-                        <Text style={styles.moreEvalText}>更多评论</Text>
+                        <Text style={styles.moreData}>更多评论</Text>
                     </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
+    //房屋描述
+    renderHouseDiscribe(){
+        return(
+            <View style={styles.renderHouseDiscribe}>
+                <Text style={styles.houseDiscribeTitle}>房屋详情</Text>
+                <Text style={styles.discribeText}>4室2厅 宜住8人 2大床4小床</Text>
+                <Text style={[styles.houseDiscribeTitle,{marginTop:Calc.getHeight(60)}]}>房屋描述</Text>
+                <Text style={styles.discribeText}>公寓位于大东海旅游区核心位置，出门即是海滩。公寓内种植很多热带花草，三角梅，石榴还有一个...</Text>
+                <View>
+                    <View style={styles.moreDataWrap}>
+                        <TouchableOpacity activeOpacity={1}>
+                            <Text style={styles.moreData}>查看全部</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         )
@@ -136,6 +154,8 @@ class GuestDetail extends Component<{}> {
                 {this.renderCat()}
                 {/*租客评价*/}
                 {this.renderEvaluate()}
+                {/*房屋描述*/}
+                {this.renderHouseDiscribe()}
             </ScrollView>
         );
     }
@@ -270,12 +290,26 @@ const styles = StyleSheet.create({
         fontSize:Calc.getFont(15),
         color:"#3a3c3c",
     },
-    moreEval:{
-        alignItems:"center",
-        justifyContent:"center",
-        marginTop:Calc.getHeight(50),
+//    房屋描述
+    renderHouseDiscribe:{
+        paddingBottom:Calc.getHeight(50),
+        paddingTop:Calc.getHeight(50),
+        borderBottomWidth:Calc.getBorder(1),
+        borderColor:"#d9e1e9",
+        paddingLeft:Calc.getWidth(10),
+        paddingRight:Calc.getWidth(10),
     },
-    moreEvalText:{
+    houseDiscribeTitle:{
+        fontSize:Calc.getFont(18),
+        color:"#262626",
+        marginBottom:Calc.getHeight(30),
+    },
+    discribeText:{
+        fontSize:Calc.getFont(15),
+        color:"#3a3c3c",
+    },
+    //更多类型按钮
+    moreData:{
         fontSize:Calc.getFont(15),
         color:"#3a3c3c",
         borderWidth:Calc.getBorder(1),
@@ -285,7 +319,12 @@ const styles = StyleSheet.create({
         paddingBottom:Calc.getHeight(15),
         paddingLeft:Calc.getWidth(30),
         paddingRight:Calc.getWidth(30),
-    }
+    },
+    moreDataWrap:{
+        alignItems:"center",
+        justifyContent:"center",
+        marginTop:Calc.getHeight(50),
+    },
 });
 
 
