@@ -112,8 +112,10 @@ class GuestDetail extends Component<{}> {
                     <View style={{flex:1,justifyContent:"center"}}>
                         <Text numberOfLines={1} style={styles.evalName}>时光不老</Text>
                         <Text numberOfLines={1} style={styles.evalText}>评分5.0 10月1日 12:42</Text>
-                        <Text style={styles.evalContent}>老板人很好，服务周到，房间有韵味特别喜欢下次还来。独家好房推荐哦！</Text>
                     </View>
+                </View>
+                <View style={styles.evalContWrap}>
+                    <Text style={styles.evalContent}>老板人很好，服务周到，房间有韵味特别喜欢下次还来。独家好房推荐哦！</Text>
                 </View>
                 <View style={styles.moreEval}>
                     <TouchableOpacity activeOpacity={1}>
@@ -260,10 +262,13 @@ const styles = StyleSheet.create({
         height:Calc.getWidth(80),
         justifyContent:"flex-start"
     },
+    evalContWrap:{
+        paddingLeft:Calc.getWidth(100),
+        marginTop:Calc.getHeight(30),
+    },
     evalContent:{
         fontSize:Calc.getFont(15),
         color:"#3a3c3c",
-        marginTop:Calc.getHeight(30),
     },
     moreEval:{
         alignItems:"center",
