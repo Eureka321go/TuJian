@@ -146,8 +146,8 @@ class GuestDetail extends Component<{}> {
     //设施
     renderFacility(){
        return(
-           <View>
-
+           <View style={styles.facilityWrap}>
+               <Text style={styles.facilityTitle}>服务设施</Text>
            </View>
        )
     }
@@ -164,6 +164,8 @@ class GuestDetail extends Component<{}> {
                 {this.renderEvaluate()}
                 {/*房屋描述*/}
                 {this.renderHouseDiscribe()}
+                {/*设施*/}
+                {this.renderFacility()}
             </ScrollView>
         );
     }
@@ -333,6 +335,21 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         marginTop:Calc.getHeight(50),
     },
+//    设施
+    facilityWrap:{
+        paddingBottom:Calc.getHeight(50),
+        paddingTop:Calc.getHeight(50),
+        borderBottomWidth:Calc.getBorder(1),
+        borderColor:"#d9e1e9",
+        paddingLeft:Calc.getWidth(10),
+        paddingRight:Calc.getWidth(10),
+    },
+    facilityTitle:{
+        fontSize:Calc.getFont(18),
+        color:"#262626",
+        marginBottom:Calc.getHeight(30),
+    },
+
 });
 
 
