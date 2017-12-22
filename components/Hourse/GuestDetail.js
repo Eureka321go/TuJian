@@ -145,7 +145,11 @@ class GuestDetail extends Component<{}> {
     }
     //设施
     renderFacility(){
+       return(
+           <View>
 
+           </View>
+       )
     }
     render(){
         return (
