@@ -143,6 +143,10 @@ class GuestDetail extends Component<{}> {
             </View>
         )
     }
+    //设施
+    renderFacility(){
+
+    }
     render(){
         return (
             <ScrollView style={styles.container} alwaysBounceVertical={false}>
