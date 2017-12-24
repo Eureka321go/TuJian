@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import {connect} from "react-redux";
 let Calc=global.Calc;
+let CommonJS=global.CommonJS
 
 class Destination extends Component<{}> {
     constructor(props) {
@@ -54,7 +55,7 @@ class Destination extends Component<{}> {
         let self=this;
         navigator.geolocation.getCurrentPosition(
             (position)=>{
-                let key="HEPBZ-MW2WG-US2QP-I7HZ6-HQNFF-5XFIS";
+                let key=CommonJS.key
                 let url="http://apis.map.qq.com/ws/geocoder/v1/?location="+position.coords.latitude+","+position.coords.longitude+"&coord_type=1&get_poi=1&poi_options=address_format=short&key="+key+"&output=json";
                 self.setState({
                     location:"定位中..."

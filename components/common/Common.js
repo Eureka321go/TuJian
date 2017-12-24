@@ -147,9 +147,14 @@ ajaxMethod.forEach((method) => {
 });
 
 
+
+let key="HEPBZ-MW2WG-US2QP-I7HZ6-HQNFF-5XFIS";//腾讯地图key
+
+
 export const CommonJS={
     toastShow,
     phoneTest,
-    $axios:api
+    $axios:api,
+    key,
 }
 global.CommonJS=CommonJS
