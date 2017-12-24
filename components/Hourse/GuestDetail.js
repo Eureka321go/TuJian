@@ -13,8 +13,10 @@ import {
     Image,
     TouchableOpacity,
     ScrollView,
+    Modal
 } from 'react-native';
 import {connect} from "react-redux";
+import ImageViewer from 'react-native-image-zoom-viewer';
 let commonJS=global.CommonJS;
 let Calc=global.Calc;
 
@@ -39,7 +41,15 @@ class HeaderRight extends Component<{}>{
 class GuestDetail extends Component<{}> {
     constructor(props) {
         super(props)
-
+        this.state={
+            photoSwipeShow:false,
+            initShow:0,//初始化显示第几个图片预览
+            photoSwipe:[
+                {url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460'},
+                {url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513785908776&di=18378ddcb1048b85af713edebd9d93bc&imgtype=0&src=http%3A%2F%2Fwww.jswzs.com%2Fueditor%2Fphp%2Fupload%2Fimage%2F20150625%2F1435226368469531.jpg'},
+                {url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460'}
+            ]
+        }
     }
     static navigationOptions({navigation}){
         return{
@@ -60,11 +70,27 @@ class GuestDetail extends Component<{}> {
                     <TouchableOpacity activeOpacity={1}>
                         <Image style={styles.TopRighgImg} source={{uri:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513785908776&di=18378ddcb1048b85af713edebd9d93bc&imgtype=0&src=http%3A%2F%2Fwww.jswzs.com%2Fueditor%2Fphp%2Fupload%2Fimage%2F20150625%2F1435226368469531.jpg"}}/>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={1} style={{flex:1,alignItems:"center",justifyContent:"center"}}>
+                    <TouchableOpacity activeOpacity={1} style={{flex:1,alignItems:"center",justifyContent:"center"}} onPress={()=>{
+                        this.setState({
+                            photoSwipeShow:true
+                        });
+                    }}>
                         <Text style={{fontSize:Calc.getFont(12),color:"#3a3c3c"}}>查看更多</Text>
                     </TouchableOpacity>
                 </View>
             </View>
+        )
+    }
+    //图片预览
+    renderPhotoSwipe(){
+        return(
+            <Modal visible={this.state.photoSwipeShow} transparent={true}>
+                <ImageViewer  index={this.state.initShow} imageUrls={this.state.photoSwipe} onDoubleClick={()=>{
+                    this.setState({
+                        photoSwipeShow:false
+                    })
+                }}/>
+            </Modal>
         )
     }
     //客房描述
@@ -156,6 +182,8 @@ class GuestDetail extends Component<{}> {
             <ScrollView style={styles.container} alwaysBounceVertical={false}>
                 {/*头部图片*/}
                 {this.renderTop()}
+                {/*图片预览*/}
+                {this.renderPhotoSwipe()}
                 {/*客房描述*/}
                 {this.renderDescribe()}
                 {/*用户详情*/}

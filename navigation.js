@@ -388,6 +388,7 @@ const SimpleApp =nav.StackNavigator({
         }
     },//客房详情
 
+
 },{
     headerMode:"screen",
     mode:"card",
