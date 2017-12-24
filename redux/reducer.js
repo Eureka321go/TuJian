@@ -92,6 +92,17 @@ function getUserInfo(state='',action){
 }
 
 
+//首页目的地/客栈
+function getDestination(state="目的地/客栈",action){
+    switch (action.type){
+        case actionTypes.destination:
+            return action.name
+        default:
+            return state
+    }
+}
+
+
 //将多个子reducer合并成一个主reducer
 const mainReducer=combineReducers({
     getToken,
@@ -100,6 +111,7 @@ const mainReducer=combineReducers({
     isFirst,//是否是第一次登录app
     getUnLock,//手势指纹解锁
     getUserInfo,//用户信息
+    getDestination,//首页目的地
 })
 
 export default mainReducer;

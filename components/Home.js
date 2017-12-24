@@ -32,10 +32,7 @@ let allActionsFun=global.allActionsFun;
 class Home extends Component<{}> {
     constructor(props) {
         super(props)
-        this.state={
-            addressText:"目的地/客栈名称",
-            addressName:"厦门",
-        }
+
     }
     componentDidMount(){
         let self=this;
@@ -152,8 +149,7 @@ class Home extends Component<{}> {
             }}>
                 <View style={styles.List}>
                     <Image style={styles.smallIcon} source={require("../assets/images/index/addressIcon.png")}/>
-                    <Text allowFontScaling={false}  numberOfLines={1} style={{flex:1,fontSize:Calc.getFont(15),color:"#b8bdc2"}}>{this.state.addressText}</Text>
-                    <Text allowFontScaling={false}  style={styles.rightText}>{this.state.addressName}</Text>
+                    <Text allowFontScaling={false}  numberOfLines={1} style={{flex:1,fontSize:Calc.getFont(15),color:"#b8bdc2"}}>{this.props.destination}</Text>
                     <Image style={styles.enterIcon} source={require("../assets/images/common/enter.png")}/>
                 </View>
             </TouchableOpacity>
@@ -256,7 +252,8 @@ function select(state){
         CalendarDate:state.getIndexCalendar,
         peopleNum:state.getindexNum,
         token:state.getToken,
-        isFirst:state.isFirst
+        isFirst:state.isFirst,
+        destination:state.getDestination
     }
 }
 export default connect(select)(Home)

@@ -6,6 +6,7 @@ export const actionTypes={
     isFirst:"isFirst",//用于判断是否是第一次登入APP
     unlock:"unlock",//手势指纹解锁
     userInfo:"userInfo",//用户的信息
+    destination:"destination",//首页目的地/客栈
 };
 
 
@@ -52,6 +53,13 @@ export const allActionsFun={
         return{
             type:actionTypes.userInfo,
             data:obj
+        }
+    },
+    //首页目的地
+    destinationAction(name){
+        return{
+            type:actionTypes.destination,
+            name:name
         }
     }
 }
