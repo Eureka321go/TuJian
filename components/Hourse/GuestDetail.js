@@ -60,14 +60,14 @@ class GuestDetail extends Component<{}> {
     renderTop(){
         return(
             <View style={styles.TopWrap}>
-                <TouchableOpacity activeOpacity={1} style={{marginRight:Calc.getWidth(20)}}>
+                <TouchableOpacity activeOpacity={1} style={{marginRight:Calc.getWidth(20)}} onPress={()=>{this.setState({photoSwipeShow:true, initShow:0})}}>
                     <Image style={styles.TopLeftImg} source={{uri:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513785908776&di=18378ddcb1048b85af713edebd9d93bc&imgtype=0&src=http%3A%2F%2Fwww.jswzs.com%2Fueditor%2Fphp%2Fupload%2Fimage%2F20150625%2F1435226368469531.jpg"}}/>
                 </TouchableOpacity>
                 <View style={{flex:1}}>
-                    <TouchableOpacity activeOpacity={1} style={{marginBottom:Calc.getHeight(20)}}>
+                    <TouchableOpacity activeOpacity={1} style={{marginBottom:Calc.getHeight(20)}} onPress={()=>{this.setState({photoSwipeShow:true, initShow:1})}}>
                         <Image style={[styles.TopRighgImg]} source={{uri:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513785908776&di=18378ddcb1048b85af713edebd9d93bc&imgtype=0&src=http%3A%2F%2Fwww.jswzs.com%2Fueditor%2Fphp%2Fupload%2Fimage%2F20150625%2F1435226368469531.jpg"}}/>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={1}>
+                    <TouchableOpacity activeOpacity={1} onPress={()=>{this.setState({photoSwipeShow:true, initShow:2})}}>
                         <Image style={styles.TopRighgImg} source={{uri:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513785908776&di=18378ddcb1048b85af713edebd9d93bc&imgtype=0&src=http%3A%2F%2Fwww.jswzs.com%2Fueditor%2Fphp%2Fupload%2Fimage%2F20150625%2F1435226368469531.jpg"}}/>
                     </TouchableOpacity>
                     <TouchableOpacity activeOpacity={1} style={{flex:1,alignItems:"center",justifyContent:"center"}} onPress={()=>{
@@ -87,7 +87,8 @@ class GuestDetail extends Component<{}> {
             <Modal visible={this.state.photoSwipeShow} transparent={true}>
                 <ImageViewer  index={this.state.initShow} imageUrls={this.state.photoSwipe} onDoubleClick={()=>{
                     this.setState({
-                        photoSwipeShow:false
+                        photoSwipeShow:false,
+                        initShow:0
                     })
                 }}/>
             </Modal>
