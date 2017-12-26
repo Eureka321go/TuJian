@@ -1,8 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+
 
 import React, {Component} from 'react';
 import {
@@ -50,9 +46,11 @@ class PeopleNum extends Component<{}> {
     }
     render() {
         return (
-            <ScrollView style={styles.container}>
-                {this.renderList()}
-            </ScrollView>
+           <View style={styles.container}>
+               <ScrollView>
+                   {this.renderList()}
+               </ScrollView>
+           </View>
         );
     }
 }

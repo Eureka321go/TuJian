@@ -300,7 +300,7 @@ const SimpleApp =nav.StackNavigator({
 
             }
         }
-    },//个人资料
+    },//通用设置
     GestureResolve:{
         screen:GestureResolve,
         navigationOptions:({navigation})=>{
@@ -387,8 +387,6 @@ const SimpleApp =nav.StackNavigator({
             }
         }
     },//客房详情
-
-
 },{
     headerMode:"screen",
     mode:"card",
