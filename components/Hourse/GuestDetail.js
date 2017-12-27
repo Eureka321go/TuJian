@@ -80,21 +80,16 @@ class GuestDetail extends Component<{}> {
     renderPhotoSwipe(){
         return(
             <Modal visible={this.state.photoSwipeShow} transparent={true}>
-                {/*<ImageViewer  index={this.state.initShow} imageUrls={this.state.photoSwipe} onDoubleClick={()=>{*/}
-                    {/*this.setState({*/}
-                        {/*photoSwipeShow:false,*/}
-                        {/*initShow:0*/}
-                    {/*})*/}
-                {/*}}/>*/}
                 <View style={{flex:1,backgroundColor:"#000"}}>
                     <AlbumView
                         style={{flex: 1}}
-                        maxScale={60}
+                        control={true}
                         images={[
                             {uri:"https://avatars2.githubusercontent.com/u/7970947?v=3&s=460"},
                             {uri:"https://avatars2.githubusercontent.com/u/7970947?v=3&s=460"},
                             {uri:"https://avatars2.githubusercontent.com/u/7970947?v=3&s=460"},
                         ]}
+                        defaultIndex={this.state.initShow}
                     />
                 </View>
             </Modal>
