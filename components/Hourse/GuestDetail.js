@@ -16,7 +16,7 @@ import {
     Modal
 } from 'react-native';
 import {connect} from "react-redux";
-import ImageViewer from 'react-native-image-zoom-viewer';
+import  AlbumView from "../common/AlbumView/AlbumView"
 let commonJS=global.CommonJS;
 let Calc=global.Calc;
 
@@ -44,11 +44,6 @@ class GuestDetail extends Component<{}> {
         this.state={
             photoSwipeShow:false,
             initShow:0,//初始化显示第几个图片预览
-            photoSwipe:[
-                {url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460'},
-                {url: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513785908776&di=18378ddcb1048b85af713edebd9d93bc&imgtype=0&src=http%3A%2F%2Fwww.jswzs.com%2Fueditor%2Fphp%2Fupload%2Fimage%2F20150625%2F1435226368469531.jpg'},
-                {url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460'}
-            ]
         }
     }
     static navigationOptions({navigation}){
@@ -85,12 +80,23 @@ class GuestDetail extends Component<{}> {
     renderPhotoSwipe(){
         return(
             <Modal visible={this.state.photoSwipeShow} transparent={true}>
-                <ImageViewer  index={this.state.initShow} imageUrls={this.state.photoSwipe} onDoubleClick={()=>{
-                    this.setState({
-                        photoSwipeShow:false,
-                        initShow:0
-                    })
-                }}/>
+                {/*<ImageViewer  index={this.state.initShow} imageUrls={this.state.photoSwipe} onDoubleClick={()=>{*/}
+                    {/*this.setState({*/}
+                        {/*photoSwipeShow:false,*/}
+                        {/*initShow:0*/}
+                    {/*})*/}
+                {/*}}/>*/}
+                <View style={{flex:1,backgroundColor:"#000"}}>
+                    <AlbumView
+                        style={{flex: 1}}
+                        maxScale={60}
+                        images={[
+                            {uri:"https://avatars2.githubusercontent.com/u/7970947?v=3&s=460"},
+                            {uri:"https://avatars2.githubusercontent.com/u/7970947?v=3&s=460"},
+                            {uri:"https://avatars2.githubusercontent.com/u/7970947?v=3&s=460"},
+                        ]}
+                    />
+                </View>
             </Modal>
         )
     }
