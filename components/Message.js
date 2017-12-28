@@ -30,7 +30,7 @@ class Message extends Component<{}> {
                     <Text allowFontScaling={false}  style={{textAlign:"center",fontSize:Calc.getFont(18),color:"#262626"}}>消息</Text>
                 </View>
                 <ScrollView style={{flex:1,marginTop:Calc.getHeight(20)}}>
-                    <TouchableOpacity activeOpacity={1}>
+                    <TouchableOpacity activeOpacity={1} onPress={()=>{this.props.navigation.navigate("MsgDiscount")}}>
                         <View style={styles.listWrap}>
                             <View style={styles.list}>
                                 <View style={styles.leftWrap}>
@@ -136,4 +136,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Message;
+export default connect()(Message);

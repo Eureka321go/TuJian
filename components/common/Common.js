@@ -111,7 +111,7 @@ ajaxMethod.forEach((method) => {
                     // window.localStorage.setItem("token", '');
                     // Toast({
                     //     position: 'bottom',
-                    //     message: response.data.msg,
+                    //     Message: response.data.msg,
                     //     iconClass: 'icon-error',
                     //     duration:3000
                     // });

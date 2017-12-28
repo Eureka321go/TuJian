@@ -32,7 +32,7 @@ import GestureResolve from "./components/common/GestureResolve"  //手势解锁�
 import Gesture from "./components/My/Setting/Gesture"  //手势解锁页面
 import FingerPrint from "./components/My/Setting/FingerPrint" //指纹解锁
 import GuestDetail from "./components/Hourse/GuestDetail"  //客房详情
-
+import MsgDiscount from "./components/Message/MsgDiscount";//消息中的优惠
 
 import defaultTransitionConfig from "react-navigation/src/views/CardStack/CardStackStyleInterpolator"
 import nav from 'react-navigation';
@@ -387,6 +387,37 @@ const SimpleApp =nav.StackNavigator({
             }
         }
     },//客房详情
+    MsgDiscount:{
+        screen:MsgDiscount,
+        navigationOptions:({navigation})=>{
+            return {
+                headerTitle:"优惠折扣",
+                headerStyle:{
+                    borderBottomWidth:0,
+                    borderColor:"transparent",
+                    backgroundColor:"#fff",
+                    elevation:0,
+                },
+                headerTitleStyle:{
+                    fontSize:Calc.getFont(18),
+                    color:"#262626",
+                    fontWeight:"normal",
+                    alignSelf:"center"
+                },
+                headerLeft:()=>{
+                    return (
+                        <TouchableOpacity onPress={()=>{navigation.goBack()}} activeOpacity={1}>
+                            <View>
+                                <Image style={styles.back} source={require("./assets/images/common/arrowBack.png")}/>
+                            </View>
+                        </TouchableOpacity>
+                    )
+                },
+
+            }
+        }
+    },//消息中的优惠
+
 },{
     headerMode:"screen",
     mode:"card",
