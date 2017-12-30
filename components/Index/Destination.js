@@ -18,6 +18,7 @@ import {
 import {connect} from "react-redux";
 let Calc=global.Calc;
 let CommonJS=global.CommonJS
+let allActionsFun=global.allActionsFun;
 
 class Destination extends Component<{}> {
     constructor(props) {
@@ -25,7 +26,7 @@ class Destination extends Component<{}> {
         this.state={
             initState:"",//是否显示搜索结果
             location:"使用当前位置",
-            hotDesitination:["丽江","大理","厦门","三亚","杭州","深圳","北京"],
+            hotDesitination:[],
             searchText:""
         }
     }
@@ -67,9 +68,11 @@ class Destination extends Component<{}> {
                                let recommend=responseJson.result.formatted_addresses.recommend;
                                let rough=responseJson.result.formatted_addresses.rough;
                                if(recommend){
-                                   self.setState({location:recommend})
+                                   self.setState({location:recommend});
+                                   self.chooseOk(recommend)
                                }else if(rough){
                                    self.setState({location:rough})
+                                   self.chooseOk(rough)
                                }
                            }
                     })
@@ -109,6 +112,8 @@ class Destination extends Component<{}> {
     }
     //热门目的地
     renderHotDestination(){
+        if(!this.state.hotDesitination || this.state.hotDesitination.length<=0){return}
+        let self=this;
         let arr=[];
         let date=this.state.hotDesitination;
         date.forEach((v,k)=>{
@@ -120,7 +125,7 @@ class Destination extends Component<{}> {
             }
             arr.push(
                 <TouchableOpacity  key={k} activeOpacity={1} onPress={()=>{
-                    alert(1)
+                    this.chooseOk(v);
                 }}>
                     <View style={[{
                         borderColor:"#51cdf1",
@@ -141,6 +146,18 @@ class Destination extends Component<{}> {
         });
         return arr;
     }
+    //热门目的地标签
+    renderHotTitle(){
+        if(!this.state.hotDesitination || this.state.hotDesitination.length<=0){return}
+        return(
+            <Text style={{fontSize:Calc.getFont(12),color:"#b8bdc2"}}>热门目的地</Text>
+        )
+    }
+    //选择目的地/客栈后的跳转和赋值
+    chooseOk(name){
+        this.props.dispatch(allActionsFun.destinationAction(name));
+        this.props.navigation.goBack();
+    }
     //初始状态
     renderInitState(){
         return(
@@ -152,7 +169,7 @@ class Destination extends Component<{}> {
                    </View>
                </TouchableOpacity>
                 {/*热门目的地*/}
-                <Text style={{fontSize:Calc.getFont(12),color:"#b8bdc2"}}>热门目的地</Text>
+                {this.renderHotTitle()}
                 <View style={{flexDirection:"row",flexWrap:"wrap"}}>
                     {this.renderHotDestination()}
                 </View>
@@ -168,6 +185,23 @@ class Destination extends Component<{}> {
                 {(this.state.searchText.length<=0)?(this.renderInitState()):(this.renderResult())}
             </View>
         );
+    }
+    componentWillMount(){
+        let self=this;
+        CommonJS.$axios.get({
+            url:"/house/city"
+        }).then((ret)=>{
+            if(ret.data && ret.data.success){
+                if(!ret.data.data || ret.data.data.length<0){return;}
+                self.setState({
+                    hotDesitination:ret.data.data
+                });
+                return;
+            }
+            CommonJS.toastShow(ret.data.msg,{
+                visible:true,
+            })
+        })
     }
 }
 
