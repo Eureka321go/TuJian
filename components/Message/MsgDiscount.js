@@ -10,15 +10,27 @@ import {
     StyleSheet,
     Text,
     View,
-    Image
+    Image,
+    FlatList,
+    RefreshControl
 } from 'react-native';
 import {connect} from "react-redux";
 import Swipeout from 'react-native-swipeout';
+
 let Calc=global.Calc;
 
 class MsgDiscount extends Component<{}> {
     constructor(props) {
         super(props)
+        this.state={
+            list:[
+                {key:1,id:1},
+                {key:2,id:2},
+                {key:3,id:3},
+                {key:4,id:4},
+            ],
+            isRefreshing:false,
+        }
 
     }
     renderDeleteBtn(){
@@ -40,31 +52,53 @@ class MsgDiscount extends Component<{}> {
     }
     renderItem(){
         return(
-                <Swipeout right={[this.renderDeletaOpt()]}
-                backgroundColor={"#fff"}
-                buttonWidth={Calc.getWidth(182)}
-                >
-                    <View style={styles.item}>
-                        <View style={styles.itemImgWrap}>
-                            <Image  style={styles.itemImg} source={require("../../assets/images/message/msg.png")}/>
-                            <View style={styles.newMessage} ></View>
-                        </View>
-                        <View style={styles.itemRightWrap}>
-                            <Text numberOfLines={1} style={styles.itemTitle}>送你一张优惠券</Text>
-                            <Text numberOfLines={1} style={styles.itemText}>如果你无法简洁的表达你的想法,那只能说明你还很稚嫩。那只能说明你还很稚嫩那只能说明你还很稚嫩</Text>
-                            <Text numberOfLines={1} style={styles.itemTime}>10月11日 12：08</Text>
-                        </View>
-                    </View>
-                </Swipeout>
+             <Swipeout right={[this.renderDeletaOpt()]}
+                            backgroundColor={"#fff"}
+                            buttonWidth={Calc.getWidth(182)}
+                  >
+                      <View style={styles.item}>
+                          <View style={styles.itemImgWrap}>
+                              <Image  style={styles.itemImg} source={require("../../assets/images/message/msg.png")}/>
+                              <View style={styles.newMessage} ></View>
+                          </View>
+                          <View style={styles.itemRightWrap}>
+                              <Text numberOfLines={1} style={styles.itemTitle}>送你一张优惠券</Text>
+                              <Text numberOfLines={1} style={styles.itemText}>如果你无法简洁的表达你的想法,那只能说明你还很稚嫩。那只能说明你还很稚嫩那只能说明你还很稚嫩</Text>
+                              <Text numberOfLines={1} style={styles.itemTime}>10月11日 12：08</Text>
+                          </View>
+                      </View>
+                  </Swipeout>
         )
     }
     render() {
         return (
             <View style={styles.container}>
-                {this.renderItem()}
+                <FlatList
+                   data={this.state.list}
+                   renderItem={({item}) =>{return this.renderItem()}}
+                   keyExtractor={(item, index) => item.id}
+                   refreshControl={
+                       <RefreshControl
+                           refreshing={this.state.isRefreshing}
+                           onRefresh={this._onRefresh.bind(this)}
+                       />
+                   }
+                />
             </View>
         );
     }
+    _onRefresh(){
+        let self=this;
+        self.setState({
+            isRefreshing:true
+        })
+        setTimeout(()=>{
+            self.setState({
+                isRefreshing:false
+            })
+        },1000)
+    }
+
 }
 
 const styles = StyleSheet.create({
