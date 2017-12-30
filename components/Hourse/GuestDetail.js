@@ -16,7 +16,7 @@ import {
     Modal
 } from 'react-native';
 import {connect} from "react-redux";
-import  AlbumView from "../common/AlbumView/AlbumView"
+import Gallery from 'react-native-image-gallery';
 let commonJS=global.CommonJS;
 let Calc=global.Calc;
 
@@ -81,15 +81,16 @@ class GuestDetail extends Component<{}> {
         return(
             <Modal visible={this.state.photoSwipeShow} transparent={true}>
                 <View style={{flex:1,backgroundColor:"#000"}}>
-                    <AlbumView
-                        style={{flex: 1}}
-                        control={true}
+                    <Gallery
+                        style={{ flex: 1, backgroundColor: 'black' }}
+                        initialPage={this.state.initShow}
                         images={[
-                            {uri:"https://avatars2.githubusercontent.com/u/7970947?v=3&s=460"},
-                            {uri:"https://avatars2.githubusercontent.com/u/7970947?v=3&s=460"},
-                            {uri:"https://avatars2.githubusercontent.com/u/7970947?v=3&s=460"},
+                            { source: { uri: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460' } },
+                            { source: { uri: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460' } },
+                            { source: { uri: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460' } },
+                            { source: { uri: 'http://i.imgur.com/kj5VXtG.jpg' } }
                         ]}
-                        defaultIndex={this.state.initShow}
+                        onSingleTapConfirmed={()=>{this.setState({photoSwipeShow:false})}}
                     />
                 </View>
             </Modal>
