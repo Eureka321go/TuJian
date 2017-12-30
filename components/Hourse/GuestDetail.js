@@ -182,24 +182,43 @@ class GuestDetail extends Component<{}> {
     }
     render(){
         return (
-            <ScrollView style={styles.container} alwaysBounceVertical={false}>
-                {/*头部图片*/}
-                {this.renderTop()}
-                {/*图片预览*/}
-                {this.renderPhotoSwipe()}
-                {/*客房描述*/}
-                {this.renderDescribe()}
-                {/*用户详情*/}
-                {this.renderCat()}
-                {/*租客评价*/}
-                {this.renderEvaluate()}
-                {/*房屋描述*/}
-                {this.renderHouseDiscribe()}
-                {/*设施*/}
-                {this.renderFacility()}
-            </ScrollView>
+            <View style={{flex:1}}>
+                <ScrollView style={styles.container} alwaysBounceVertical={false}>
+                    {/*头部图片*/}
+                    {this.renderTop()}
+                    {/*图片预览*/}
+                    {this.renderPhotoSwipe()}
+                    {/*客房描述*/}
+                    {this.renderDescribe()}
+                    {/*用户详情*/}
+                    {this.renderCat()}
+                    {/*租客评价*/}
+                    {this.renderEvaluate()}
+                    {/*房屋描述*/}
+                    {this.renderHouseDiscribe()}
+                    {/*设施*/}
+                    {this.renderFacility()}
+                </ScrollView>
+                {/*底部预订*/}
+                <View style={styles.botWrap}>
+                    <TouchableOpacity style={styles.botLeftWRap}>
+                        <View style={styles.botLeftContWrap}>
+                            <Image
+                                source={require("../../assets/images/index/phone.png")}
+                                style={styles.phone}
+                            />
+                            <Text style={styles.phoneText}>电话</Text>
+                            <Text style={styles.botleftLine}></Text>
+                        </View>
+                    </TouchableOpacity>
+                    <View style={styles.botRightWRap}>
+
+                    </View>
+                </View>
+            </View>
         );
     }
+
 }
 
 const styles = StyleSheet.create({
@@ -380,6 +399,45 @@ const styles = StyleSheet.create({
         color:"#262626",
         marginBottom:Calc.getHeight(30),
     },
+    //底部预订
+    botWrap:{
+        flexDirection:"row",
+        height:Calc.getHeight(98),
+        width:Calc.getWidth(750),
+        backgroundColor:"#fff",
+        borderTopWidth:Calc.getBorder(1),
+        borderColor:"#d9e1e9",
+    },
+    phone:{
+        width:Calc.getWidth(42),
+        height:Calc.getWidth(42),
+    },
+    botLeftWRap:{
+        width:Calc.getWidth(133),
+    },
+    botLeftContWrap:{
+        position:"relative",
+        alignItems:"center",
+        flex:1,
+        justifyContent:"center",
+        flexDirection:"column",
+    },
+    botRightWRap:{
+        flex:1,
+    },
+    phoneText:{
+        fontSize:Calc.getFont(12),
+        color:"#3a3c3c",
+        marginTop:Calc.getWidth(6),
+    },
+    botleftLine:{
+        position:"absolute",
+        width:Calc.getWidth(1),
+        height:Calc.getHeight(52),
+        backgroundColor:"#d9e1e9",
+        top:Calc.getHeight(23),
+        right:0,
+    }
 
 });
 

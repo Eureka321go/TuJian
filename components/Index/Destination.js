@@ -179,10 +179,10 @@ class Destination extends Component<{}> {
     render() {
         return (
             <View style={styles.container}>
-                {/*头部*/}
-                {this.renderHeader()}
-                {/*初始的状态*/}
-                {(this.state.searchText.length<=0)?(this.renderInitState()):(this.renderResult())}
+              {/*头部*/}
+              {this.renderHeader()}
+              {/*初始的状态*/}
+              {(this.state.searchText.length<=0)?(this.renderInitState()):(this.renderResult())}
             </View>
         );
     }
@@ -271,8 +271,7 @@ const styles = StyleSheet.create({
         fontSize:Calc.getFont(12),
         color:"#b8bdc2",
         marginTop:Calc.getHeight(10)
-    }
-
+    },
 });
 
 
