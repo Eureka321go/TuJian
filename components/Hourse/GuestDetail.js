@@ -13,7 +13,8 @@ import {
     Image,
     TouchableOpacity,
     ScrollView,
-    Modal
+    Modal,
+    
 } from 'react-native';
 import {connect} from "react-redux";
 import Gallery from 'react-native-image-gallery';
@@ -177,8 +178,57 @@ class GuestDetail extends Component<{}> {
        return(
            <View style={styles.facilityWrap}>
                <Text style={styles.facilityTitle}>服务设施</Text>
+               <View style={styles.facilityDetailWrap}>
+                   <View style={styles.fcWrap}>
+                      <Image style={styles.facImg} source={require("../../assets/images/facility/television.png")}/>
+                      <Text style={styles.facText}>电视</Text>
+                   </View>
+                   <View style={styles.fcWrap}>
+                       <Image style={styles.facImg} source={require("../../assets/images/facility/wifi.png")}/>
+                       <Text style={styles.facText}>无线网络</Text>
+                   </View>
+                   <View style={styles.fcWrap}>
+                       <Image style={styles.facImg} source={require("../../assets/images/facility/washing.png")}/>
+                       <Text style={styles.facText}>洗衣机</Text>
+                   </View>
+                   <View style={styles.fcWrap}>
+                       <Image style={styles.facImg} source={require("../../assets/images/facility/refrigerator.png")}/>
+                       <Text style={styles.facText}>冰箱</Text>
+                   </View>
+               </View>
+               <View style={styles.moreDataWrap}>
+                   <TouchableOpacity activeOpacity={1}>
+                       <Text style={styles.moreData}>查看全部</Text>
+                   </TouchableOpacity>
+               </View>
            </View>
        )
+    }
+    //底部
+    renderBottom(){
+        return(
+            <View style={styles.botWrap}>
+                <TouchableOpacity style={styles.botLeftWRap}>
+                    <View style={styles.botLeftContWrap}>
+                        <Image
+                            source={require("../../assets/images/index/phone.png")}
+                            style={styles.phone}
+                        />
+                        <Text style={styles.phoneText}>电话</Text>
+                        <Text style={styles.botleftLine}></Text>
+                    </View>
+                </TouchableOpacity>
+                <View style={styles.priceWrap}>
+                    <Text style={styles.priceLabel}>￥</Text>
+                    <Text numberOfLines={1} style={{fontSize:Calc.getFont(16),color:"#262626"}}>1250</Text>
+                </View>
+                <View style={styles.botRightWRap} >
+                      <TouchableOpacity style={styles.YuDingBtn} activeOpacity={0.9}>
+                          <Text style={styles.btnText}>预订</Text>
+                      </TouchableOpacity>
+                </View>
+            </View>
+        )
     }
     render(){
         return (
@@ -200,21 +250,7 @@ class GuestDetail extends Component<{}> {
                     {this.renderFacility()}
                 </ScrollView>
                 {/*底部预订*/}
-                <View style={styles.botWrap}>
-                    <TouchableOpacity style={styles.botLeftWRap}>
-                        <View style={styles.botLeftContWrap}>
-                            <Image
-                                source={require("../../assets/images/index/phone.png")}
-                                style={styles.phone}
-                            />
-                            <Text style={styles.phoneText}>电话</Text>
-                            <Text style={styles.botleftLine}></Text>
-                        </View>
-                    </TouchableOpacity>
-                    <View style={styles.botRightWRap}>
-
-                    </View>
-                </View>
+                {this.renderBottom()}
             </View>
         );
     }
@@ -399,9 +435,31 @@ const styles = StyleSheet.create({
         color:"#262626",
         marginBottom:Calc.getHeight(30),
     },
+    facilityDetailWrap:{
+        flexDirection:"row",
+        justifyContent:"center",
+        alignItems:"center",
+    },
+    fcWrap:{
+        flex:1,
+        flexDirection:"column",
+        justifyContent:"center",
+        alignItems:"center",
+    },
+    facImg:{
+        width:Calc.getWidth(60),
+        height:Calc.getWidth(60),
+    },
+    facText:{
+        fontSize:Calc.getFont(12),
+        color:"#3a3c3c",
+        marginTop:Calc.getHeight(20)
+    },
     //底部预订
     botWrap:{
         flexDirection:"row",
+        justifyContent:"center",
+        alignItems:"center",
         height:Calc.getHeight(98),
         width:Calc.getWidth(750),
         backgroundColor:"#fff",
@@ -437,6 +495,31 @@ const styles = StyleSheet.create({
         backgroundColor:"#d9e1e9",
         top:Calc.getHeight(23),
         right:0,
+    },
+    priceLabel:{
+          fontSize:Calc.getFont(12),
+          color:"#262626",
+          position:"relative",
+          top:Calc.getHeight(-5)
+    },
+    priceWrap:{
+        width:Calc.getWidth(232),
+        height:"auto",
+        flexDirection:"row",
+        alignItems:"flex-end",
+        justifyContent:"center",
+    },
+    YuDingBtn:{
+        width:Calc.getWidth(360),
+        height:Calc.getHeight(68),
+        borderRadius:6,
+        backgroundColor:"#51cdf1",
+        alignItems:"center",
+        justifyContent:"center"
+    },
+    btnText:{
+        color:"#fff",
+        fontSize:Calc.getFont(18)
     }
 
 });
