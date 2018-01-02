@@ -45,7 +45,7 @@ class Message extends Component<{}> {
                             </View>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={1}>
+                    <TouchableOpacity activeOpacity={1} onPress={()=>{this.props.navigation.navigate("SystemMsg")}}>
                         <View style={styles.listWrap}>
                             <View style={[styles.list2]}>
                                 <View style={styles.leftWrap}>
